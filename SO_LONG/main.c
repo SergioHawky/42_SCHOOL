@@ -6,56 +6,41 @@
 /*   By: seilkiv <seilkiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 20:05:53 by seilkiv           #+#    #+#             */
-/*   Updated: 2025/02/11 21:34:48 by seilkiv          ###   ########.fr       */
+/*   Updated: 2025/02/12 02:32:02 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minilibx-linux/mlx.h"
-#include <stdlib.h>
-#include <unistd.h>
+#include "so_long.h"
 
-#define HEIGHT 500
-#define WIDTH 500
-
-typedef struct s_data {
-    void    *mlx;
-    void    *win;
-    void    *img;
-    int     img_width;
-    int     img_height;
-} t_data;
-
-int key_press(int keycode, t_data *data)
+int key_press(int keysym, game_data *game)
 {
-    if (keycode == 65307)
+    if(keysym == 65307)
     {
-        mlx_destroy_window(data->mlx, data->win);
+        mlx_destroy_window(game->mlx, game->window);
         exit(0);
     }
-    return (0);
+    return(0);
 }
-
 int main()
 {
-    t_data  data;
+    game_data game;
 
+    game.mlx = mlx_init();
+
+    game.window = mlx_new_window(game.mlx, WIDTH, HEIGHT, "MY GAME");
     
-    data.mlx = mlx_init();
-    data.win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "Exibir XPM");
-
-    // Carregar a imagem .xpm
-    data.img = mlx_xpm_file_to_image(data.mlx, "WALL.xpm", &data.img_width, &data.img_height);
-    if (!data.img)
+    game.img = mlx_xpm_file_to_image(game.mlx, "/home/seilkiv/42_School/SO_LONG/Assets/TileSet/WALL.xpm", &game.img_width, &game.img_height);
+    if(!game.img)
     {
-        write(2, "Erro ao carregar a imagem\n", 26);
+        write(2, "Erro ao carregar a imagem", 25);
         exit(1);
     }
+    
+    mlx_put_image_to_window(game.mlx, game.window, game.img, 0, 0);
+    
+    mlx_key_hook(game.window, key_press, &game);
 
-    mlx_put_image_to_window(data.mlx, data.win, data.img, 100, 100);
+    mlx_loop(game.mlx);
 
-    mlx_key_hook(data.win, key_press, &data);
-
-    mlx_loop(data.mlx);
-
-    return (0);
+    return(0);
 }
