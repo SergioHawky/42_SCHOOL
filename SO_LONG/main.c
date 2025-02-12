@@ -6,7 +6,7 @@
 /*   By: seilkiv <seilkiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 20:05:53 by seilkiv           #+#    #+#             */
-/*   Updated: 2025/02/12 02:40:30 by seilkiv          ###   ########.fr       */
+/*   Updated: 2025/02/12 04:20:09 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,52 @@ int key_press(int keysym, game_data *game)
     return(0);
 }
 
-void    map()
+char    **map(char *Map_Name)
+{
+    int     fd, bytes_read, i = 0;
+    int     column = WIDTH/24, row = HEIGHT/24;
+    char    buffer[column + 1];
+    
+    char    **map = (char **)malloc(sizeof(char *) * row);
+    if(!map)
+        return NULL;
+    
+    while(i < row)
+    {
+        map[i] = (char *)malloc(sizeof(char) * (column + 1));
+        if(!map[i])
+        {
+            free_all();//funcao para libertar tudo o que aloquei ??e necessario??
+            return NULL;
+        }
+        i ++;
+    }
+    
+    fd = open(Map_Name, O_RDONLY);
+    if(fd < 0)
+    {
+        write(2, "Erro ao abrir o mapa", 20);
+        exit(1);
+    }
+    
+    i = 0;
+    while(i < row && fd >= 0)
+    {
+        bytes_read = read(fd, buffer, column);
+        if(bytes_read < 0)
+        {
+            return(free_all, NULL); // fazer free para as columas preenchidas
+        }
+        buffer[bytes_read] = '\0';
+        map[i] = strdup(buffer);    //incluir libft
+        i ++;
+    }
+    map[i] = NULL;
+    close(fd);
+    return (map);
+}
+
+void    draw_map(char **map)
 {
     
 }

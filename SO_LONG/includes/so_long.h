@@ -6,7 +6,7 @@
 /*   By: seilkiv <seilkiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 01:47:05 by seilkiv           #+#    #+#             */
-/*   Updated: 2025/02/12 02:40:59 by seilkiv          ###   ########.fr       */
+/*   Updated: 2025/02/12 03:06:49 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "../minilibx-linux/mlx.h"
 #include <stdlib.h>
 #include <unistd.h>
+#include <fcntl.h>
 
 #define HEIGHT 504
 #define WIDTH 504
