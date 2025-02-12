@@ -6,11 +6,15 @@
 /*   By: seilkiv <seilkiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 20:05:53 by seilkiv           #+#    #+#             */
-/*   Updated: 2025/02/12 04:20:09 by seilkiv          ###   ########.fr       */
+/*   Updated: 2025/02/12 05:15:35 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/so_long.h"
+#define COLUMN (WIDTH/24)
+#define ROW (HEIGHT/24)
+#include <stdio.h>
+#include <string.h>
 
 int key_press(int keysym, game_data *game)
 {
@@ -22,22 +26,28 @@ int key_press(int keysym, game_data *game)
     return(0);
 }
 
+void free_all(char **map, int row) {
+    for (int i = 0; i < row; i++) {
+        free(map[i]);
+    }
+    free(map);
+}
+
 char    **map(char *Map_Name)
 {
     int     fd, bytes_read, i = 0;
-    int     column = WIDTH/24, row = HEIGHT/24;
-    char    buffer[column + 1];
+    char    buffer[COLUMN + 1];
     
-    char    **map = (char **)malloc(sizeof(char *) * row);
+    char    **map = (char **)malloc(sizeof(char *) * ROW);
     if(!map)
         return NULL;
     
-    while(i < row)
+    while(i < ROW)
     {
-        map[i] = (char *)malloc(sizeof(char) * (column + 1));
+        map[i] = (char *)malloc(sizeof(char) * (COLUMN + 1));
         if(!map[i])
         {
-            free_all();//funcao para libertar tudo o que aloquei ??e necessario??
+            free_all(map, i);
             return NULL;
         }
         i ++;
@@ -51,15 +61,20 @@ char    **map(char *Map_Name)
     }
     
     i = 0;
-    while(i < row && fd >= 0)
+    while(i < ROW && fd >= 0)
     {
-        bytes_read = read(fd, buffer, column);
+        bytes_read = read(fd, buffer, COLUMN);
         if(bytes_read < 0)
         {
-            return(free_all, NULL); // fazer free para as columas preenchidas
+            return(free_all(map, i), NULL); // fazer free para as columas preenchidas
         }
         buffer[bytes_read] = '\0';
-        map[i] = strdup(buffer);    //incluir libft
+        map[i] = strdup(buffer);  // lib
+        if (!map[i])
+        {
+            free_all(map, i);
+            return NULL;
+        }
         i ++;
     }
     map[i] = NULL;
@@ -67,14 +82,33 @@ char    **map(char *Map_Name)
     return (map);
 }
 
-void    draw_map(char **map)
+void    draw_map(game_data *game, char **map)
 {
-    
+    int x, y = 0;
+    int pixel_x, pixel_y = 0; 
+
+    while(y < ROW && pixel_y < HEIGHT)
+    {
+        x = 0;
+        pixel_x = 0;
+        while(x < COLUMN && pixel_x < WIDTH)
+        {
+            if(map[y][x] == '1')
+                mlx_put_image_to_window(game->mlx, game->window, game->img, pixel_x, pixel_y);
+            else if(map[y][x] == '0')
+                mlx_put_image_to_window(game->mlx, game->window, game->img, pixel_x, pixel_y);
+            x ++;
+            pixel_x += 24;
+        }
+        y ++;
+        pixel_y += 24;
+    }
 }
 
 int main()
 {
     game_data game;
+    char **map1 = map("map1.ber");
 
     game.mlx = mlx_init();
 
@@ -87,7 +121,7 @@ int main()
         exit(1);
     }
     
-    mlx_put_image_to_window(game.mlx, game.window, game.img, 0, 0);
+    draw_map(&game, map1);
     
     mlx_key_hook(game.window, key_press, &game);
 

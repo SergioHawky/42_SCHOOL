@@ -6,7 +6,7 @@
 /*   By: seilkiv <seilkiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 01:47:05 by seilkiv           #+#    #+#             */
-/*   Updated: 2025/02/12 03:06:49 by seilkiv          ###   ########.fr       */
+/*   Updated: 2025/02/12 05:09:19 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-#define HEIGHT 504
-#define WIDTH 504
+#define HEIGHT 384
+#define WIDTH 384
 
 
 typedef struct s_data {
