@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seilkiv <seilkiv@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 20:05:53 by seilkiv           #+#    #+#             */
-/*   Updated: 2025/02/12 05:15:35 by seilkiv          ###   ########.fr       */
+/*   Updated: 2025/02/12 20:13:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,11 @@ void free_all(char **map, int row) {
 char    **map(char *Map_Name)
 {
     int     fd, bytes_read, i = 0;
-    char    buffer[COLUMN + 1];
+    char    buffer[COLUMN + 2];
     
-    char    **map = (char **)malloc(sizeof(char *) * ROW);
+    char    **map = (char **)malloc(sizeof(char *) * ROW + 1);
     if(!map)
         return NULL;
-    
-    while(i < ROW)
-    {
-        map[i] = (char *)malloc(sizeof(char) * (COLUMN + 1));
-        if(!map[i])
-        {
-            free_all(map, i);
-            return NULL;
-        }
-        i ++;
-    }
     
     fd = open(Map_Name, O_RDONLY);
     if(fd < 0)
@@ -63,7 +52,7 @@ char    **map(char *Map_Name)
     i = 0;
     while(i < ROW && fd >= 0)
     {
-        bytes_read = read(fd, buffer, COLUMN);
+        bytes_read = read(fd, buffer, COLUMN+2);
         if(bytes_read < 0)
         {
             return(free_all(map, i), NULL); // fazer free para as columas preenchidas
@@ -95,8 +84,8 @@ void    draw_map(game_data *game, char **map)
         {
             if(map[y][x] == '1')
                 mlx_put_image_to_window(game->mlx, game->window, game->img, pixel_x, pixel_y);
-            else if(map[y][x] == '0')
-                mlx_put_image_to_window(game->mlx, game->window, game->img, pixel_x, pixel_y);
+            //else if(map[y][x] == '0')
+               // mlx_put_image_to_window(game->mlx, game->window, game->img, pixel_x, pixel_y);
             x ++;
             pixel_x += 24;
         }
@@ -114,7 +103,8 @@ int main()
 
     game.window = mlx_new_window(game.mlx, WIDTH, HEIGHT, "MY GAME");
     
-    game.img = mlx_xpm_file_to_image(game.mlx, "/home/seilkiv/42_School/SO_LONG/Assets/TileSet/WALL.xpm", &game.img_width, &game.img_height);
+    //game.img = mlx_xpm_file_to_image(game.mlx, "/home/seilkiv/42_School/SO_LONG/Assets/TileSet/WALL.xpm", &game.img_width, &game.img_height);
+    game.img = mlx_xpm_file_to_image(game.mlx, "/mnt/d/42/SO_LONG/Assets/TileSet/WALL.xpm", &game.img_width, &game.img_height);
     if(!game.img)
     {
         write(2, "Erro ao carregar a imagem", 25);
