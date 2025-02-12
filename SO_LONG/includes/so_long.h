@@ -6,14 +6,14 @@
 /*   By: seilkiv <seilkiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 01:47:05 by seilkiv           #+#    #+#             */
-/*   Updated: 2025/02/12 01:54:51 by seilkiv          ###   ########.fr       */
+/*   Updated: 2025/02/12 02:40:59 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 #define SO_LONG_H
 
-#include "minilibx-linux/mlx.h"
+#include "../minilibx-linux/mlx.h"
 #include <stdlib.h>
 #include <unistd.h>
 

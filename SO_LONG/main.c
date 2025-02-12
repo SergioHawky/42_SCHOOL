@@ -6,11 +6,11 @@
 /*   By: seilkiv <seilkiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 20:05:53 by seilkiv           #+#    #+#             */
-/*   Updated: 2025/02/12 02:32:02 by seilkiv          ###   ########.fr       */
+/*   Updated: 2025/02/12 02:40:30 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "includes/so_long.h"
 
 int key_press(int keysym, game_data *game)
 {
@@ -21,6 +21,12 @@ int key_press(int keysym, game_data *game)
     }
     return(0);
 }
+
+void    map()
+{
+    
+}
+
 int main()
 {
     game_data game;
