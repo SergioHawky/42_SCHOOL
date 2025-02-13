@@ -1,0 +1,36 @@
+/* XPM */
+static const char *WALL_UP[] = {
+/* columns rows colors chars-per-pixel */
+"24 24 6 1 ",
+"  c #251613",
+". c #28231D",
+"X c #3C2A25",
+"o c #504A41",
+"O c #7D7064",
+"+ c None",
+/* pixels */
+"                        ",
+"                        ",
+"                        ",
+"                        ",
+"                        ",
+"                        ",
+"                        ",
+"                        ",
+"                        ",
+"        ..              ",
+"       ...X  ..      XXX",
+"       ..XX ...     XXXX",
+" .. XX .XX  ..  XXX XXXX",
+" ..XXXX ..      XXXo XX ",
+"X  XXXX oo      XXXXo  .",
+"XX  XXoXoo.  oo..XXXX ..",
+"XX   oooXX..oooo..XX  ..",
+"XX   ooooX..oooo...oo  .",
+"   XXoooXOOXXooX...oOOXX",
+"XXOOoXXXOoOOXXXXOOOXOOXX",
+"XOOOOXXXOOoOXXXXOOOOXXXX",
+"oOOOOoXXOOOXXoooOOOOOXXo",
+"oOOOOooXOOOOoooooOOOOooo",
+"+OOOoo+++OOOoo++++OOOoo+"
+};

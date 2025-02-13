@@ -1,0 +1,36 @@
+/* XPM */
+static const char *CORNER_RU[] = {
+/* columns rows colors chars-per-pixel */
+"24 24 6 1 ",
+"  c #251613",
+". c #3C2A25",
+"X c #28231D",
+"o c #504A41",
+"O c #7D7064",
+"+ c white",
+/* pixels */
+"                        ",
+"                        ",
+"                        ",
+"                        ",
+"                        ",
+"                        ",
+"                        ",
+"                        ",
+"                        ",
+"                        ",
+"                        ",
+"                        ",
+"                        ",
+"                        ",
+"                        ",
+"                        ",
+"  ...                   ",
+"X....                   ",
+"XX..XX                  ",
+"oooXX.. XX              ",
+"ooooX..XXXX             ",
+".oooXX XXXX             ",
+"ooXXX   XX              ",
+"oOOO.     XX            "
+};

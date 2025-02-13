@@ -1,0 +1,38 @@
+/* XPM */
+static const char *FLOOR[] = {
+/* columns rows colors chars-per-pixel */
+"24 24 8 1 ",
+"  c #FED171",
+". c #D29052",
+"X c #652825",
+"o c #954A32",
+"O c #251613",
+"+ c #28231D",
+"@ c #3C2A25",
+"# c white",
+/* pixels */
+"    . .     . .       . ",
+"           ..       .   ",
+"  .... .  .... .   ...  ",
+"Xoo..ooooo..o.oooXXXXXXX",
+"XXXXXoXoXXXXoXooXXXoXoXo",
+"oXoXOXXXXoXXXXXXXoXoooOo",
+"oOoOOOXOOoOoXXOOXOXOoOOO",
+"OOOOOOOOO++OXOOOOOOOOOOO",
+"OOOOO+@@O++OOOOO++OOOO++",
+"+++O++@@+OOOOO+++++OO+++",
+"+++O+++++@@OO++++OOOO+@@",
+"+++@@@+O@@@@O@@+++O++O@@",
+"++@@@@OO@@@@O@@++O@@++O+",
+"OO@@@@OO@@@++O++O@@@@+OO",
+"OOO@@OOOO+++++OOO@@@@OOO",
+"OOOOO++OO+++++OOO+@@OOOO",
+"OOOOO++OOOO++OOOOOOOOOOO",
+"OOOOOOOOOOOOOOOOOOOOOOOO",
+"OOOOOOOOOOOOOOOOOOOOOOOO",
+"OOOOOOOOOOOOOOOOOOOOOOOO",
+"OOOOOOOOOOOOOOOOOOOOOOOO",
+"OOOOOOOOOOOOOOOOOOOOOOOO",
+"OOOOOOOOOOOOOOOOOOOOOOOO",
+"OOOOOOOOOOOOOOOOOOOOOOOO"
+};
