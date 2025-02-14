@@ -22,7 +22,7 @@ void    player_on_tile(game_data *game, int new_x, int new_y)
         game->player.position_x = new_x;
         game->player.position_y = new_y;
         mlx_clear_window(game->mlx, game->window);
-        draw_map(game, 1);
+        draw_map(game);
     }
 }
 

@@ -57,7 +57,7 @@ char    **map(char *Map_Name)
     return (map);
 }
 
-void    draw_map(game_data *game, int flag)
+void    draw_map(game_data *game)
 {
     int x, y = 0;
     int pixel_x, pixel_y = 0; 
@@ -89,16 +89,6 @@ void    draw_map(game_data *game, int flag)
                 else
                     mlx_put_image_to_window(game->mlx, game->window, game->textures[PLATFORM], pixel_x, pixel_y);
             }
-            else if (game->map[y][x] == 'P')
-            {
-                if (flag == 0)
-                {
-                    game->player.position_x = pixel_x;
-                    game->player.position_y = pixel_y;
-                }
-                    mlx_put_image_to_window(game->mlx, game->window, game->player.img_player, game->player.position_x, game->player.position_y);
-            }
-            
             x ++;
             pixel_x += TILE;
         }

@@ -6,7 +6,7 @@
 /*   By: seilkiv <seilkiv@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 20:05:53 by seilkiv           #+#    #+#             */
-/*   Updated: 2025/02/14 18:28:35 by seilkiv          ###   ########.fr       */
+/*   Updated: 2025/02/14 19:24:12 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int main()
     put_image_to_struct(&game);
     put_image_to_player(&game);
     
-    draw_map(&game, 0);
+    draw_map(&game);
+    spawn_player(&game);
     
     mlx_key_hook(game.window, key_press, &game);
 

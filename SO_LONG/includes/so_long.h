@@ -6,7 +6,7 @@
 /*   By: seilkiv <seilkiv@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 01:47:05 by seilkiv           #+#    #+#             */
-/*   Updated: 2025/02/14 18:28:48 by seilkiv          ###   ########.fr       */
+/*   Updated: 2025/02/14 19:21:43 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,9 @@ typedef struct s_data
 
 void    put_image_to_struct(game_data *game);
 char    **map(char *Map_Name);
-void    draw_map(game_data *game, int flag);
+void    draw_map(game_data *game);
 void    put_image_to_player(game_data *game);
 int     key_press(int keysym, game_data *game);
+void    spawn_player(game_data *game);
 
 #endif
