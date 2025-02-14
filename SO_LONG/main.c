@@ -6,7 +6,7 @@
 /*   By: seilkiv <seilkiv@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 20:05:53 by seilkiv           #+#    #+#             */
-/*   Updated: 2025/02/14 15:59:58 by seilkiv          ###   ########.fr       */
+/*   Updated: 2025/02/14 18:28:35 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,12 @@
 #include <stdio.h>
 #include <string.h>
 
-int key_press(int keysym, game_data *game)
-{
-    if(keysym == 65307)
-    {
-        mlx_destroy_window(game->mlx, game->window);
-        exit(0);
-    }
-    return(0);
-}
 
 int main()
 {
     game_data game;
     
-    char **map1 = map("map1.ber");
+    game.map = map("map1.ber");
 
     game.mlx = mlx_init();
 
@@ -38,7 +29,7 @@ int main()
     put_image_to_struct(&game);
     put_image_to_player(&game);
     
-    draw_map(&game, map1);
+    draw_map(&game, 0);
     
     mlx_key_hook(game.window, key_press, &game);
 

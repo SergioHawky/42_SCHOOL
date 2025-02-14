@@ -6,7 +6,7 @@
 /*   By: seilkiv <seilkiv@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 01:47:05 by seilkiv           #+#    #+#             */
-/*   Updated: 2025/02/14 17:05:42 by seilkiv          ###   ########.fr       */
+/*   Updated: 2025/02/14 18:28:48 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,8 @@ typedef struct p_data
     void    *img_player;
     int     player_width;
     int     player_heigth;
-    int     x;
-    int     y;
-    char    direction;              // 'U' (up), 'D' (down), 'L' (left), 'R' (right)
+    int     position_x;
+    int     position_y;
 }   player_data;
 
 typedef struct s_data
@@ -57,6 +56,7 @@ typedef struct s_data
     void    *mlx;
     void    *window;
     void    *textures[TOTAL_TXT];
+    char    **map;
     int     img_width;
     int     img_height;
     player_data player;
@@ -65,7 +65,8 @@ typedef struct s_data
 
 void    put_image_to_struct(game_data *game);
 char    **map(char *Map_Name);
-void    draw_map(game_data *game, char **map);
+void    draw_map(game_data *game, int flag);
 void    put_image_to_player(game_data *game);
+int     key_press(int keysym, game_data *game);
 
 #endif

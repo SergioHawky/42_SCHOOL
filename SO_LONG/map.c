@@ -57,7 +57,7 @@ char    **map(char *Map_Name)
     return (map);
 }
 
-void    draw_map(game_data *game, char **map)
+void    draw_map(game_data *game, int flag)
 {
     int x, y = 0;
     int pixel_x, pixel_y = 0; 
@@ -68,7 +68,7 @@ void    draw_map(game_data *game, char **map)
         pixel_x = 0;
         while(x < COLUMN && pixel_x < PIXEL_X)
         {
-            if(map[y][x] == '1')
+            if(game->map[y][x] == '1')
             {
                 if (pixel_x == 0 && pixel_y == 0)
                     mlx_put_image_to_window(game->mlx, game->window, game->textures[CORNER_LU], pixel_x, pixel_y);
@@ -89,9 +89,14 @@ void    draw_map(game_data *game, char **map)
                 else
                     mlx_put_image_to_window(game->mlx, game->window, game->textures[PLATFORM], pixel_x, pixel_y);
             }
-            else if (map[y][x] == 'P')
+            else if (game->map[y][x] == 'P')
             {
-                mlx_put_image_to_window(game->mlx, game->window, game->player.img_player, pixel_x, pixel_y);
+                if (flag == 0)
+                {
+                    game->player.position_x = pixel_x;
+                    game->player.position_y = pixel_y;
+                }
+                    mlx_put_image_to_window(game->mlx, game->window, game->player.img_player, game->player.position_x, game->player.position_y);
             }
             
             x ++;
