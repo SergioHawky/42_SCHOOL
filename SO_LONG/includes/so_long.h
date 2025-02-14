@@ -6,7 +6,7 @@
 /*   By: seilkiv <seilkiv@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 01:47:05 by seilkiv           #+#    #+#             */
-/*   Updated: 2025/02/14 19:21:43 by seilkiv          ###   ########.fr       */
+/*   Updated: 2025/02/14 22:15:06 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define SO_LONG_H
 
 #include "../minilibx-linux/mlx.h"
+#include <X11/X.h>
 #include <stdlib.h>
 #include <unistd.h>     //write
 #include <fcntl.h>      //open e read
@@ -29,6 +30,8 @@
 #define PIXEL_X (COLUMN * TILE)     //ROW in pixels
 #define PIXEL_Y (ROW * TILE)        //COLUMN in pixels
 
+#define SPEED   4
+
 typedef enum e_texture              //Nao esta diretamente no codigo so serve para ser mais legivel
 {
     WALL_LEFT,
@@ -42,14 +45,31 @@ typedef enum e_texture              //Nao esta diretamente no codigo so serve pa
     PLATFORM
 }   texture;
 
-typedef struct p_data 
+typedef struct i_data
+{
+    int     up;
+    int     down;
+    int     left;
+    int     right;
+}   input_data;
+typedef struct p_data               //player
 {
     void    *img_player;
     int     player_width;
     int     player_heigth;
     int     position_x;
     int     position_y;
+    void    *idle_sprites[6];
 }   player_data;
+
+typedef struct c_data               //collectible
+{
+    void    *img_collectible;
+    int     collectible_width;
+    int     collectible_heigth;
+    int     position_x;
+    int     position_y;
+}   collectible_data;
 
 typedef struct s_data
 {
@@ -60,6 +80,8 @@ typedef struct s_data
     int     img_width;
     int     img_height;
     player_data player;
+    collectible_data collectible;
+    input_data input;
 }   game_data;
 
 
@@ -68,6 +90,10 @@ char    **map(char *Map_Name);
 void    draw_map(game_data *game);
 void    put_image_to_player(game_data *game);
 int     key_press(int keysym, game_data *game);
+int     key_release(int keysym, game_data *game);
+int     update_player(game_data *game);
 void    spawn_player(game_data *game);
+int     animate_idle(game_data *game);
+void    put_movement_to_player(game_data *game);
 
 #endif

@@ -45,3 +45,28 @@ void    put_image_to_player(game_data *game)
 {
     game->player.img_player = mlx_xpm_file_to_image(game->mlx, "/mnt/d/42/SO_LONG/Assets/character/char.xpm", &game->player.player_width, &game->player.player_heigth);
 }
+
+void    put_movement_to_player(game_data *game)
+{
+    int i = 0;
+
+    char *all_sprites[6] = {
+        "/mnt/d/42/SO_LONG/Assets/character/char.xpm",
+        "/mnt/d/42/SO_LONG/Assets/character/char_1.xpm",
+        "/mnt/d/42/SO_LONG/Assets/character/char_2.xpm",
+        "/mnt/d/42/SO_LONG/Assets/character/char_3.xpm",
+        "/mnt/d/42/SO_LONG/Assets/character/char_4.xpm",
+        "/mnt/d/42/SO_LONG/Assets/character/char_5.xpm"
+    };
+
+    while (i < 6)
+    {
+        game->player.idle_sprites[i] = mlx_xpm_file_to_image(game->mlx, all_sprites[i], &game->player.player_width, &game->player.player_heigth);
+        if (!game->player.idle_sprites[i])
+        {
+            write(2, "Erro a carregar a imagem", 25);
+            exit(1);
+        }
+        i ++;
+    }
+}

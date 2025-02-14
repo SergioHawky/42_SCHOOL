@@ -37,16 +37,17 @@ int key_press(int keysym, game_data *game)
         exit(0);
     }
 
-    if (keysym == 119)                      // W (cima)
-        new_y -= TILE;
-    else if (keysym == 115)                 // S (baixo)
-        new_y += TILE;
-    else if (keysym == 97)                  // A (esquerda)
-        new_x -= TILE;
-    else if (keysym == 100)                 // D (direita)
-        new_x += TILE;
+    if (keysym == 119)                  // W (cima)
+        new_y -= SPEED;  
+    else if (keysym == 115)             // S (baixo)
+        new_y += SPEED;
+    else if (keysym == 97)              // A (esquerda)
+        new_x -= SPEED;
+    else if (keysym == 100)             // D (direita)
+        new_x += SPEED;
 
     player_on_tile(game, new_x, new_y);
     mlx_put_image_to_window(game->mlx, game->window, game->player.img_player, game->player.position_x, game->player.position_y);
+
     return (0);
 }
