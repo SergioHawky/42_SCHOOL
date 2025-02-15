@@ -19,7 +19,7 @@ int main()
 {
     game_data game;
     
-    game.map = map("map2.ber");
+    game.map = map("Maps/map2.ber");
 
     game.mlx = mlx_init();
 
