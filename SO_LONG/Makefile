@@ -10,7 +10,7 @@ MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
 INCLUDES = -I$(MLX_DIR)
 
 # Arquivos do projeto
-SRCS = main.c image.c map.c movement.c spawn.c animation.c
+SRCS = main.c image.c map.c movement.c spawn.c animation.c free.c
 OBJS = $(SRCS:.c=.o)
 
 # Regra principal (compilação do programa)

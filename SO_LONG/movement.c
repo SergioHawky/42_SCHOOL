@@ -12,17 +12,23 @@
 
 #include "includes/so_long.h"
 
-void    player_on_tile(game_data *game, int new_x, int new_y)
+void player_on_tile(game_data *game, int new_x, int new_y)
 {
-    int row = new_y / TILE;
-    int col = new_x / TILE;
+    int left_col = new_x / TILE;                                        // B. esquerdo
+    int right_col = (new_x + game->player.player_width - 1) / TILE;     // B. direito
+    int top_row = new_y / TILE;                                         // B. topo
+    int bottom_row = (new_y + game->player.player_heigth - 1) / TILE;   // B. base
 
-    if (game->map[row][col] != '1')
+    if (game->map[top_row][left_col] != '1' &&                          // Verifica se qualquer parte do personagem colide com um tile '1'
+        game->map[top_row][right_col] != '1' &&
+        game->map[bottom_row][left_col] != '1' &&
+        game->map[bottom_row][right_col] != '1')
     {
         game->player.position_x = new_x;
         game->player.position_y = new_y;
         mlx_clear_window(game->mlx, game->window);
         draw_map(game);
+        mlx_put_image_to_window(game->mlx, game->window, game->player.img_player, game->player.position_x, game->player.position_y);
     }
 }
 
@@ -33,7 +39,15 @@ int key_press(int keysym, game_data *game)
 
     if(keysym == 65307)
     {
+        //free_images(game);
         mlx_destroy_window(game->mlx, game->window);
+        if (game->map)
+            free_all(game->map, ROW);
+        if (game->mlx)
+        {
+            mlx_destroy_display(game->mlx);
+            free(game->mlx);
+        }
         exit(0);
     }
 
@@ -47,7 +61,6 @@ int key_press(int keysym, game_data *game)
         new_x += SPEED;
 
     player_on_tile(game, new_x, new_y);
-    mlx_put_image_to_window(game->mlx, game->window, game->player.img_player, game->player.position_x, game->player.position_y);
 
     return (0);
 }

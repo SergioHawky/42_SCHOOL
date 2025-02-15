@@ -6,7 +6,7 @@
 /*   By: seilkiv <seilkiv@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 01:47:05 by seilkiv           #+#    #+#             */
-/*   Updated: 2025/02/14 22:15:06 by seilkiv          ###   ########.fr       */
+/*   Updated: 2025/02/15 17:04:36 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,19 @@
 #include <fcntl.h>      //open e read
 #include <string.h>     //strdup dps tirar
 
-#define TOTAL_TXT   9
+#define ROW     7
+#define COLUMN  25
 
-#define ROW     10
-#define COLUMN  16
-
-#define TILE    34
+#define TILE    40
 
 #define PIXEL_X (COLUMN * TILE)     //ROW in pixels
 #define PIXEL_Y (ROW * TILE)        //COLUMN in pixels
 
-#define SPEED   4
+#define SPEED   5
+
+#define TOTAL_TXT   9
+
+#define ANIMATION   6
 
 typedef enum e_texture              //Nao esta diretamente no codigo so serve para ser mais legivel
 {
@@ -90,10 +92,10 @@ char    **map(char *Map_Name);
 void    draw_map(game_data *game);
 void    put_image_to_player(game_data *game);
 int     key_press(int keysym, game_data *game);
-int     key_release(int keysym, game_data *game);
-int     update_player(game_data *game);
 void    spawn_player(game_data *game);
 int     animate_idle(game_data *game);
 void    put_movement_to_player(game_data *game);
+void    free_all(char **map, int row);
+void    free_images(game_data *game);
 
 #endif

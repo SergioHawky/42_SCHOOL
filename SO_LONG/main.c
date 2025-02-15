@@ -6,7 +6,7 @@
 /*   By: seilkiv <seilkiv@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 20:05:53 by seilkiv           #+#    #+#             */
-/*   Updated: 2025/02/14 22:05:38 by seilkiv          ###   ########.fr       */
+/*   Updated: 2025/02/15 16:36:41 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int main()
 {
     game_data game;
     
-    game.map = map("map1.ber");
+    game.map = map("map2.ber");
 
     game.mlx = mlx_init();
 
@@ -33,9 +33,9 @@ int main()
     draw_map(&game);
     spawn_player(&game);
 
+    mlx_loop_hook(game.mlx, animate_idle, &game);
     mlx_hook(game.window, KeyPress, KeyPressMask, key_press, &game);
 
     mlx_loop(game.mlx);
-
     return(0);
 }

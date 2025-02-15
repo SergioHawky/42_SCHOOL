@@ -20,7 +20,7 @@ int animate_idle(game_data *game)
     delay++;
     if (delay > 4000) // 4000 é o tempo entre frames
     {
-        frame = (frame + 1) % 6; // 6 é o total de frames(sprites)
+        frame = (frame + 1) % ANIMATION;
         game->player.img_player = game->player.idle_sprites[frame]; 
         mlx_put_image_to_window(game->mlx, game->window, game->player.img_player, game->player.position_x, game->player.position_y);
         delay = 0;
