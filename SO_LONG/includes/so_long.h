@@ -32,7 +32,8 @@
 
 #define TOTAL_TXT   9
 
-#define ANIMATION   6
+#define BASE_ANIM   6
+#define FORW_ANIM   8
 
 typedef enum e_texture              //Nao esta diretamente no codigo so serve para ser mais legivel
 {
@@ -54,8 +55,14 @@ typedef struct p_data               //player
     int     player_heigth;
     int     position_x;
     int     position_y;
-    void    *idle_sprites[6];
 }   player_data;
+
+typedef struct a_data               //animation
+{
+    int     moving;
+    void    *base_animation[BASE_ANIM];
+    void    *move_forward_anim[FORW_ANIM];
+}   animation_data;
 
 typedef struct c_data               //collectible
 {
@@ -75,19 +82,23 @@ typedef struct s_data
     int     img_width;
     int     img_height;
     player_data player;
+    animation_data animation;
 }   game_data;
 
 
-void    put_image_to_struct(game_data *game);
 char    **map(char *Map_Name);
 void    draw_map(game_data *game);
-void    put_image_to_player(game_data *game);
 int     key_press(int keysym, game_data *game);
+int     key_release(int keysym, game_data *game);
 void    spawn_player(game_data *game);
-int     animate_idle(game_data *game);
-void    put_movement_to_player(game_data *game);
+int     base_animation(game_data *game);
+int     move_forward_animation(game_data *game);
 void    free_map(char **map, int row);
 void    free_images(game_data *game);
 void    free_all(game_data *game);
+void    put_forward_mov_player(game_data *game);
+void    put_textures_struct(game_data *game);
+void    put_image_player(game_data *game);
+void    put_base_mov_player(game_data *game);
 
 #endif

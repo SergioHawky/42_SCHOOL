@@ -24,10 +24,17 @@ void    free_images(game_data *game)
         i++;
     }
     i = 0;
-    while (i < ANIMATION)
+    while (i < BASE_ANIM)
     {
-        if (game->player.idle_sprites[i])
-            mlx_destroy_image(game->mlx, game->player.idle_sprites[i]);
+        if (game->animation.base_animation[i])
+            mlx_destroy_image(game->mlx, game->animation.base_animation[i]);
+        i++;
+    }
+    i = 0;
+    while (i < FORW_ANIM)
+    {
+        if (game->animation.move_forward_anim[i])
+            mlx_destroy_image(game->mlx, game->animation.move_forward_anim[i]);
         i++;
     }
     
