@@ -18,11 +18,10 @@ int animate_idle(game_data *game)
     static int delay = 0;   // Controle de tempo entre frames
 
     delay++;
-    if (delay > 4000) // 4000 é o tempo entre frames
+    if (delay > 4000)
     {
+        mlx_put_image_to_window(game->mlx, game->window, game->player.idle_sprites[frame], game->player.position_x, game->player.position_y);
         frame = (frame + 1) % ANIMATION;
-        game->player.img_player = game->player.idle_sprites[frame]; 
-        mlx_put_image_to_window(game->mlx, game->window, game->player.img_player, game->player.position_x, game->player.position_y);
         delay = 0;
     }
     return (0);

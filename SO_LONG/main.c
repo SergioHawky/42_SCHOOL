@@ -20,9 +20,7 @@ int main()
     game_data game;
     
     game.map = map("Maps/map2.ber");
-
     game.mlx = mlx_init();
-
     game.window = mlx_new_window(game.mlx, PIXEL_X, PIXEL_Y, "MY GAME");
     
     //game.img = mlx_xpm_file_to_image(game.mlx, "/home/seilkiv/42_School/SO_LONG/Assets/TileSet/WALL.xpm", &game.img_width, &game.img_height);
@@ -35,7 +33,6 @@ int main()
 
     mlx_loop_hook(game.mlx, animate_idle, &game);
     mlx_hook(game.window, KeyPress, KeyPressMask, key_press, &game);
-
     mlx_loop(game.mlx);
     return(0);
 }

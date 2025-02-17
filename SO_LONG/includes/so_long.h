@@ -13,12 +13,12 @@
 #ifndef SO_LONG_H
 #define SO_LONG_H
 
-#include "../minilibx-linux/mlx.h"
-#include <X11/X.h>
+#include "../minilibx-linux/mlx.h"          //mlx
+#include <X11/X.h>                          //keysym
 #include <stdlib.h>
-#include <unistd.h>     //write
-#include <fcntl.h>      //open e read
-#include <string.h>     //strdup dps tirar
+#include <unistd.h>                         //write
+#include <fcntl.h>                          //open e read
+#include <string.h>                         //strdup dps tirar
 
 #define ROW     7
 #define COLUMN  25
@@ -47,13 +47,6 @@ typedef enum e_texture              //Nao esta diretamente no codigo so serve pa
     PLATFORM
 }   texture;
 
-typedef struct i_data
-{
-    int     up;
-    int     down;
-    int     left;
-    int     right;
-}   input_data;
 typedef struct p_data               //player
 {
     void    *img_player;
@@ -82,8 +75,6 @@ typedef struct s_data
     int     img_width;
     int     img_height;
     player_data player;
-    collectible_data collectible;
-    input_data input;
 }   game_data;
 
 
@@ -95,7 +86,8 @@ int     key_press(int keysym, game_data *game);
 void    spawn_player(game_data *game);
 int     animate_idle(game_data *game);
 void    put_movement_to_player(game_data *game);
-void    free_all(char **map, int row);
+void    free_map(char **map, int row);
 void    free_images(game_data *game);
+void    free_all(game_data *game);
 
 #endif

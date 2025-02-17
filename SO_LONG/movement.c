@@ -39,15 +39,7 @@ int key_press(int keysym, game_data *game)
 
     if(keysym == 65307)
     {
-        //free_images(game);
-        mlx_destroy_window(game->mlx, game->window);
-        if (game->map)
-            free_all(game->map, ROW);
-        if (game->mlx)
-        {
-            mlx_destroy_display(game->mlx);
-            free(game->mlx);
-        }
+        free_all(game);
         exit(0);
     }
 

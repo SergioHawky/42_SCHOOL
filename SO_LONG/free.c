@@ -34,3 +34,27 @@ void    free_images(game_data *game)
     if (game->player.img_player)
         mlx_destroy_image(game->mlx, game->player.img_player);
 }
+
+void free_map(char **map, int row) 
+{
+    int i;
+
+    i = 0;
+    while (i < row)
+    {
+        if (map[i])     
+            free(map[i]);
+        i++;
+    }
+    free(map);
+}
+
+void free_all(game_data *game)
+{
+    free_images(game);
+    free_map(game->map, ROW);
+    mlx_destroy_window(game->mlx, game->window);
+    mlx_destroy_display(game->mlx);
+    free(game->mlx);
+    exit(0);
+}

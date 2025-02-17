@@ -33,6 +33,4 @@ void    spawn_player(game_data *game)
         j = 0;
         i++;
     }
-}
-
-//void    
+}   

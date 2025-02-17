@@ -12,16 +12,6 @@
 
 #include "includes/so_long.h"
 
-void free_all(char **map, int row) 
-{
-    if (!map) return;
-    for (int i = 0; i < row; i++)
-    {
-        if (map[i]) free(map[i]);
-    }
-    free(map);
-}
-
 char    **map(char *Map_Name)
 {
     int     fd, bytes_read, i = 0;
@@ -42,19 +32,19 @@ char    **map(char *Map_Name)
     i = 0;
     while(i < ROW)
     {
-        bytes_read = read(fd, buffer, COLUMN+2);
-        if(bytes_read < 0)
+        bytes_read = read(fd, buffer, COLUMN + 2);
+        if(bytes_read <= 0)
         {
             close(fd);
-            free_all(map, i);
+            free_map(map, i);
             return NULL;
         }
-        buffer[bytes_read] = '\0';
+        buffer[COLUMN] = '\0';
         map[i] = strdup(buffer);  // lib
         if (!map[i])
         {
             close(fd);
-            free_all(map, i);
+            free_map(map, i);
             return NULL;
         }
         i ++;
