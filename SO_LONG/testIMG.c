@@ -31,6 +31,9 @@ void    free_images(game_data *game)
     
     if (game->collectible.img_collectible)
         mlx_destroy_image(game->mlx, game->collectible.img_collectible);
+    
+    if (game->exit.img_exit)
+        mlx_destroy_image(game->mlx, game->exit.img_exit);
 }
 
 void free_map(char **map, int row) 
@@ -228,17 +231,21 @@ void    put_forward_mov_player(game_data *game)
 
 void    put_img_collectible(game_data *game)
 {
-    int i = 0;
-
-    while (i < COLLECTIBLES)
+    game->collectible.img_collectible = mlx_xpm_file_to_image(game->mlx, "/mnt/d/42/SO_LONG/Assets/collectible/coin.xpm", &game->collectible.width, &game->collectible.heigth);
+    if(!game->collectible.img_collectible)
     {
-        game->collectible.img_collectible[i] = mlx_xpm_file_to_image(game->mlx, "/mnt/d/42/SO_LONG/Assets/collectible/coin.xpm", &game->collectible.width, &game->collectible.heigth);
-        if (!game->collectible.img_collectible[i])
-        {
-            write(2, "Erro a carregar a imagem collectible", 37);
-            exit(1);
-        }
-        i ++;
+        write(2, "Erro a carregar a imagem collectible", 37);
+        exit(1);
+    }
+}
+
+void    put_img_exit(game_data *game)
+{
+    game->exit.img_exit = mlx_xpm_file_to_image(game->mlx, "/mnt/d/42/SO_LONG/Assets/exit/shop.xpm", &game->exit.width, &game->exit.heigth);
+    if(!game->exit.img_exit)
+    {
+        write(2, "Erro a carregar a imagem exit", 30);
+        exit(1);
     }
 }
 
@@ -277,12 +284,12 @@ int move_forward_animation(game_data *game)
 }
 
 
-void    spawn_all(game_data *game, int first_time)
+void    spawn_player(game_data *game)
 {
     int i = 0;
     int j = 0;
 
-    while (game->map[i] && first_time)
+    while (game->map[i])
     {
         while (game->map[i][j])
         {
@@ -290,25 +297,87 @@ void    spawn_all(game_data *game, int first_time)
             {
                 game->player.position_x = j * TILE;
                 game->player.position_y = i * TILE;
-                mlx_put_image_to_window(game->mlx, game->window, game->player.img_player, game->player.position_x, game->player.position_y);
+                mlx_put_image_to_window(game->mlx, game->window, game->player.img_player, game->player.position_x, game->player.position_y += 5);
+                return ;
             }
-            else if (game->map[i][j] == 'C')
-            {
-                game->collectible.position_x = j * TILE;
-                game->collectible.position_y = i * TILE;
-                mlx_put_image_to_window(game->mlx, game->window, game->collectible.img_collectible, game->collectible.position_x + 10, game->collectible.position_y + 20);
-            }
-            
             j++;
         }
         j = 0;
         i++;
     }
-    if (!first_time)
+}
+
+void    spawn_collectibles(game_data *game)
+{
+    int i = 0;
+    int j = 0;
+
+    while (game->map[i])
     {
-        mlx_put_image_to_window(game->mlx, game->window, game->player.img_player, game->player.position_x, game->player.position_y);
-        mlx_put_image_to_window(game->mlx, game->window, game->collectible.img_collectible, game->collectible.position_x + 10, game->collectible.position_y + 20);
+        while (game->map[i][j])
+        {
+            if (game->map[i][j] == 'C')
+            {
+                game->collectible.position_x = j * TILE;
+                game->collectible.position_y = i * TILE;
+                mlx_put_image_to_window(game->mlx, game->window, game->collectible.img_collectible, game->collectible.position_x + 15, game->collectible.position_y + 15);
+            }
+            j++;
+        }
+        j = 0;
+        i++;
     }
+}
+
+void    spawn_exit(game_data *game)
+{
+    int i = 0;
+    int j = 0;
+
+    while (game->map[i])
+    {
+        while (game->map[i][j])
+        {
+            if (game->map[i][j] == 'E')
+            {
+                game->exit.position_x = j * TILE;
+                game->exit.position_y = i * TILE;
+                mlx_put_image_to_window(game->mlx, game->window, game->exit.img_exit, game->exit.position_x, game->exit.position_y);
+            }
+            j++;
+        }
+        j = 0;
+        i++;
+    }
+}
+
+
+void player_touching_collectible(game_data *game, int left_col, int right_col, int top_row, int bottom_row)
+{
+    if (game->map[top_row][left_col] == 'C') 
+        game->map[top_row][left_col] = '0';
+    if (game->map[top_row][right_col] == 'C') 
+        game->map[top_row][right_col] = '0';
+    if (game->map[bottom_row][left_col] == 'C') 
+         game->map[bottom_row][left_col] = '0';
+    if (game->map[bottom_row][right_col] == 'C') 
+        game->map[bottom_row][right_col] = '0';
+}
+
+int player_touching_tile(game_data *game, int x, int y)
+{
+    int left_col = x / TILE;
+    int right_col = (x + game->player.player_width) / TILE;
+    int top_row = y / TILE;
+    int bottom_row = (y + game->player.player_heigth) / TILE;
+
+    player_touching_collectible(game, left_col, right_col, top_row, bottom_row);
+    if (game->map[top_row][left_col] != '1' && game->map[top_row][right_col] != '1' &&        // Verifica se qualquer parte do personagem colide com um tile
+        game->map[bottom_row][left_col] != '1' && game->map[bottom_row][right_col] != '1')
+    {
+        return (0);
+    }
+    return (1);
 }
 
 
@@ -316,20 +385,15 @@ void    update(game_data *game)
 {
     mlx_clear_window(game->mlx, game->window);
     draw_map(game);
-    spawn_all(game, 0);
+    spawn_collectibles(game);
+    spawn_exit(game);
+    mlx_put_image_to_window(game->mlx, game->window, game->player.img_player, game->player.position_x, game->player.position_y);
 }
 
-void player_on_tile(game_data *game, int new_x, int new_y)
-{
-    int left_col = new_x / TILE;                                        // B. esquerdo
-    int right_col = (new_x + game->player.player_width - 1) / TILE;     // B. direito
-    int top_row = new_y / TILE;                                         // B. topo
-    int bottom_row = (new_y + game->player.player_heigth - 1) / TILE;   // B. base
 
-    if (game->map[top_row][left_col] != '1' &&                          // Verifica se qualquer parte do personagem colide com um tile 
-        game->map[top_row][right_col] != '1' &&
-        game->map[bottom_row][left_col] != '1' &&
-        game->map[bottom_row][right_col] != '1')
+void player(game_data *game, int new_x, int new_y)
+{
+    if (!player_touching_tile(game, new_x, new_y))
     {
         game->player.position_x = new_x;
         game->player.position_y = new_y;
@@ -360,7 +424,7 @@ int key_press(int keysym, game_data *game)
         game->animation.moving = 1;
         mlx_loop_hook(game->mlx, move_forward_animation, game);
     }
-    player_on_tile(game, new_x, new_y);
+    player(game, new_x, new_y);
 
     return (0);
 }
@@ -391,9 +455,12 @@ int main()
     put_base_mov_player(&game);
     put_forward_mov_player(&game);
     put_img_collectible(&game);
+    put_img_exit(&game);
     
     draw_map(&game);
-    spawn_all(&game, 1);
+    spawn_player(&game);
+    spawn_collectibles(&game);
+    spawn_exit(&game);
 
     mlx_hook(game.window, KeyPress, KeyPressMask, key_press, &game);
     mlx_hook(game.window, KeyRelease, KeyReleaseMask, key_release, &game);
