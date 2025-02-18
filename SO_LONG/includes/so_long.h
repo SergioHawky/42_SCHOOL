@@ -32,6 +32,8 @@
 
 #define TOTAL_TXT   9
 
+
+
 #define BASE_ANIM   6
 #define FORW_ANIM   8
 
@@ -67,11 +69,20 @@ typedef struct a_data               //animation
 typedef struct c_data               //collectible
 {
     void    *img_collectible;
-    int     collectible_width;
-    int     collectible_heigth;
+    int     width;
+    int     heigth;
     int     position_x;
     int     position_y;
 }   collectible_data;
+
+typedef struct e_data               //exit
+{
+    void    *img_exit;
+    int     width;
+    int     heigth;
+    int     position_x;
+    int     position_y;
+}   exit_data;
 
 typedef struct s_data
 {
@@ -83,6 +94,8 @@ typedef struct s_data
     int     img_height;
     player_data player;
     animation_data animation;
+    collectible_data collectible;
+    exit_data exit;
 }   game_data;
 
 
@@ -91,6 +104,8 @@ void    draw_map(game_data *game);
 int     key_press(int keysym, game_data *game);
 int     key_release(int keysym, game_data *game);
 void    spawn_player(game_data *game);
+void    spawn_collectibles(game_data *game);
+void    spawn_exit(game_data *game);
 int     base_animation(game_data *game);
 int     move_forward_animation(game_data *game);
 void    free_map(char **map, int row);
@@ -100,5 +115,9 @@ void    put_forward_mov_player(game_data *game);
 void    put_textures_struct(game_data *game);
 void    put_image_player(game_data *game);
 void    put_base_mov_player(game_data *game);
+void    put_img_collectible(game_data *game);
+void    put_img_exit(game_data *game);
+void    update(game_data *game);
+int     player_touching_tile(game_data *game, int x, int y);
 
 #endif

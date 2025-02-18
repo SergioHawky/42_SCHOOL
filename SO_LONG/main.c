@@ -29,9 +29,13 @@ int main()
     put_image_player(&game);
     put_base_mov_player(&game);
     put_forward_mov_player(&game);
+    put_img_collectible(&game);
+    put_img_exit(&game);
     
     draw_map(&game);
     spawn_player(&game);
+    spawn_collectibles(&game);
+    spawn_exit(&game);
 
     mlx_hook(game.window, KeyPress, KeyPressMask, key_press, &game);
     mlx_hook(game.window, KeyRelease, KeyReleaseMask, key_release, &game);

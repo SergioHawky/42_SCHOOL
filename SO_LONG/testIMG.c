@@ -1,6 +1,39 @@
 #include "includes/so_long.h"
 
-void free_map1(char **map, int row) 
+void    free_images(game_data *game)
+{
+    int i;
+
+    i = 0;
+    while (i < TOTAL_TXT)
+    {
+        if (game->textures[i])
+            mlx_destroy_image(game->mlx, game->textures[i]);
+        i++;
+    }
+    i = 0;
+    while (i < BASE_ANIM)
+    {
+        if (game->animation.base_animation[i])
+            mlx_destroy_image(game->mlx, game->animation.base_animation[i]);
+        i++;
+    }
+    i = 0;
+    while (i < FORW_ANIM)
+    {
+        if (game->animation.move_forward_anim[i])
+            mlx_destroy_image(game->mlx, game->animation.move_forward_anim[i]);
+        i++;
+    }
+    
+    if (game->player.img_player)
+        mlx_destroy_image(game->mlx, game->player.img_player);
+    
+    if (game->collectible.img_collectible)
+        mlx_destroy_image(game->mlx, game->collectible.img_collectible);
+}
+
+void free_map(char **map, int row) 
 {
     int i;
 
@@ -14,40 +47,18 @@ void free_map1(char **map, int row)
     free(map);
 }
 
-void    free_images1(game_data *game)
+void free_all(game_data *game)
 {
-    int i;
-
-    i = 0;
-    while (i < TOTAL_TXT)
-    {
-        if (game->textures[i])
-            mlx_destroy_image(game->mlx, game->textures[i]);
-        i++;
-    }
-    i = 0;
-    while (i < ANIMATION)
-    {
-        if (game->player.idle_sprites[i])
-            mlx_destroy_image(game->mlx, game->player.idle_sprites[i]);
-        i++;
-    }
-    
-    if (game->player.img_player)
-        mlx_destroy_image(game->mlx, game->player.img_player);
-}
-
-void clean_up(game_data *game)
-{
-    free_images1(game); // Liberta as imagens carregadas
-    free_map1(game->map, ROW);
+    free_images(game);
+    free_map(game->map, ROW);
     mlx_destroy_window(game->mlx, game->window);
-    mlx_destroy_display(game->mlx); // Liberta o display da MiniLibX
-    free(game->mlx); // Liberta a estrutura mlx
+    mlx_destroy_display(game->mlx);
+    free(game->mlx);
+    exit(0);
 }
 
 
-char    **map1(char *Map_Name)
+char    **map(char *Map_Name)
 {
     int     fd, bytes_read, i = 0;
     char    buffer[COLUMN + 2];
@@ -71,7 +82,7 @@ char    **map1(char *Map_Name)
         if(bytes_read <= 0)
         {
             close(fd);
-            free_map1(map, i);
+            free_map(map, i);
             return NULL;
         }
         buffer[COLUMN] = '\0';
@@ -79,7 +90,7 @@ char    **map1(char *Map_Name)
         if (!map[i])
         {
             close(fd);
-            free_map1(map, i);
+            free_map(map, i);
             return NULL;
         }
         i ++;
@@ -129,7 +140,7 @@ void    draw_map(game_data *game)
     }
 }
 
-void    put_image_to_struct1(game_data *game)
+void    put_textures_struct(game_data *game)
 {
     int i = 0;
 
@@ -150,7 +161,7 @@ void    put_image_to_struct1(game_data *game)
         game->textures[i] = mlx_xpm_file_to_image(game->mlx, all_textures[i], &game->img_width, &game->img_height);
         if (!game->textures[i])
         {
-            write(2, "Erro a carregar a imagem", 25);
+            write(2, "Erro a carregar a imagem textures", 34);
             exit(1);
         }
         i ++;
@@ -158,17 +169,17 @@ void    put_image_to_struct1(game_data *game)
     
 }
 
-void    put_image_to_player1(game_data *game)
+void    put_image_player(game_data *game)
 {
-    game->player.img_player = mlx_xpm_file_to_image(game->mlx, "/mnt/d/42/SO_LONG/Assets/character/char.xpm", &game->player.player_width, &game->player.player_heigth);
+    game->player.img_player = mlx_xpm_file_to_image(game->mlx, "/mnt/d/42/SO_LONG/Assets/character/char_0.xpm", &game->player.player_width, &game->player.player_heigth);
 }
 
-void    put_movement_to_player1(game_data *game)
+void    put_base_mov_player(game_data *game)
 {
     int i = 0;
 
-    char *all_sprites[6] = {
-        "/mnt/d/42/SO_LONG/Assets/character/char.xpm",
+    char *all_sprites[BASE_ANIM] = {
+        "/mnt/d/42/SO_LONG/Assets/character/char_0.xpm",
         "/mnt/d/42/SO_LONG/Assets/character/char_1.xpm",
         "/mnt/d/42/SO_LONG/Assets/character/char_2.xpm",
         "/mnt/d/42/SO_LONG/Assets/character/char_3.xpm",
@@ -176,12 +187,55 @@ void    put_movement_to_player1(game_data *game)
         "/mnt/d/42/SO_LONG/Assets/character/char_5.xpm"
     };
 
-    while (i < 6)
+    while (i < BASE_ANIM)
     {
-        game->player.idle_sprites[i] = mlx_xpm_file_to_image(game->mlx, all_sprites[i], &game->player.player_width, &game->player.player_heigth);
-        if (!game->player.idle_sprites[i])
+        game->animation.base_animation[i] = mlx_xpm_file_to_image(game->mlx, all_sprites[i], &game->player.player_width, &game->player.player_heigth);
+        if (!game->animation.base_animation[i])
         {
-            write(2, "Erro a carregar a imagem", 25);
+            write(2, "Erro a carregar a imagem base animation", 40);
+            exit(1);
+        }
+        i ++;
+    }
+}
+
+void    put_forward_mov_player(game_data *game)
+{
+    int i = 0;
+
+    char *all_sprites[FORW_ANIM] = {
+        "/mnt/d/42/SO_LONG/Assets/character/char_mov_forward0.xpm",
+        "/mnt/d/42/SO_LONG/Assets/character/char_mov_forward1.xpm",
+        "/mnt/d/42/SO_LONG/Assets/character/char_mov_forward2.xpm",
+        "/mnt/d/42/SO_LONG/Assets/character/char_mov_forward3.xpm",
+        "/mnt/d/42/SO_LONG/Assets/character/char_mov_forward4.xpm",
+        "/mnt/d/42/SO_LONG/Assets/character/char_mov_forward5.xpm",
+        "/mnt/d/42/SO_LONG/Assets/character/char_mov_forward6.xpm",
+        "/mnt/d/42/SO_LONG/Assets/character/char_mov_forward7.xpm"
+    };
+
+    while (i < FORW_ANIM)
+    {
+        game->animation.move_forward_anim[i] = mlx_xpm_file_to_image(game->mlx, all_sprites[i], &game->player.player_width, &game->player.player_heigth);
+        if (!game->animation.move_forward_anim[i])
+        {
+            write(2, "Erro a carregar a imagem forward animation", 43);
+            exit(1);
+        }
+        i ++;
+    }
+}
+
+void    put_img_collectible(game_data *game)
+{
+    int i = 0;
+
+    while (i < COLLECTIBLES)
+    {
+        game->collectible.img_collectible[i] = mlx_xpm_file_to_image(game->mlx, "/mnt/d/42/SO_LONG/Assets/collectible/coin.xpm", &game->collectible.width, &game->collectible.heigth);
+        if (!game->collectible.img_collectible[i])
+        {
+            write(2, "Erro a carregar a imagem collectible", 37);
             exit(1);
         }
         i ++;
@@ -189,28 +243,46 @@ void    put_movement_to_player1(game_data *game)
 }
 
 
-int animate_idle(game_data *game)
+int base_animation(game_data *game)
 {
-    static int frame = 0;   
-    static int delay = 0;   // Controle de tempo entre frames
+    static int frame = 0;
+    static int delay = 0;
 
     delay++;
-    if (delay > 4000) // 4000 é o tempo entre frames
+    if (delay > 4000)
     {
-        mlx_put_image_to_window(game->mlx, game->window, game->player.idle_sprites[frame], game->player.position_x, game->player.position_y);
-        frame = (frame + 1) % ANIMATION;
+        frame = (frame + 1) % BASE_ANIM;
+        mlx_put_image_to_window(game->mlx, game->window, game->animation.base_animation[frame], game->player.position_x, game->player.position_y);
         delay = 0;
     }
     return (0);
 }
 
+int move_forward_animation(game_data *game)
+{
+    static int frame1 = 0;
+    static int delay1 = 0;
+    
+    if(!game->animation.moving)
+        return (0);
+        
+    delay1++;
+    if (delay1 > 2000)
+    {
+        frame1 = (frame1 + 1) % FORW_ANIM;
+        mlx_put_image_to_window(game->mlx, game->window, game->animation.move_forward_anim[frame1], game->player.position_x, game->player.position_y);
+        delay1 = 0;
+    }
+    return (0);
+}
 
-void    spawn_player(game_data *game)
+
+void    spawn_all(game_data *game, int first_time)
 {
     int i = 0;
     int j = 0;
 
-    while (game->map[i])
+    while (game->map[i] && first_time)
     {
         while (game->map[i][j])
         {
@@ -219,15 +291,33 @@ void    spawn_player(game_data *game)
                 game->player.position_x = j * TILE;
                 game->player.position_y = i * TILE;
                 mlx_put_image_to_window(game->mlx, game->window, game->player.img_player, game->player.position_x, game->player.position_y);
-                return ;
             }
+            else if (game->map[i][j] == 'C')
+            {
+                game->collectible.position_x = j * TILE;
+                game->collectible.position_y = i * TILE;
+                mlx_put_image_to_window(game->mlx, game->window, game->collectible.img_collectible, game->collectible.position_x + 10, game->collectible.position_y + 20);
+            }
+            
             j++;
         }
         j = 0;
         i++;
     }
+    if (!first_time)
+    {
+        mlx_put_image_to_window(game->mlx, game->window, game->player.img_player, game->player.position_x, game->player.position_y);
+        mlx_put_image_to_window(game->mlx, game->window, game->collectible.img_collectible, game->collectible.position_x + 10, game->collectible.position_y + 20);
+    }
 }
 
+
+void    update(game_data *game)
+{
+    mlx_clear_window(game->mlx, game->window);
+    draw_map(game);
+    spawn_all(game, 0);
+}
 
 void player_on_tile(game_data *game, int new_x, int new_y)
 {
@@ -236,16 +326,14 @@ void player_on_tile(game_data *game, int new_x, int new_y)
     int top_row = new_y / TILE;                                         // B. topo
     int bottom_row = (new_y + game->player.player_heigth - 1) / TILE;   // B. base
 
-    if (game->map[top_row][left_col] != '1' &&                          // Verifica se qualquer parte do personagem colide com um tile '1'
+    if (game->map[top_row][left_col] != '1' &&                          // Verifica se qualquer parte do personagem colide com um tile 
         game->map[top_row][right_col] != '1' &&
         game->map[bottom_row][left_col] != '1' &&
         game->map[bottom_row][right_col] != '1')
     {
         game->player.position_x = new_x;
         game->player.position_y = new_y;
-        mlx_clear_window(game->mlx, game->window);
-        draw_map(game);
-        mlx_put_image_to_window(game->mlx, game->window, game->player.img_player, game->player.position_x, game->player.position_y);
+        update(game);
     }
 }
 
@@ -256,7 +344,7 @@ int key_press(int keysym, game_data *game)
 
     if(keysym == 65307)
     {
-        clean_up(game);
+        free_all(game);
         exit(0);
     }
 
@@ -267,10 +355,23 @@ int key_press(int keysym, game_data *game)
     else if (keysym == 97)              // A (esquerda)
         new_x -= SPEED;
     else if (keysym == 100)             // D (direita)
+    {
         new_x += SPEED;
-
+        game->animation.moving = 1;
+        mlx_loop_hook(game->mlx, move_forward_animation, game);
+    }
     player_on_tile(game, new_x, new_y);
 
+    return (0);
+}
+
+int key_release(int keysym, game_data *game)
+{
+    if (keysym == 100)
+    {
+        game->animation.moving = 0;
+        mlx_loop_hook(game->mlx, base_animation, game);
+    }
     return (0);
 }
 
@@ -278,20 +379,24 @@ int key_press(int keysym, game_data *game)
 int main()
 {
     game_data game;
-
-    game.map = map1("Maps/map2.ber");
+    
+    game.map = map("Maps/map2.ber");
     game.mlx = mlx_init();
     game.window = mlx_new_window(game.mlx, PIXEL_X, PIXEL_Y, "MY GAME");
+    game.animation.moving = 0;
     
-    put_image_to_player1(&game);
-    put_image_to_struct1(&game);
-    put_movement_to_player1(&game);
+    //game.img = mlx_xpm_file_to_image(game.mlx, "/home/seilkiv/42_School/SO_LONG/Assets/TileSet/WALL.xpm", &game.img_width, &game.img_height);
+    put_textures_struct(&game);
+    put_image_player(&game);
+    put_base_mov_player(&game);
+    put_forward_mov_player(&game);
+    put_img_collectible(&game);
     
     draw_map(&game);
-    spawn_player(&game);
+    spawn_all(&game, 1);
 
-    mlx_loop_hook(game.mlx, animate_idle, &game);
     mlx_hook(game.window, KeyPress, KeyPressMask, key_press, &game);
+    mlx_hook(game.window, KeyRelease, KeyReleaseMask, key_release, &game);
     mlx_loop(game.mlx);
-    return (0);
+    return(0);
 }

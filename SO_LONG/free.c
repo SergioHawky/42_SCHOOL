@@ -40,6 +40,12 @@ void    free_images(game_data *game)
     
     if (game->player.img_player)
         mlx_destroy_image(game->mlx, game->player.img_player);
+    
+    if (game->collectible.img_collectible)
+        mlx_destroy_image(game->mlx, game->collectible.img_collectible);
+    
+    if (game->exit.img_exit)
+        mlx_destroy_image(game->mlx, game->exit.img_exit);
 }
 
 void free_map(char **map, int row) 
