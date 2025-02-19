@@ -62,6 +62,7 @@ typedef struct p_data               //player
 typedef struct a_data               //animation
 {
     int     moving;
+    int     moving_direction;
     void    *base_animation[BASE_ANIM];
     void    *move_forward_anim[FORW_ANIM];
 }   animation_data;

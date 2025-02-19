@@ -29,18 +29,18 @@ int base_animation(game_data *game)
 
 int move_forward_animation(game_data *game)
 {
-    static int frame1 = 0;
-    static int delay1 = 0;
+    static int frame = 0;
+    static int delay = 0;
     
     if(!game->animation.moving)
         return (0);
         
-    delay1++;
-    if (delay1 > 2000)
+    delay++;
+    if (delay > 2000)
     {
-        frame1 = (frame1 + 1) % FORW_ANIM;
-        mlx_put_image_to_window(game->mlx, game->window, game->animation.move_forward_anim[frame1], game->player.position_x, game->player.position_y);
-        delay1 = 0;
+        frame = (frame + 1) % FORW_ANIM;
+        mlx_put_image_to_window(game->mlx, game->window, game->animation.move_forward_anim[frame], game->player.position_x, game->player.position_y);
+        delay = 0;
     }
     return (0);
 }

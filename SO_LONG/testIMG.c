@@ -284,6 +284,7 @@ int move_forward_animation(game_data *game)
 }
 
 
+
 void    spawn_player(game_data *game)
 {
     int i = 0;
@@ -417,12 +418,20 @@ int key_press(int keysym, game_data *game)
     else if (keysym == 115)             // S (baixo)
         new_y += SPEED;
     else if (keysym == 97)              // A (esquerda)
+    {
         new_x -= SPEED;
+        game->animation.moving = 1;
+        game->animation.moving_direction = 2; // Direção esquerda
+    }
     else if (keysym == 100)             // D (direita)
     {
         new_x += SPEED;
-        game->animation.moving = 1;
-        mlx_loop_hook(game->mlx, move_forward_animation, game);
+        if (!game->animation.moving) 
+        {
+            game->animation.moving = 1;
+            game->animation.moving_direction = 1; // Direita
+            mlx_loop_hook(game->mlx, move_forward_animation, game);
+        }
     }
     player(game, new_x, new_y);
 
@@ -431,9 +440,10 @@ int key_press(int keysym, game_data *game)
 
 int key_release(int keysym, game_data *game)
 {
-    if (keysym == 100)
+    if (keysym == 97 || keysym == 100)
     {
         game->animation.moving = 0;
+        game->animation.moving_direction = 0;
         mlx_loop_hook(game->mlx, base_animation, game);
     }
     return (0);
@@ -448,6 +458,7 @@ int main()
     game.mlx = mlx_init();
     game.window = mlx_new_window(game.mlx, PIXEL_X, PIXEL_Y, "MY GAME");
     game.animation.moving = 0;
+    game.animation.moving_direction = 0;
     
     //game.img = mlx_xpm_file_to_image(game.mlx, "/home/seilkiv/42_School/SO_LONG/Assets/TileSet/WALL.xpm", &game.img_width, &game.img_height);
     put_textures_struct(&game);
@@ -464,6 +475,7 @@ int main()
 
     mlx_hook(game.window, KeyPress, KeyPressMask, key_press, &game);
     mlx_hook(game.window, KeyRelease, KeyReleaseMask, key_release, &game);
+    //mlx_loop_hook(game.mlx, player_animation, &game); // Adicionado aqui!
     mlx_loop(game.mlx);
     return(0);
 }
