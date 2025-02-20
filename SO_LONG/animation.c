@@ -12,35 +12,58 @@
 
 #include "includes/so_long.h"
 
-int base_animation(game_data *game)
+void base_animation(game_data *game)
 {
     static int frame = 0;
     static int delay = 0;
-
+      
     delay++;
-    if (delay > 4000)
+    if (delay > 400)
     {
         frame = (frame + 1) % BASE_ANIM;
-        mlx_put_image_to_window(game->mlx, game->window, game->animation.base_animation[frame], game->player.position_x, game->player.position_y);
         delay = 0;
     }
-    return (0);
+    mlx_put_image_to_window(game->mlx, game->window, game->animation.base_animation[frame], game->player.position_x, game->player.position_y);
 }
 
-int move_forward_animation(game_data *game)
+void base_animation_backward(game_data *game)
 {
     static int frame = 0;
     static int delay = 0;
-    
-    if(!game->animation.moving)
-        return (0);
-        
+      
     delay++;
-    if (delay > 100)
+    if (delay > 400)
     {
-        frame = (frame + 1) % FORW_ANIM;
-        mlx_put_image_to_window(game->mlx, game->window, game->animation.move_forward_anim[frame], game->player.position_x, game->player.position_y);
+        frame = (frame + 1) % BASE_ANIM;
         delay = 0;
     }
-    return (0);
+    mlx_put_image_to_window(game->mlx, game->window, game->animation.base_animation_backward[frame], game->player.position_x, game->player.position_y);
+}
+
+void move_forward_animation(game_data *game)
+{
+    static int frame = 0;
+    static int delay = 0;
+      
+    delay++;
+    if (delay > 400)
+    {
+        frame = (frame + 1) % FORW_ANIM;
+        delay = 0;
+    }
+    mlx_put_image_to_window(game->mlx, game->window, game->animation.move_forward_anim[frame], game->player.position_x, game->player.position_y);
+}
+
+void move_backward_animation(game_data *game)
+{
+    static int frame = 0;
+    static int delay = 0;
+      
+    delay++;
+    if (delay > 400)
+    {
+        frame = (frame + 1) % FORW_ANIM;
+        delay = 0;
+    }
+    mlx_put_image_to_window(game->mlx, game->window, game->animation.move_backward_anim[frame], game->player.position_x, game->player.position_y);
 }

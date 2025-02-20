@@ -12,11 +12,8 @@
 
 #include "includes/so_long.h"
 
-void    update(game_data *game)
+int    update(game_data *game)
 {
-    static int frame = 0;
-    static int delay = 0;
-
     mlx_clear_window(game->mlx, game->window);
     draw_map(game);
     spawn_collectibles(game, 0);
@@ -25,12 +22,25 @@ void    update(game_data *game)
     HUD(game);
     if (game->animation. moving == 1)
     {
-        delay++;
-        if (delay > 1)
+        if (game->animation.moving_direction == 1)
         {
-            frame = (frame + 1) % FORW_ANIM;
-            mlx_put_image_to_window(game->mlx, game->window, game->animation.move_forward_anim[frame], game->player.position_x, game->player.position_y);
-            delay = 0;
+            move_backward_animation(game);
+        }
+        else if (game->animation.moving_direction == 2)
+        {
+            move_forward_animation(game);
         }
     }
+    else
+    {
+        if (game->animation.moving_direction == 1)
+        {
+            base_animation_backward(game);
+        }
+        else if (game->animation.moving_direction == 2)
+        {
+            base_animation(game);
+        }
+    }
+    return (0);
 }

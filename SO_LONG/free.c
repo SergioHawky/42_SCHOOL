@@ -31,13 +31,26 @@ void    free_images(game_data *game)
         i++;
     }
     i = 0;
+    while (i < BASE_ANIM)
+    {
+        if (game->animation.base_animation_backward[i])
+            mlx_destroy_image(game->mlx, game->animation.base_animation_backward[i]);
+        i++;
+    }
+    i = 0;
     while (i < FORW_ANIM)
     {
         if (game->animation.move_forward_anim[i])
             mlx_destroy_image(game->mlx, game->animation.move_forward_anim[i]);
         i++;
     }
-    
+    i = 0;
+    while (i < FORW_ANIM)
+    {
+        if (game->animation.move_backward_anim[i])
+            mlx_destroy_image(game->mlx, game->animation.move_backward_anim[i]);
+        i++;
+    }
     if (game->player.img_player)
         mlx_destroy_image(game->mlx, game->player.img_player);
     

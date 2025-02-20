@@ -59,6 +59,8 @@ typedef struct a_data               //animation
     int     moving_direction;
     void    *base_animation[BASE_ANIM];
     void    *move_forward_anim[FORW_ANIM];
+    void    *move_backward_anim[FORW_ANIM];
+    void    *base_animation_backward[BASE_ANIM];
 }   animation_data;
 
 typedef struct c_data               //collectible
@@ -105,18 +107,22 @@ int     key_release(int keysym, game_data *game);
 void    spawn_player(game_data *game);
 void    spawn_collectibles(game_data *game, int first_time);
 void    spawn_exit(game_data *game);
-int     base_animation(game_data *game);
-int     move_forward_animation(game_data *game);
+void    base_animation(game_data *game);
+void    base_animation_backward(game_data *game);
+void    move_forward_animation(game_data *game);
+void    move_backward_animation(game_data *game);
 void    free_map(game_data *game);
 void    free_images(game_data *game);
 void    free_all(game_data *game);
 void    put_forward_mov_player(game_data *game);
+void    put_backward_mov_player(game_data *game);
 void    put_textures_struct(game_data *game);
 void    put_image_player(game_data *game);
 void    put_base_mov_player(game_data *game);
+void    put_base_mov_player_backward(game_data *game);
 void    put_img_collectible(game_data *game);
 void    put_img_exit(game_data *game);
-void    update(game_data *game);
+int     update(game_data *game);
 int     player_touching_tile(game_data *game, int x, int y);
 void    player_can_exit(game_data *game);
 void    HUD(game_data *game);

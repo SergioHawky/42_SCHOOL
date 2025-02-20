@@ -71,6 +71,31 @@ void    put_base_mov_player(game_data *game)
     }
 }
 
+void    put_base_mov_player_backward(game_data *game)
+{
+    int i = 0;
+
+    char *all_sprites[BASE_ANIM] = {
+        "Assets/character/BACK/char_0B.xpm",
+        "Assets/character/BACK/char_1B.xpm",
+        "Assets/character/BACK/char_2B.xpm",
+        "Assets/character/BACK/char_3B.xpm",
+        "Assets/character/BACK/char_4B.xpm",
+        "Assets/character/BACK/char_5B.xpm"
+    };
+
+    while (i < BASE_ANIM)
+    {
+        game->animation.base_animation_backward[i] = mlx_xpm_file_to_image(game->mlx, all_sprites[i], &game->player.player_width, &game->player.player_heigth);
+        if (!game->animation.base_animation_backward[i])
+        {
+            write(2, "Erro a carregar a imagem base animation", 40);
+            exit(1);
+        }
+        i ++;
+    }
+}
+
 void    put_forward_mov_player(game_data *game)
 {
     int i = 0;
@@ -92,6 +117,33 @@ void    put_forward_mov_player(game_data *game)
         if (!game->animation.move_forward_anim[i])
         {
             write(2, "Erro a carregar a imagem forward animation", 43);
+            exit(1);
+        }
+        i ++;
+    }
+}
+
+void    put_backward_mov_player(game_data *game)
+{
+    int i = 0;
+
+    char *all_sprites[FORW_ANIM] = {
+        "Assets/character/BACK/char_mov_forward0B.xpm",
+        "Assets/character/BACK/char_mov_forward1B.xpm",
+        "Assets/character/BACK/char_mov_forward2B.xpm",
+        "Assets/character/BACK/char_mov_forward3B.xpm",
+        "Assets/character/BACK/char_mov_forward4B.xpm",
+        "Assets/character/BACK/char_mov_forward5B.xpm",
+        "Assets/character/BACK/char_mov_forward6B.xpm",
+        "Assets/character/BACK/char_mov_forward7B.xpm"
+    };
+
+    while (i < FORW_ANIM)
+    {
+        game->animation.move_backward_anim[i] = mlx_xpm_file_to_image(game->mlx, all_sprites[i], &game->player.player_width, &game->player.player_heigth);
+        if (!game->animation.move_backward_anim[i])
+        {
+            write(2, "Erro a carregar a imagem backward animation", 44);
             exit(1);
         }
         i ++;

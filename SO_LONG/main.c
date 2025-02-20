@@ -26,11 +26,14 @@ int main()
     game.animation.moving = 0;
     game.collectible.all_collectible = 0;
     game.player.count_moves = 0;
+    game.animation.moving_direction = 2;
     
     put_textures_struct(&game);
     put_image_player(&game);
     put_base_mov_player(&game);
+    put_base_mov_player_backward(&game);
     put_forward_mov_player(&game);
+    put_backward_mov_player(&game);
     put_img_collectible(&game);
     put_img_exit(&game);
     
@@ -42,6 +45,7 @@ int main()
 
     mlx_hook(game.window, KeyPress, KeyPressMask, key_press, &game);
     mlx_hook(game.window, KeyRelease, KeyReleaseMask, key_release, &game);
+    mlx_loop_hook(game.mlx, update, &game);
     mlx_loop(game.mlx);
     return(0);
 }
