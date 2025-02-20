@@ -6,19 +6,20 @@
 /*   By: seilkiv <seilkiv@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 01:47:05 by seilkiv           #+#    #+#             */
-/*   Updated: 2025/02/15 17:04:36 by seilkiv          ###   ########.fr       */
+/*   Updated: 2025/02/20 04:38:58 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 #define SO_LONG_H
 
+#include "libft.h"
 #include "../minilibx-linux/mlx.h"          //mlx
 #include <X11/X.h>                          //keysym
-#include <stdlib.h>
 #include <unistd.h>                         //write
 #include <fcntl.h>                          //open e read
-#include <string.h>                         //strdup dps tirar
+#include <string.h>                         
+#include <stdio.h>                          //strdup dps tirar
 
 #define ROW     7
 #define COLUMN  25
@@ -28,11 +29,9 @@
 #define PIXEL_X (COLUMN * TILE)     //ROW in pixels
 #define PIXEL_Y (ROW * TILE)        //COLUMN in pixels
 
-#define SPEED   5
+#define SPEED   10
 
 #define TOTAL_TXT   9
-
-
 
 #define BASE_ANIM   6
 #define FORW_ANIM   8
@@ -57,6 +56,7 @@ typedef struct p_data               //player
     int     player_heigth;
     int     position_x;
     int     position_y;
+    int     count_moves;
 }   player_data;
 
 typedef struct a_data               //animation
@@ -74,6 +74,7 @@ typedef struct c_data               //collectible
     int     heigth;
     int     position_x;
     int     position_y;
+    int     all_collectible;
 }   collectible_data;
 
 typedef struct e_data               //exit
@@ -83,6 +84,7 @@ typedef struct e_data               //exit
     int     heigth;
     int     position_x;
     int     position_y;
+    int     touching_exit;
 }   exit_data;
 
 typedef struct s_data
@@ -91,6 +93,8 @@ typedef struct s_data
     void    *window;
     void    *textures[TOTAL_TXT];
     char    **map;
+    int     map_height;
+    int     map_width;
     int     img_width;
     int     img_height;
     player_data player;
@@ -105,7 +109,7 @@ void    draw_map(game_data *game);
 int     key_press(int keysym, game_data *game);
 int     key_release(int keysym, game_data *game);
 void    spawn_player(game_data *game);
-void    spawn_collectibles(game_data *game);
+void    spawn_collectibles(game_data *game, int first_time);
 void    spawn_exit(game_data *game);
 int     base_animation(game_data *game);
 int     move_forward_animation(game_data *game);
@@ -120,5 +124,9 @@ void    put_img_collectible(game_data *game);
 void    put_img_exit(game_data *game);
 void    update(game_data *game);
 int     player_touching_tile(game_data *game, int x, int y);
+void    player_can_exit(game_data *game);
+void    HUD(game_data *game);
+void    is_map_valid(game_data *game);
+void    get_map_size(char *Map_Name, game_data *game);
 
 #endif

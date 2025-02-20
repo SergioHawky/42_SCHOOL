@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seilkiv <seilkiv@student.42lisboa.com>     +#+  +:+       +#+        */
+/*   By: seilkiv <seilkiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/14 14:32:17 by seilkiv           #+#    #+#             */
-/*   Updated: 2025/02/14 14:32:17 by seilkiv          ###   ########.fr       */
+/*   Created: 2025/02/19 21:16:59 by seilkiv           #+#    #+#             */
+/*   Updated: 2025/02/19 21:16:59 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ void    put_textures_struct(game_data *game)
     int i = 0;
 
     char *all_textures[TOTAL_TXT] = {
-        "/mnt/d/42/SO_LONG/Assets/TileSet/WALL_LEFT.xpm",
-        "/mnt/d/42/SO_LONG/Assets/TileSet/WALL_RIGHT.xpm",
-        "/mnt/d/42/SO_LONG/Assets/TileSet/WALL_UP.xpm",
-        "/mnt/d/42/SO_LONG/Assets/TileSet/FLOOR.xpm",
-        "/mnt/d/42/SO_LONG/Assets/TileSet/CORNER_LU.xpm",
-        "/mnt/d/42/SO_LONG/Assets/TileSet/CORNER_LD.xpm",
-        "/mnt/d/42/SO_LONG/Assets/TileSet/CORNER_RU.xpm",
-        "/mnt/d/42/SO_LONG/Assets/TileSet/CORNER_RD.xpm",
-        "/mnt/d/42/SO_LONG/Assets/TileSet/PLATFORM.xpm"
+        "Assets/TileSet/WALL_LEFT.xpm",
+        "Assets/TileSet/WALL_RIGHT.xpm",
+        "Assets/TileSet/WALL_UP.xpm",
+        "Assets/TileSet/FLOOR.xpm",
+        "Assets/TileSet/CORNER_LU.xpm",
+        "Assets/TileSet/CORNER_LD.xpm",
+        "Assets/TileSet/CORNER_RU.xpm",
+        "Assets/TileSet/CORNER_RD.xpm",
+        "Assets/TileSet/PLATFORM.xpm"
     };
 
     while (i < TOTAL_TXT)
@@ -43,7 +43,7 @@ void    put_textures_struct(game_data *game)
 
 void    put_image_player(game_data *game)
 {
-    game->player.img_player = mlx_xpm_file_to_image(game->mlx, "/mnt/d/42/SO_LONG/Assets/character/char_0.xpm", &game->player.player_width, &game->player.player_heigth);
+    game->player.img_player = mlx_xpm_file_to_image(game->mlx, "Assets/character/char_0.xpm", &game->player.player_width, &game->player.player_heigth);
 }
 
 void    put_base_mov_player(game_data *game)
@@ -51,12 +51,12 @@ void    put_base_mov_player(game_data *game)
     int i = 0;
 
     char *all_sprites[BASE_ANIM] = {
-        "/mnt/d/42/SO_LONG/Assets/character/char_0.xpm",
-        "/mnt/d/42/SO_LONG/Assets/character/char_1.xpm",
-        "/mnt/d/42/SO_LONG/Assets/character/char_2.xpm",
-        "/mnt/d/42/SO_LONG/Assets/character/char_3.xpm",
-        "/mnt/d/42/SO_LONG/Assets/character/char_4.xpm",
-        "/mnt/d/42/SO_LONG/Assets/character/char_5.xpm"
+        "Assets/character/char_0.xpm",
+        "Assets/character/char_1.xpm",
+        "Assets/character/char_2.xpm",
+        "Assets/character/char_3.xpm",
+        "Assets/character/char_4.xpm",
+        "Assets/character/char_5.xpm"
     };
 
     while (i < BASE_ANIM)
@@ -76,14 +76,14 @@ void    put_forward_mov_player(game_data *game)
     int i = 0;
 
     char *all_sprites[FORW_ANIM] = {
-        "/mnt/d/42/SO_LONG/Assets/character/char_mov_forward0.xpm",
-        "/mnt/d/42/SO_LONG/Assets/character/char_mov_forward1.xpm",
-        "/mnt/d/42/SO_LONG/Assets/character/char_mov_forward2.xpm",
-        "/mnt/d/42/SO_LONG/Assets/character/char_mov_forward3.xpm",
-        "/mnt/d/42/SO_LONG/Assets/character/char_mov_forward4.xpm",
-        "/mnt/d/42/SO_LONG/Assets/character/char_mov_forward5.xpm",
-        "/mnt/d/42/SO_LONG/Assets/character/char_mov_forward6.xpm",
-        "/mnt/d/42/SO_LONG/Assets/character/char_mov_forward7.xpm"
+        "Assets/character/char_mov_forward0.xpm",
+        "Assets/character/char_mov_forward1.xpm",
+        "Assets/character/char_mov_forward2.xpm",
+        "Assets/character/char_mov_forward3.xpm",
+        "Assets/character/char_mov_forward4.xpm",
+        "Assets/character/char_mov_forward5.xpm",
+        "Assets/character/char_mov_forward6.xpm",
+        "Assets/character/char_mov_forward7.xpm"
     };
 
     while (i < FORW_ANIM)
@@ -100,7 +100,7 @@ void    put_forward_mov_player(game_data *game)
 
 void    put_img_collectible(game_data *game)
 {
-    game->collectible.img_collectible = mlx_xpm_file_to_image(game->mlx, "/mnt/d/42/SO_LONG/Assets/collectible/coin.xpm", &game->collectible.width, &game->collectible.heigth);
+    game->collectible.img_collectible = mlx_xpm_file_to_image(game->mlx, "Assets/collectible/coin.xpm", &game->collectible.width, &game->collectible.heigth);
     if(!game->collectible.img_collectible)
     {
         write(2, "Erro a carregar a imagem collectible", 37);
@@ -110,7 +110,7 @@ void    put_img_collectible(game_data *game)
 
 void    put_img_exit(game_data *game)
 {
-    game->exit.img_exit = mlx_xpm_file_to_image(game->mlx, "/mnt/d/42/SO_LONG/Assets/exit/shop.xpm", &game->exit.width, &game->exit.heigth);
+    game->exit.img_exit = mlx_xpm_file_to_image(game->mlx, "Assets/exit/shop.xpm", &game->exit.width, &game->exit.heigth);
     if(!game->exit.img_exit)
     {
         write(2, "Erro a carregar a imagem exit", 30);

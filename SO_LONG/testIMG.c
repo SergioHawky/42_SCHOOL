@@ -148,15 +148,15 @@ void    put_textures_struct(game_data *game)
     int i = 0;
 
     char *all_textures[TOTAL_TXT] = {
-        "/mnt/d/42/SO_LONG/Assets/TileSet/WALL_LEFT.xpm",
-        "/mnt/d/42/SO_LONG/Assets/TileSet/WALL_RIGHT.xpm",
-        "/mnt/d/42/SO_LONG/Assets/TileSet/WALL_UP.xpm",
-        "/mnt/d/42/SO_LONG/Assets/TileSet/FLOOR.xpm",
-        "/mnt/d/42/SO_LONG/Assets/TileSet/CORNER_LU.xpm",
-        "/mnt/d/42/SO_LONG/Assets/TileSet/CORNER_LD.xpm",
-        "/mnt/d/42/SO_LONG/Assets/TileSet/CORNER_RU.xpm",
-        "/mnt/d/42/SO_LONG/Assets/TileSet/CORNER_RD.xpm",
-        "/mnt/d/42/SO_LONG/Assets/TileSet/PLATFORM.xpm"
+        "Assets/TileSet/WALL_LEFT.xpm",
+        "Assets/TileSet/WALL_RIGHT.xpm",
+        "Assets/TileSet/WALL_UP.xpm",
+        "Assets/TileSet/FLOOR.xpm",
+        "Assets/TileSet/CORNER_LU.xpm",
+        "Assets/TileSet/CORNER_LD.xpm",
+        "Assets/TileSet/CORNER_RU.xpm",
+        "Assets/TileSet/CORNER_RD.xpm",
+        "Assets/TileSet/PLATFORM.xpm"
     };
 
     while (i < TOTAL_TXT)
@@ -174,7 +174,7 @@ void    put_textures_struct(game_data *game)
 
 void    put_image_player(game_data *game)
 {
-    game->player.img_player = mlx_xpm_file_to_image(game->mlx, "/mnt/d/42/SO_LONG/Assets/character/char_0.xpm", &game->player.player_width, &game->player.player_heigth);
+    game->player.img_player = mlx_xpm_file_to_image(game->mlx, "Assets/character/char_0.xpm", &game->player.player_width, &game->player.player_heigth);
 }
 
 void    put_base_mov_player(game_data *game)
@@ -182,12 +182,12 @@ void    put_base_mov_player(game_data *game)
     int i = 0;
 
     char *all_sprites[BASE_ANIM] = {
-        "/mnt/d/42/SO_LONG/Assets/character/char_0.xpm",
-        "/mnt/d/42/SO_LONG/Assets/character/char_1.xpm",
-        "/mnt/d/42/SO_LONG/Assets/character/char_2.xpm",
-        "/mnt/d/42/SO_LONG/Assets/character/char_3.xpm",
-        "/mnt/d/42/SO_LONG/Assets/character/char_4.xpm",
-        "/mnt/d/42/SO_LONG/Assets/character/char_5.xpm"
+        "Assets/character/char_0.xpm",
+        "Assets/character/char_1.xpm",
+        "Assets/character/char_2.xpm",
+        "Assets/character/char_3.xpm",
+        "Assets/character/char_4.xpm",
+        "Assets/character/char_5.xpm"
     };
 
     while (i < BASE_ANIM)
@@ -207,14 +207,14 @@ void    put_forward_mov_player(game_data *game)
     int i = 0;
 
     char *all_sprites[FORW_ANIM] = {
-        "/mnt/d/42/SO_LONG/Assets/character/char_mov_forward0.xpm",
-        "/mnt/d/42/SO_LONG/Assets/character/char_mov_forward1.xpm",
-        "/mnt/d/42/SO_LONG/Assets/character/char_mov_forward2.xpm",
-        "/mnt/d/42/SO_LONG/Assets/character/char_mov_forward3.xpm",
-        "/mnt/d/42/SO_LONG/Assets/character/char_mov_forward4.xpm",
-        "/mnt/d/42/SO_LONG/Assets/character/char_mov_forward5.xpm",
-        "/mnt/d/42/SO_LONG/Assets/character/char_mov_forward6.xpm",
-        "/mnt/d/42/SO_LONG/Assets/character/char_mov_forward7.xpm"
+        "Assets/character/char_mov_forward0.xpm",
+        "Assets/character/char_mov_forward1.xpm",
+        "Assets/character/char_mov_forward2.xpm",
+        "Assets/character/char_mov_forward3.xpm",
+        "Assets/character/char_mov_forward4.xpm",
+        "Assets/character/char_mov_forward5.xpm",
+        "Assets/character/char_mov_forward6.xpm",
+        "Assets/character/char_mov_forward7.xpm"
     };
 
     while (i < FORW_ANIM)
@@ -231,7 +231,7 @@ void    put_forward_mov_player(game_data *game)
 
 void    put_img_collectible(game_data *game)
 {
-    game->collectible.img_collectible = mlx_xpm_file_to_image(game->mlx, "/mnt/d/42/SO_LONG/Assets/collectible/coin.xpm", &game->collectible.width, &game->collectible.heigth);
+    game->collectible.img_collectible = mlx_xpm_file_to_image(game->mlx, "Assets/collectible/coin.xpm", &game->collectible.width, &game->collectible.heigth);
     if(!game->collectible.img_collectible)
     {
         write(2, "Erro a carregar a imagem collectible", 37);
@@ -241,7 +241,7 @@ void    put_img_collectible(game_data *game)
 
 void    put_img_exit(game_data *game)
 {
-    game->exit.img_exit = mlx_xpm_file_to_image(game->mlx, "/mnt/d/42/SO_LONG/Assets/exit/shop.xpm", &game->exit.width, &game->exit.heigth);
+    game->exit.img_exit = mlx_xpm_file_to_image(game->mlx, "Assets/exit/shop.xpm", &game->exit.width, &game->exit.heigth);
     if(!game->exit.img_exit)
     {
         write(2, "Erro a carregar a imagem exit", 30);
@@ -256,7 +256,7 @@ int base_animation(game_data *game)
     static int delay = 0;
 
     delay++;
-    if (delay > 4000)
+    if (delay > 10000)
     {
         frame = (frame + 1) % BASE_ANIM;
         mlx_put_image_to_window(game->mlx, game->window, game->animation.base_animation[frame], game->player.position_x, game->player.position_y);
@@ -274,7 +274,7 @@ int move_forward_animation(game_data *game)
         return (0);
         
     delay1++;
-    if (delay1 > 2000)
+    if (delay1 > 10000)
     {
         frame1 = (frame1 + 1) % FORW_ANIM;
         mlx_put_image_to_window(game->mlx, game->window, game->animation.move_forward_anim[frame1], game->player.position_x, game->player.position_y);
@@ -388,7 +388,14 @@ void    update(game_data *game)
     draw_map(game);
     spawn_collectibles(game);
     spawn_exit(game);
-    mlx_put_image_to_window(game->mlx, game->window, game->player.img_player, game->player.position_x, game->player.position_y);
+    if (game->animation.moving)
+    {
+        move_forward_animation(game);
+    }
+    else
+    {
+        mlx_put_image_to_window(game->mlx, game->window, game->player.img_player, game->player.position_x, game->player.position_y);
+    }
 }
 
 
@@ -426,12 +433,8 @@ int key_press(int keysym, game_data *game)
     else if (keysym == 100)             // D (direita)
     {
         new_x += SPEED;
-        if (!game->animation.moving) 
-        {
-            game->animation.moving = 1;
-            game->animation.moving_direction = 1; // Direita
-            mlx_loop_hook(game->mlx, move_forward_animation, game);
-        }
+        game->animation.moving = 1;
+        game->animation.moving_direction = 1;
     }
     player(game, new_x, new_y);
 
@@ -475,7 +478,6 @@ int main()
 
     mlx_hook(game.window, KeyPress, KeyPressMask, key_press, &game);
     mlx_hook(game.window, KeyRelease, KeyReleaseMask, key_release, &game);
-    //mlx_loop_hook(game.mlx, player_animation, &game); // Adicionado aqui!
     mlx_loop(game.mlx);
     return(0);
 }

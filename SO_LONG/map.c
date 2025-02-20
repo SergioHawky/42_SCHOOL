@@ -3,14 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seilkiv <seilkiv@student.42lisboa.com>     +#+  +:+       +#+        */
+/*   By: seilkiv <seilkiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/14 15:09:03 by seilkiv           #+#    #+#             */
-/*   Updated: 2025/02/14 15:09:03 by seilkiv          ###   ########.fr       */
+/*   Created: 2025/02/19 21:17:32 by seilkiv           #+#    #+#             */
+/*   Updated: 2025/02/19 21:17:32 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/so_long.h"
+
+void    get_map_size(char *Map_Name, game_data *game)
+{
+    int fd;
+    game->map_height = 0;
+    game->map_width = 0;
+    int     first_line = 1;
+    char    c;
+
+    fd = open(Map_Name, O_RDONLY);
+    if(fd < 0)
+    {
+        write(2, "Error opening fd", 16);
+        exit(1);
+    }
+
+    while(read(fd, &c, 1) > 0)
+    {
+        if(c == '\n')
+        {
+            game->map_height ++;
+            first_line = 0;
+        }
+        else if(first_line)
+            game->map_width ++;
+    }
+    close(fd);
+}
 
 char    **map(char *Map_Name)
 {
@@ -40,7 +68,7 @@ char    **map(char *Map_Name)
             return NULL;
         }
         buffer[COLUMN] = '\0';
-        map[i] = strdup(buffer);  // lib
+        map[i] = ft_strdup(buffer);
         if (!map[i])
         {
             close(fd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   animation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seilkiv <seilkiv@student.42lisboa.com>     +#+  +:+       +#+        */
+/*   By: seilkiv <seilkiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/14 19:52:28 by seilkiv           #+#    #+#             */
-/*   Updated: 2025/02/14 19:52:28 by seilkiv          ###   ########.fr       */
+/*   Created: 2025/02/19 21:16:08 by seilkiv           #+#    #+#             */
+/*   Updated: 2025/02/19 21:16:08 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int base_animation(game_data *game)
     static int delay = 0;
 
     delay++;
-    if (delay > 4000)
+    if (delay > 10000)
     {
         frame = (frame + 1) % BASE_ANIM;
         mlx_put_image_to_window(game->mlx, game->window, game->animation.base_animation[frame], game->player.position_x, game->player.position_y);
@@ -36,7 +36,7 @@ int move_forward_animation(game_data *game)
         return (0);
         
     delay++;
-    if (delay > 2000)
+    if (delay > 10000)
     {
         frame = (frame + 1) % FORW_ANIM;
         mlx_put_image_to_window(game->mlx, game->window, game->animation.move_forward_anim[frame], game->player.position_x, game->player.position_y);

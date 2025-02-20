@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   spawn.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seilkiv <seilkiv@student.42lisboa.com>     +#+  +:+       +#+        */
+/*   By: seilkiv <seilkiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/14 19:16:34 by seilkiv           #+#    #+#             */
-/*   Updated: 2025/02/14 19:16:34 by seilkiv          ###   ########.fr       */
+/*   Created: 2025/02/19 21:18:07 by seilkiv           #+#    #+#             */
+/*   Updated: 2025/02/19 21:18:07 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void    spawn_player(game_data *game)
     }
 }
 
-void    spawn_collectibles(game_data *game)
+void    spawn_collectibles(game_data *game, int first_time)
 {
     int i = 0;
     int j = 0;
@@ -49,6 +49,8 @@ void    spawn_collectibles(game_data *game)
                 game->collectible.position_x = j * TILE;
                 game->collectible.position_y = i * TILE;
                 mlx_put_image_to_window(game->mlx, game->window, game->collectible.img_collectible, game->collectible.position_x + 15, game->collectible.position_y + 15);
+                if(first_time == 1)
+                    game->collectible.all_collectible ++;
             }
             j++;
         }
