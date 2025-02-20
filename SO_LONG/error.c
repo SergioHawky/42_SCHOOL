@@ -6,7 +6,7 @@
 /*   By: seilkiv <seilkiv@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 02:32:57 by seilkiv           #+#    #+#             */
-/*   Updated: 2025/02/20 05:38:05 by seilkiv          ###   ########.fr       */
+/*   Updated: 2025/02/20 06:16:34 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void    is_map_valid(game_data *game)
         i ++;
     }
     player_collectibles_exit(game, P, C, E);
+    minimum_map_size(game);
 }
 
 void    minimum_map_size(game_data *game)

@@ -6,7 +6,7 @@
 /*   By: seilkiv <seilkiv@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 20:05:53 by seilkiv           #+#    #+#             */
-/*   Updated: 2025/02/20 05:58:18 by seilkiv          ###   ########.fr       */
+/*   Updated: 2025/02/20 06:10:41 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ int main()
     
     get_map_size("Maps/map2.ber", &game);
     game.map = map("Maps/map2.ber", &game);
-    printf("%d\n", game.map_height);
-    printf("%d", game.map_width);
     is_map_valid(&game);
     game.mlx = mlx_init();
     game.window = mlx_new_window(game.mlx, (game.map_width * TILE), (game.map_height * TILE), "MY GAME");
