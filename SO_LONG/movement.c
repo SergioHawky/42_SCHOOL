@@ -50,7 +50,6 @@ int key_press(int keysym, game_data *game)
     {
         new_x += SPEED;
         game->animation.moving = 1;
-        mlx_loop_hook(game->mlx, move_forward_animation, game);
     }
     player(game, new_x, new_y);
 

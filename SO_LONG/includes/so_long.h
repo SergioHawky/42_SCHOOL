@@ -23,7 +23,7 @@
 
 #define TILE    40
 
-#define SPEED   10
+#define SPEED   5
 
 #define TOTAL_TXT   9
 

@@ -18,7 +18,7 @@ int base_animation(game_data *game)
     static int delay = 0;
 
     delay++;
-    if (delay > 10000)
+    if (delay > 4000)
     {
         frame = (frame + 1) % BASE_ANIM;
         mlx_put_image_to_window(game->mlx, game->window, game->animation.base_animation[frame], game->player.position_x, game->player.position_y);
@@ -36,7 +36,7 @@ int move_forward_animation(game_data *game)
         return (0);
         
     delay++;
-    if (delay > 10000)
+    if (delay > 100)
     {
         frame = (frame + 1) % FORW_ANIM;
         mlx_put_image_to_window(game->mlx, game->window, game->animation.move_forward_anim[frame], game->player.position_x, game->player.position_y);
