@@ -6,7 +6,7 @@
 /*   By: seilkiv <seilkiv@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 01:47:05 by seilkiv           #+#    #+#             */
-/*   Updated: 2025/02/20 04:38:58 by seilkiv          ###   ########.fr       */
+/*   Updated: 2025/02/20 05:58:00 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,7 @@
 #include <string.h>                         
 #include <stdio.h>                          //strdup dps tirar
 
-#define ROW     7
-#define COLUMN  25
-
 #define TILE    40
-
-#define PIXEL_X (COLUMN * TILE)     //ROW in pixels
-#define PIXEL_Y (ROW * TILE)        //COLUMN in pixels
 
 #define SPEED   10
 
@@ -104,7 +98,7 @@ typedef struct s_data
 }   game_data;
 
 
-char    **map(char *Map_Name);
+char    **map(char *Map_Name, game_data *game);
 void    draw_map(game_data *game);
 int     key_press(int keysym, game_data *game);
 int     key_release(int keysym, game_data *game);
@@ -113,7 +107,7 @@ void    spawn_collectibles(game_data *game, int first_time);
 void    spawn_exit(game_data *game);
 int     base_animation(game_data *game);
 int     move_forward_animation(game_data *game);
-void    free_map(char **map, int row);
+void    free_map(game_data *game);
 void    free_images(game_data *game);
 void    free_all(game_data *game);
 void    put_forward_mov_player(game_data *game);
@@ -128,5 +122,6 @@ void    player_can_exit(game_data *game);
 void    HUD(game_data *game);
 void    is_map_valid(game_data *game);
 void    get_map_size(char *Map_Name, game_data *game);
+void    minimum_map_size(game_data *game);
 
 #endif

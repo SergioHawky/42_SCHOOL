@@ -30,8 +30,6 @@ int key_press(int keysym, game_data *game)
 
     if(keysym == 65307)
     {
-        printf("%d\n", game->map_height);
-        printf("%d", game->map_width);
         free_all(game);
         exit(0);
     }

@@ -48,24 +48,24 @@ void    free_images(game_data *game)
         mlx_destroy_image(game->mlx, game->exit.img_exit);
 }
 
-void free_map(char **map, int row) 
+void free_map(game_data *game) 
 {
     int i;
 
     i = 0;
-    while (i < row)
+    while (i < game->map_height)
     {
-        if (map[i])     
-            free(map[i]);
+        if (game->map[i])     
+            free(game->map[i]);
         i++;
     }
-    free(map);
+    free(game->map);
 }
 
 void free_all(game_data *game)
 {
     free_images(game);
-    free_map(game->map, ROW);
+    free_map(game);
     mlx_destroy_window(game->mlx, game->window);
     mlx_destroy_display(game->mlx);
     free(game->mlx);

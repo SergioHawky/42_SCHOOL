@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "includes/so_long.h"
+#define PIXEL_X (game->map_width * TILE)            //WIDTH in pixels
+#define PIXEL_Y (game->map_height * TILE)           //HEIGHT in pixels
 
 void    get_map_size(char *Map_Name, game_data *game)
 {
@@ -29,6 +31,8 @@ void    get_map_size(char *Map_Name, game_data *game)
 
     while(read(fd, &c, 1) > 0)
     {
+        if(c == '\r')
+            continue;
         if(c == '\n')
         {
             game->map_height ++;
@@ -37,15 +41,19 @@ void    get_map_size(char *Map_Name, game_data *game)
         else if(first_line)
             game->map_width ++;
     }
+    if (c != '\n')
+        game->map_height++;
+
+    minimum_map_size(game);
     close(fd);
 }
 
-char    **map(char *Map_Name)
+char    **map(char *Map_Name, game_data *game)
 {
     int     fd, bytes_read, i = 0;
-    char    buffer[COLUMN + 2];
+    char    buffer[game->map_width + 2];
     
-    char    **map = (char **)malloc(sizeof(char *) * (ROW + 1));
+    char    **map = (char **)malloc(sizeof(char *) * (game->map_height + 1));
     if(!map)
         return NULL;
     
@@ -58,21 +66,21 @@ char    **map(char *Map_Name)
     }
     
     i = 0;
-    while(i < ROW)
+    while(i < game->map_height)
     {
-        bytes_read = read(fd, buffer, COLUMN + 2);
+        bytes_read = read(fd, buffer, game->map_width + 2);
         if(bytes_read <= 0)
         {
             close(fd);
-            free_map(map, i);
+            free_map(game);
             return NULL;
         }
-        buffer[COLUMN] = '\0';
+        buffer[game->map_width] = '\0';
         map[i] = ft_strdup(buffer);
         if (!map[i])
         {
             close(fd);
-            free_map(map, i);
+            free_map(game);
             return NULL;
         }
         i ++;
@@ -87,11 +95,11 @@ void    draw_map(game_data *game)
     int x, y = 0;
     int pixel_x, pixel_y = 0; 
 
-    while(y < ROW && pixel_y < PIXEL_Y)
+    while(y < game->map_height && pixel_y < PIXEL_Y)
     {
         x = 0;
         pixel_x = 0;
-        while(x < COLUMN && pixel_x < PIXEL_X)
+        while(x < game->map_width && pixel_x < PIXEL_X)
         {
             if(game->map[y][x] == '1')
             {
