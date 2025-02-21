@@ -48,8 +48,9 @@ typedef struct p_data               //player
     void    *img_player;
     int     player_width;
     int     player_heigth;
-    int     position_x;
-    int     position_y;
+    float   position_x;
+    float   position_y;
+    float   gravity_velocity;
     int     count_moves;
 }   player_data;
 
@@ -129,5 +130,7 @@ void    HUD(game_data *game);
 void    is_map_valid(game_data *game);
 void    get_map_size(char *Map_Name, game_data *game);
 void    minimum_map_size(game_data *game);
+
+void    apply_gravity(game_data *game);
 
 #endif

@@ -18,8 +18,8 @@ int main()
     
     get_map_size("Maps/map2.ber", &game);
     game.map = map("Maps/map2.ber", &game);
-    printf("%d\n", game.map_height);
-    printf("%d\n", game.map_width);
+    //printf("%d\n", game.map_height);
+    //printf("%d\n", game.map_width);
     is_map_valid(&game);
     game.mlx = mlx_init();
     game.window = mlx_new_window(game.mlx, (game.map_width * TILE), (game.map_height * TILE), "MY GAME");

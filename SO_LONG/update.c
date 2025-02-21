@@ -20,6 +20,8 @@ int    update(game_data *game)
     spawn_exit(game);
     player_can_exit(game);
     HUD(game);
+
+    apply_gravity(game);
     if (game->animation. moving == 1)
     {
         if (game->animation.moving_direction == 1)

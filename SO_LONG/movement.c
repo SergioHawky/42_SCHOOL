@@ -18,7 +18,10 @@ void player(game_data *game, int new_x, int new_y)
     {
         game->player.position_x = new_x;
         game->player.position_y = new_y;
-        game->player.count_moves ++;
+        if (game->animation.moving == 1)
+        {
+            game->player.count_moves ++;
+        }
         update(game);
     }
 }
@@ -34,13 +37,9 @@ int key_press(int keysym, game_data *game)
         exit(0);
     }
 
-    if (keysym == 119)                  // W (cima)
+    if (keysym == 119 )                  // W (cima)
     {
         new_y -= SPEED;
-    }
-    else if (keysym == 115)             // S (baixo)
-    {
-        new_y += SPEED;
     }
     else if (keysym == 97)              // A (esquerda)
     {
@@ -55,7 +54,6 @@ int key_press(int keysym, game_data *game)
         game->animation.moving_direction = 2;
     }
     player(game, new_x, new_y);
-
     return (0);
 }
 

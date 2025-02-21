@@ -10,7 +10,7 @@ MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
 INCLUDES = -I$(MLX_DIR)
 
 # Arquivos do projeto
-SRCS = main.c image.c map.c movement.c spawn.c animation.c free.c update.c player_border.c exit.c HUD.c error.c Libft/ft_strdup.c Libft/ft_strlen.c Libft/ft_itoa.c
+SRCS = main.c image.c map.c movement.c spawn.c animation.c free.c update.c player_border.c exit.c HUD.c error.c gravity.c Libft/ft_strdup.c Libft/ft_strlen.c Libft/ft_itoa.c
 
 OBJS = $(SRCS:.c=.o)
 
