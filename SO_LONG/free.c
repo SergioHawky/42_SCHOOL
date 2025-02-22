@@ -51,6 +51,13 @@ void    free_images(game_data *game)
             mlx_destroy_image(game->mlx, game->animation.move_backward_anim[i]);
         i++;
     }
+    i = 0;
+    while (i < COLLEC_ANIM)
+    {
+        if (game->animation.collectible_animation[i])
+            mlx_destroy_image(game->mlx, game->animation.collectible_animation[i]);
+        i++;
+    }
     if (game->player.img_player)
         mlx_destroy_image(game->mlx, game->player.img_player);
     

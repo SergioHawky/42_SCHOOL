@@ -48,7 +48,8 @@ void    spawn_collectibles(game_data *game, int first_time)
             {
                 game->collectible.position_x = j * TILE;
                 game->collectible.position_y = i * TILE;
-                mlx_put_image_to_window(game->mlx, game->window, game->collectible.img_collectible, game->collectible.position_x + 15, game->collectible.position_y + 15);
+                //mlx_put_image_to_window(game->mlx, game->window, game->collectible.img_collectible, game->collectible.position_x + 15, game->collectible.position_y + 15);
+                collectible_animation(game);
                 if(first_time == 1)
                     game->collectible.all_collectible ++;
             }

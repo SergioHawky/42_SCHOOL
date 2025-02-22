@@ -160,6 +160,31 @@ void    put_img_collectible(game_data *game)
     }
 }
 
+void    put_animation_collectible(game_data *game)
+{
+    int i = 0;
+
+    char *all_sprites[COLLEC_ANIM] = {
+        "Assets/collectible/coin.xpm",
+        "Assets/collectible/coin_2.xpm",
+        "Assets/collectible/coin_3.xpm",
+        "Assets/collectible/coin_4.xpm",
+        "Assets/collectible/coin_5.xpm",
+        "Assets/collectible/coin_6.xpm",
+    };
+
+    while (i < COLLEC_ANIM)
+    {
+        game->animation.collectible_animation[i] = mlx_xpm_file_to_image(game->mlx, all_sprites[i], &game->collectible.width, &game->collectible.heigth);
+        if (!game->animation.collectible_animation[i])
+        {
+            write(2, "Erro a carregar a imagem collectible animation", 47);
+            exit(1);
+        }
+        i ++;
+    }
+}
+
 void    put_img_exit(game_data *game)
 {
     game->exit.img_exit = mlx_xpm_file_to_image(game->mlx, "Assets/exit/shop.xpm", &game->exit.width, &game->exit.heigth);

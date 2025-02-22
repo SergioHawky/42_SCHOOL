@@ -67,3 +67,17 @@ void move_backward_animation(game_data *game)
     }
     mlx_put_image_to_window(game->mlx, game->window, game->animation.move_backward_anim[frame], game->player.position_x, game->player.position_y);
 }
+
+void collectible_animation(game_data *game)
+{
+    static int frame = 0;
+    static int delay = 0;
+      
+    delay++;
+    if (delay > 1000)
+    {
+        frame = (frame + 1) % COLLEC_ANIM;
+        delay = 0;
+    }
+    mlx_put_image_to_window(game->mlx, game->window, game->animation.collectible_animation[frame], game->collectible.position_x, game->collectible.position_y);
+}

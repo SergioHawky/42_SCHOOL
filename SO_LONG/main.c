@@ -35,6 +35,7 @@ int main()
     put_forward_mov_player(&game);
     put_backward_mov_player(&game);
     put_img_collectible(&game);
+    put_animation_collectible(&game);
     put_img_exit(&game);
     
     draw_map(&game);

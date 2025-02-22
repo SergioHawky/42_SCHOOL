@@ -29,6 +29,7 @@
 
 #define BASE_ANIM   6
 #define FORW_ANIM   8
+#define COLLEC_ANIM 6
 
 typedef enum e_texture              //Nao esta diretamente no codigo so serve para ser mais legivel
 {
@@ -62,6 +63,7 @@ typedef struct a_data               //animation
     void    *move_forward_anim[FORW_ANIM];
     void    *move_backward_anim[FORW_ANIM];
     void    *base_animation_backward[BASE_ANIM];
+    void    *collectible_animation[COLLEC_ANIM];
 }   animation_data;
 
 typedef struct c_data               //collectible
@@ -112,6 +114,7 @@ void    base_animation(game_data *game);
 void    base_animation_backward(game_data *game);
 void    move_forward_animation(game_data *game);
 void    move_backward_animation(game_data *game);
+void    collectible_animation(game_data *game);
 void    free_map(game_data *game);
 void    free_images(game_data *game);
 void    free_all(game_data *game);
@@ -122,6 +125,7 @@ void    put_image_player(game_data *game);
 void    put_base_mov_player(game_data *game);
 void    put_base_mov_player_backward(game_data *game);
 void    put_img_collectible(game_data *game);
+void    put_animation_collectible(game_data *game);
 void    put_img_exit(game_data *game);
 int     update(game_data *game);
 int     player_touching_tile(game_data *game, int x, int y);
