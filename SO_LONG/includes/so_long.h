@@ -30,6 +30,7 @@
 #define BASE_ANIM   6
 #define FORW_ANIM   8
 #define COLLEC_ANIM 6
+#define ENEMY_ANIM  2
 
 typedef enum e_texture              //Nao esta diretamente no codigo so serve para ser mais legivel
 {
@@ -44,6 +45,15 @@ typedef enum e_texture              //Nao esta diretamente no codigo so serve pa
     PLATFORM
 }   texture;
 
+typedef struct en_data              //enemy
+{
+    int     width;
+    int     heigth;
+    int     position_x;
+    int     position_y;
+    int     touching_enemy;
+}   enemy_data;
+
 typedef struct p_data               //player
 {
     void    *img_player;
@@ -52,6 +62,7 @@ typedef struct p_data               //player
     float   position_x;
     float   position_y;
     float   gravity_velocity;
+    float   is_jumping;
     int     count_moves;
 }   player_data;
 
@@ -64,11 +75,11 @@ typedef struct a_data               //animation
     void    *move_backward_anim[FORW_ANIM];
     void    *base_animation_backward[BASE_ANIM];
     void    *collectible_animation[COLLEC_ANIM];
+    void    *enemy_animation[ENEMY_ANIM];
 }   animation_data;
 
 typedef struct c_data               //collectible
 {
-    void    *img_collectible;
     int     width;
     int     heigth;
     int     position_x;
@@ -100,6 +111,8 @@ typedef struct s_data
     animation_data animation;
     collectible_data collectible;
     exit_data exit;
+    enemy_data enemy;
+    int     game_over;
 }   game_data;
 
 
@@ -110,6 +123,7 @@ int     key_release(int keysym, game_data *game);
 void    spawn_player(game_data *game);
 void    spawn_collectibles(game_data *game, int first_time);
 void    spawn_exit(game_data *game);
+void    spawn_enemy(game_data *game);
 void    base_animation(game_data *game);
 void    base_animation_backward(game_data *game);
 void    move_forward_animation(game_data *game);
@@ -124,17 +138,20 @@ void    put_textures_struct(game_data *game);
 void    put_image_player(game_data *game);
 void    put_base_mov_player(game_data *game);
 void    put_base_mov_player_backward(game_data *game);
-void    put_img_collectible(game_data *game);
 void    put_animation_collectible(game_data *game);
+void    put_enemy_animation(game_data *game);
 void    put_img_exit(game_data *game);
 int     update(game_data *game);
-int     player_touching_tile(game_data *game, int x, int y);
+int     player_touching_something(game_data *game, int x, int y);
 void    player_can_exit(game_data *game);
 void    HUD(game_data *game);
 void    is_map_valid(game_data *game);
 void    get_map_size(char *Map_Name, game_data *game);
 void    minimum_map_size(game_data *game);
+void    player_touching_enemy(game_data *game, int left_col, int right_col, int top_row, int bottom_row);
 
 void    apply_gravity(game_data *game);
+void    player_jump(game_data *game);
+int     game_over(game_data *game);
 
 #endif

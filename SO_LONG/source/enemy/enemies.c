@@ -60,24 +60,9 @@ void    spawn_enemy(game_data *game)
 
 void    player_touching_enemy(game_data *game, int left_col, int right_col, int top_row, int bottom_row)
 {
-    if(game->map[top_row][left_col] == 'A')
-    { 
-        free_all(game);
-        exit(0);
-    }
-    else if(game->map[top_row][right_col] == 'A')
+    if(game->map[top_row][left_col] == 'A' || game->map[top_row][right_col] == 'A' ||
+       game->map[bottom_row][left_col] == 'A' || game->map[bottom_row][right_col] == 'A')
     {
-        free_all(game);
-        exit(0);
-    }
-    else if(game->map[bottom_row][left_col] == 'A')
-    {
-        free_all(game);
-        exit(0);
-    }
-    else if(game->map[bottom_row][right_col] == 'A')
-    { 
-        free_all(game);
-        exit(0);
+        game->enemy.touching_enemy = 1;
     }
 }

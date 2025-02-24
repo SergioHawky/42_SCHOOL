@@ -14,6 +14,9 @@
 
 int    update(game_data *game)
 {
+    if (game->game_over == 1)
+        return (0);
+
     mlx_clear_window(game->mlx, game->window);
     draw_map(game);
     spawn_collectibles(game, 0);
@@ -26,24 +29,21 @@ int    update(game_data *game)
     if (game->animation.moving == 1)
     {
         if (game->animation.moving_direction == 1)
-        {
             move_backward_animation(game);
-        }
         else if (game->animation.moving_direction == 2)
-        {
             move_forward_animation(game);
-        }
     }
     else
     {
         if (game->animation.moving_direction == 1)
-        {
             base_animation_backward(game);
-        }
         else if (game->animation.moving_direction == 2)
-        {
             base_animation(game);
-        }
+    }
+    if (game->enemy.touching_enemy == 1)
+    {
+        game->game_over = 1;
+        mlx_loop_hook(game->mlx, game_over, game);
     }
     return (0);
 }
