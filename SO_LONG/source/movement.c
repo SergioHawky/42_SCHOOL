@@ -28,8 +28,8 @@ void player(game_data *game, int new_x, int new_y)
 
 int key_press(int keysym, game_data *game)
 {
-    int new_x = game->player.position_x;
-    int new_y = game->player.position_y;
+    float new_x = game->player.position_x;
+    float new_y = game->player.position_y;
 
     if(keysym == 65307)
     {
@@ -39,7 +39,7 @@ int key_press(int keysym, game_data *game)
 
     if (keysym == 119 )                  // W (cima)
     {
-        player_jump(game);
+       jump(game);
     }
     else if (keysym == 97)              // A (esquerda)
     {

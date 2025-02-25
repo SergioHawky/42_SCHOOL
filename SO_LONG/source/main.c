@@ -27,6 +27,7 @@ int main()
     game.collectible.all_collectible = 0;
     game.player.count_moves = 0;
     game.animation.moving_direction = 2;
+    game.enemy.touching_enemy = 0;
     
     put_textures_struct(&game);
     put_image_player(&game);

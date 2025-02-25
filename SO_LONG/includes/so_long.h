@@ -25,6 +25,8 @@
 
 #define SPEED   5
 
+#define GRAVITY 0.08
+
 #define TOTAL_TXT   9
 
 #define BASE_ANIM   6
@@ -61,8 +63,6 @@ typedef struct p_data               //player
     int     player_heigth;
     float   position_x;
     float   position_y;
-    float   gravity_velocity;
-    float   is_jumping;
     int     count_moves;
 }   player_data;
 
@@ -149,9 +149,9 @@ void    is_map_valid(game_data *game);
 void    get_map_size(char *Map_Name, game_data *game);
 void    minimum_map_size(game_data *game);
 void    player_touching_enemy(game_data *game, int left_col, int right_col, int top_row, int bottom_row);
+int     game_over(game_data *game);
 
 void    apply_gravity(game_data *game);
-void    player_jump(game_data *game);
-int     game_over(game_data *game);
+void    jump(game_data *game);
 
 #endif
