@@ -20,6 +20,7 @@ void    get_map_size(char *Map_Name, game_data *game)
     int fd;
     game->map_height = 0;
     game->map_width = 0;
+    int     count_width = 0;
     int     first_line = 1;
     char    c;
 
@@ -33,18 +34,46 @@ void    get_map_size(char *Map_Name, game_data *game)
     while(read(fd, &c, 1) > 0)
     {
         if(c == '\r')
+        {
             continue;
+        }
         if(c == '\n')
         {
-            game->map_height ++;
+            game->map_height++;
             first_line = 0;
+            
+            if (game->map_width == 0) // Definir a largura na primeira linha
+                game->map_width = count_width;
+
+            if (count_width != game->map_width)
+            {
+                printf("linha: %d count: %d, game: %d\n", game->map_height, count_width, game->map_width);
+                write(2, "Invalid width", 14);
+                exit(1);
+            }
+            
+            count_width = 0;
         }
-        else if(first_line)
-            game->map_width ++;
+        else
+        {
+            if (first_line)
+                game->map_width++;
+                
+            count_width++;
+        }
     }
-    if (c != '\n')
+
+    if (count_width > 0) // Verifica se a última linha não terminou com '\n'
+    {
         game->map_height++;
 
+        if (count_width != game->map_width)
+        {
+            printf("Erro na última linha: count_width=%d, esperado=%d\n", count_width, game->map_width);
+            write(2, "Invalid width", 14);
+            exit(1);
+        }
+    }
     minimum_map_size(game);
     close(fd);
 }

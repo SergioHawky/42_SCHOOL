@@ -50,5 +50,6 @@ int main()
     mlx_hook(game.window, KeyRelease, KeyReleaseMask, key_release, &game);
     mlx_loop_hook(game.mlx, update, &game);
     mlx_loop(game.mlx);
+    
     return(0);
 }

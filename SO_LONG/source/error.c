@@ -47,27 +47,37 @@ void    is_map_valid(game_data *game)
         j = 0;
         while(game->map[i][j])
         {
-            if(i == 0 || i == (game->map_height - 1) || j == 0 || j == (game->map_width - 1) )
+            if (game->map[i][j] == '0' || game->map[i][j] == '1' || game->map[i][j] == 'A'
+                || game->map[i][j] == 'E' || game->map[i][j] == 'P' || game->map[i][j] == 'C')
             {
-                if(game->map[i][j] != '1')
+                if(i == 0 || i == (game->map_height - 1) || j == 0 || j == (game->map_width - 1) )
                 {
-                    write(2, "Invalid map on borders", 22);
-                    free_map(game);
-                    exit(1);
+                    if(game->map[i][j] != '1' ||game->map[i][j] == '\0')
+                    {
+                        write(2, "Invalid map on borders", 22);
+                        free_map(game);
+                        exit(1);
+                    }
                 }
+                if(game->map[i][j] == 'P')
+                    P ++;
+                if(game->map[i][j] == 'C')
+                    C ++;
+                if(game->map[i][j] == 'E')
+                    E ++;
             }
-            if(game->map[i][j] == 'P')
-                P ++;
-            if(game->map[i][j] == 'C')
-                C ++;
-            if(game->map[i][j] == 'E')
-                E ++;
+            else
+            {
+                write(2, "Invalid characters", 19);
+                free_map(game);
+                exit(1);
+            }
             j ++;
         }
         i ++;
     }
     player_collectibles_exit(game, P, C, E);
-    minimum_map_size(game);
+    //minimum_map_size(game);
 }
 
 void    minimum_map_size(game_data *game)
