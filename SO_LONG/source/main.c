@@ -46,10 +46,11 @@ int main()
     spawn_enemy(&game);
     HUD(&game);
 
+    mlx_hook(game.window, 17, 0, close_window, &game);
     mlx_hook(game.window, KeyPress, KeyPressMask, key_press, &game);
     mlx_hook(game.window, KeyRelease, KeyReleaseMask, key_release, &game);
     mlx_loop_hook(game.mlx, update, &game);
     mlx_loop(game.mlx);
-    
+
     return(0);
 }

@@ -22,7 +22,6 @@ void player(game_data *game, int new_x, int new_y)
         {
             game->player.count_moves ++;
         }
-        update(game);
     }
 }
 
@@ -36,11 +35,6 @@ int key_press(int keysym, game_data *game)
         free_all(game);
         exit(0);
     }
-
-    if (keysym == 119 )                  // W (cima)
-    {
-       jump(game);
-    }
     else if (keysym == 97)              // A (esquerda)
     {
         new_x -= SPEED;
@@ -53,6 +47,17 @@ int key_press(int keysym, game_data *game)
         game->animation.moving = 1;
         game->animation.moving_direction = 2;
     }
+    else if (keysym == 119)                  // W (cima)
+    {  
+       //game->player.is_jumping = true;
+       new_y -= SPEED;
+       game->animation.moving = 1;
+    }
+    else if(keysym == 115)
+    {
+        new_y += SPEED;
+        game->animation.moving = 1;
+    }
     player(game, new_x, new_y);
     return (0);
 }
@@ -63,5 +68,12 @@ int key_release(int keysym, game_data *game)
     {
         game->animation.moving = 0;
     }
+    return (0);
+}
+
+int close_window(game_data *game)
+{
+    free_all(game);  // Libera memória e fecha o jogo corretamente
+    exit(0);
     return (0);
 }
