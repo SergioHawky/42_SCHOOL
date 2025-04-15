@@ -16,12 +16,15 @@ int main()
 {
     game_data game;
     
-    get_map_size("../Maps/map2.ber", &game);
-    game.map = map("../Maps/map2.ber", &game);
-    //printf("%d\n", game.map_height);
-    //printf("%d\n", game.map_width);
+    get_map_size("../Maps/map1.ber", &game);
+    game.map = map("../Maps/map1.ber", &game);
     is_map_valid(&game);
     game.mlx = mlx_init();
+    if (!game.mlx)
+    {
+        write(2, "Erro ao iniciar a Minilibx", 26);
+        exit(1);
+    }
     game.window = mlx_new_window(game.mlx, (game.map_width * TILE), (game.map_height * TILE), "MY GAME");
     game.animation.moving = 0;
     game.collectible.all_collectible = 0;
@@ -47,8 +50,8 @@ int main()
     HUD(&game);
 
     mlx_hook(game.window, 17, 0, close_window, &game);                          // close window
-    mlx_hook(game.window, KeyPress, KeyPressMask, key_press, &game);
-    mlx_hook(game.window, KeyRelease, KeyReleaseMask, key_release, &game);
+    mlx_hook(game.window, 2, 1, key_press, &game);
+    mlx_hook(game.window, 3, 2, key_release, &game);
     mlx_loop_hook(game.mlx, update, &game);
     mlx_loop(game.mlx);
 
