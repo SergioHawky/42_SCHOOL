@@ -30,33 +30,42 @@ int key_press(int keysym, game_data *game)
     float new_x = game->player.position_x;
     float new_y = game->player.position_y;
 
-    if(keysym == 65307)
+    if(keysym == 65307)                         // ESC (sair do jogo)
     {
         free_all(game);
         exit(0);
     }
-    else if (keysym == 97)              // A (esquerda)
+    else if (keysym == 97)                      // A (esquerda)
     {
         new_x -= SPEED;
         game->animation.moving = 1;
         game->animation.moving_direction = 1;
     }
-    else if (keysym == 100)             // D (direita)
+    else if (keysym == 100)                     // D (direita)
     {
         new_x += SPEED;
         game->animation.moving = 1;
         game->animation.moving_direction = 2;
     }
-    else if (keysym == 119)                  // W (cima)
+    else if (keysym == 119)                     // W (cima)
     {  
-       //game->player.is_jumping = true;
        new_y -= SPEED;
-       game->animation.moving = 1;
+       if (game->gravity == 0)
+            game->animation.moving = 1;
     }
-    else if(keysym == 115)
+    else if(keysym == 115)                      // S (baixo)
     {
         new_y += SPEED;
-        game->animation.moving = 1;
+        if (game->gravity == 0)
+            game->animation.moving = 1;
+    }
+    else if (keysym == 103)                     // G (gravidade)
+    {
+        game->animation.moving = 0;
+        if (game->gravity == 0)
+            game->gravity = 1;
+        else
+            game->gravity = 0;
     }
     player(game, new_x, new_y);
     return (0);

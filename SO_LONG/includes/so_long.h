@@ -26,7 +26,7 @@
 
 #define SPEED   5
 
-#define GRAVITY 0.005
+#define GRAVITY 0.07
 
 #define TOTAL_TXT   9
 
@@ -65,7 +65,6 @@ typedef struct p_data               //player
     float   position_x;
     float   position_y;
     int     count_moves;
-    //bool     is_jumping;
 }   player_data;
 
 typedef struct a_data               //animation
@@ -109,6 +108,7 @@ typedef struct s_data
     int     map_width;
     int     img_width;
     int     img_height;
+    bool    gravity;
     player_data player;
     animation_data animation;
     collectible_data collectible;
@@ -121,7 +121,6 @@ typedef struct s_data
 char    **map(char *Map_Name, game_data *game);
 void    draw_map(game_data *game);
 int     key_press(int keysym, game_data *game);
-int     key_press_for_W(int keysym, game_data *game);
 int     key_release(int keysym, game_data *game);
 void    spawn_player(game_data *game);
 void    spawn_collectibles(game_data *game, int first_time);
@@ -155,7 +154,6 @@ void    player_touching_enemy(game_data *game, int left_col, int right_col, int 
 int     game_over(game_data *game);
 
 void    apply_gravity(game_data *game);
-void    jump(game_data *game);
 int     close_window(game_data *game);
 
 #endif

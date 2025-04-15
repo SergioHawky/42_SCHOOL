@@ -25,28 +25,22 @@ int    update(game_data *game)
     player_can_exit(game);
     HUD(game);
 
-    //apply_gravity(game);
-    /*if (game->player.is_jumping)
+    if (game->gravity == 1)
+        apply_gravity(game);
+    if (game->animation.moving == 1)
     {
-        jump(game);
+        if (game->animation.moving_direction == 1)
+            move_backward_animation(game);
+        else if (game->animation.moving_direction == 2)
+            move_forward_animation(game);
     }
     else
-    {*/
-        if (game->animation.moving == 1)
-        {
-            if (game->animation.moving_direction == 1)
-                move_backward_animation(game);
-            else if (game->animation.moving_direction == 2)
-                move_forward_animation(game);
-        }
-        else
-        {
-            if (game->animation.moving_direction == 1)
-                base_animation_backward(game);
-            else if (game->animation.moving_direction == 2)
-                base_animation(game);
-        }
-    //}
+    {
+        if (game->animation.moving_direction == 1)
+            base_animation_backward(game);
+        else if (game->animation.moving_direction == 2)
+            base_animation(game);
+    }
     if (game->enemy.touching_enemy == 1)
     {
         game->game_over = 1;
