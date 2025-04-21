@@ -52,7 +52,7 @@ void    is_map_valid(game_data *game)
             {
                 if(i == 0 || i == (game->map_height - 1) || j == 0 || j == (game->map_width - 1) )
                 {
-                    if(game->map[i][j] != '1' ||game->map[i][j] == '\0')
+                    if(game->map[i][j] != '1' || game->map[i][j] == '\0')
                     {
                         write(2, "Invalid map on borders", 22);
                         free_map(game);
@@ -68,7 +68,7 @@ void    is_map_valid(game_data *game)
             }
             else
             {
-                write(2, "Invalid characters", 19);
+                write(2, "Invalid letters", 16);
                 free_map(game);
                 exit(1);
             }
