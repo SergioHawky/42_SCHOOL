@@ -5,8 +5,8 @@ void put_enemy_animation(game_data *game)
     int i = 0;
 
     char *all_sprites[ENEMY_ANIM] = {
-        "../Assets/enemy/Fro_Green1.xpm",
-        "../Assets/enemy/Fro_Green2.xpm",
+        "Assets/enemy/Fro_Green1.xpm",
+        "Assets/enemy/Fro_Green2.xpm",
     };
 
     while (i < ENEMY_ANIM)

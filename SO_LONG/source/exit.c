@@ -16,7 +16,7 @@ void    player_can_exit(game_data *game)
 {
     if(game->collectible.all_collectible == 0 && game->exit.touching_exit == 1)
     {
-        printf(" GG \n");
+        write(1, "Good Job", 9);
         free_all(game);
         exit(0);
     }

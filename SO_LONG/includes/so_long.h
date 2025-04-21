@@ -15,11 +15,10 @@
 
 #include "libft.h"
 #include "../minilibx-linux/mlx.h"          //mlx
-//#include <X11/X.h>                          //keysym
+//#include <X11/X.h>                        //keysym
 #include <unistd.h>                         //write
 #include <fcntl.h>                          //open e read
 #include <string.h>                         
-#include <stdio.h>                          //strdup dps tirar
 #include <stdbool.h>
 
 #define TILE    40

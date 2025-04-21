@@ -16,8 +16,8 @@ int main()
 {
     game_data game;
     
-    get_map_size("../Maps/map1.ber", &game);
-    game.map = map("../Maps/map1.ber", &game);
+    get_map_size("Maps/map5.ber", &game);
+    game.map = map("Maps/map5.ber", &game);
     is_map_valid(&game);
     game.mlx = mlx_init();
     if (!game.mlx)

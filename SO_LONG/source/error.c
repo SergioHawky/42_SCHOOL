@@ -77,7 +77,6 @@ void    is_map_valid(game_data *game)
         i ++;
     }
     player_collectibles_exit(game, P, C, E);
-    //minimum_map_size(game);
 }
 
 void    minimum_map_size(game_data *game)

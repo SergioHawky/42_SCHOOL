@@ -3,18 +3,39 @@ NAME = so_long
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-MLX_DIR = ../minilibx-linux
+MLX_DIR = minilibx-linux
 
 # Bibliotecas necessárias
 MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
 INCLUDES = -I$(MLX_DIR)
 
+# Diretórios
+SRC_DIR = source
+LIBFT_DIR = Libft
+
 # Arquivos do projeto
-SRCS = main.c image.c map.c movement.c spawn.c animation.c free.c update.c player_border.c exit.c HUD.c error.c gravity.c enemy/enemies.c ../Libft/ft_strdup.c ../Libft/ft_strlen.c ../Libft/ft_itoa.c
+SRCS = \
+	$(SRC_DIR)/main.c \
+	$(SRC_DIR)/image.c \
+	$(SRC_DIR)/map.c \
+	$(SRC_DIR)/movement.c \
+	$(SRC_DIR)/spawn.c \
+	$(SRC_DIR)/animation.c \
+	$(SRC_DIR)/free.c \
+	$(SRC_DIR)/update.c \
+	$(SRC_DIR)/player_border.c \
+	$(SRC_DIR)/exit.c \
+	$(SRC_DIR)/HUD.c \
+	$(SRC_DIR)/error.c \
+	$(SRC_DIR)/gravity.c \
+	$(SRC_DIR)/enemy/enemies.c \
+	$(LIBFT_DIR)/ft_strdup.c \
+	$(LIBFT_DIR)/ft_strlen.c \
+	$(LIBFT_DIR)/ft_itoa.c
 
 OBJS = $(SRCS:.c=.o)
 
-# Regra principal (compilação do programa)
+# Regra principal
 all: $(NAME)
 
 $(NAME): $(OBJS)

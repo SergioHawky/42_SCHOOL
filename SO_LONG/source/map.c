@@ -42,12 +42,8 @@ void    get_map_size(char *Map_Name, game_data *game)
             game->map_height++;
             first_line = 0;
             
-            if (game->map_width == 0) // Definir a largura na primeira linha
-                game->map_width = count_width;
-
             if (count_width != game->map_width)
             {
-                printf("linha: %d count: %d, game: %d\n", game->map_height, count_width, game->map_width);
                 write(2, "Invalid width", 14);
                 exit(1);
             }
@@ -69,7 +65,6 @@ void    get_map_size(char *Map_Name, game_data *game)
 
         if (count_width != game->map_width)
         {
-            printf("Erro na última linha: count_width=%d, esperado=%d\n", count_width, game->map_width);
             write(2, "Invalid width", 14);
             exit(1);
         }

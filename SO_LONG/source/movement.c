@@ -50,7 +50,7 @@ int key_press(int keysym, game_data *game)
     else if (keysym == 119)                     // W (cima)
     {  
        new_y -= SPEED;
-       if (game->gravity == 0)
+       if (game->gravity == 0)                  //move count
             game->animation.moving = 1;
     }
     else if(keysym == 115)                      // S (baixo)

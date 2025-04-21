@@ -15,19 +15,17 @@
 void    put_textures_struct(game_data *game)
 {
     int i = 0;
-
     char *all_textures[TOTAL_TXT] = {
-        "../Assets/TileSet/WALL_LEFT.xpm",
-        "../Assets/TileSet/WALL_RIGHT.xpm",
-        "../Assets/TileSet/WALL_UP.xpm",
-        "../Assets/TileSet/FLOOR.xpm",
-        "../Assets/TileSet/CORNER_LU.xpm",
-        "../Assets/TileSet/CORNER_LD.xpm",
-        "../Assets/TileSet/CORNER_RU.xpm",
-        "../Assets/TileSet/CORNER_RD.xpm",
-        "../Assets/TileSet/PLATFORM.xpm"
+        "Assets/TileSet/WALL_LEFT.xpm",
+        "Assets/TileSet/WALL_RIGHT.xpm",
+        "Assets/TileSet/WALL_UP.xpm",
+        "Assets/TileSet/FLOOR.xpm",
+        "Assets/TileSet/CORNER_LU.xpm",
+        "Assets/TileSet/CORNER_LD.xpm",
+        "Assets/TileSet/CORNER_RU.xpm",
+        "Assets/TileSet/CORNER_RD.xpm",
+        "Assets/TileSet/PLATFORM.xpm"
     };
-
     while (i < TOTAL_TXT)
     {
         game->textures[i] = mlx_xpm_file_to_image(game->mlx, all_textures[i], &game->img_width, &game->img_height);
@@ -38,12 +36,11 @@ void    put_textures_struct(game_data *game)
         }
         i ++;
     }
-    
 }
 
 void    put_image_player(game_data *game)
 {
-    game->player.img_player = mlx_xpm_file_to_image(game->mlx, "../Assets/character/char_0.xpm", &game->player.player_width, &game->player.player_heigth);
+    game->player.img_player = mlx_xpm_file_to_image(game->mlx, "Assets/character/char_0.xpm", &game->player.player_width, &game->player.player_heigth);
 }
 
 void    put_base_mov_player(game_data *game)
@@ -51,12 +48,12 @@ void    put_base_mov_player(game_data *game)
     int i = 0;
 
     char *all_sprites[BASE_ANIM] = {
-        "../Assets/character/char_0.xpm",
-        "../Assets/character/char_1.xpm",
-        "../Assets/character/char_2.xpm",
-        "../Assets/character/char_3.xpm",
-        "../Assets/character/char_4.xpm",
-        "../Assets/character/char_5.xpm"
+        "Assets/character/char_0.xpm",
+        "Assets/character/char_1.xpm",
+        "Assets/character/char_2.xpm",
+        "Assets/character/char_3.xpm",
+        "Assets/character/char_4.xpm",
+        "Assets/character/char_5.xpm"
     };
 
     while (i < BASE_ANIM)
@@ -76,12 +73,12 @@ void    put_base_mov_player_backward(game_data *game)
     int i = 0;
 
     char *all_sprites[BASE_ANIM] = {
-        "../Assets/character/BACK/char_0B.xpm",
-        "../Assets/character/BACK/char_1B.xpm",
-        "../Assets/character/BACK/char_2B.xpm",
-        "../Assets/character/BACK/char_3B.xpm",
-        "../Assets/character/BACK/char_4B.xpm",
-        "../Assets/character/BACK/char_5B.xpm"
+        "Assets/character/BACK/char_0B.xpm",
+        "Assets/character/BACK/char_1B.xpm",
+        "Assets/character/BACK/char_2B.xpm",
+        "Assets/character/BACK/char_3B.xpm",
+        "Assets/character/BACK/char_4B.xpm",
+        "Assets/character/BACK/char_5B.xpm"
     };
 
     while (i < BASE_ANIM)
@@ -101,14 +98,14 @@ void    put_forward_mov_player(game_data *game)
     int i = 0;
 
     char *all_sprites[FORW_ANIM] = {
-        "../Assets/character/char_mov_forward0.xpm",
-        "../Assets/character/char_mov_forward1.xpm",
-        "../Assets/character/char_mov_forward2.xpm",
-        "../Assets/character/char_mov_forward3.xpm",
-        "../Assets/character/char_mov_forward4.xpm",
-        "../Assets/character/char_mov_forward5.xpm",
-        "../Assets/character/char_mov_forward6.xpm",
-        "../Assets/character/char_mov_forward7.xpm"
+        "Assets/character/char_mov_forward0.xpm",
+        "Assets/character/char_mov_forward1.xpm",
+        "Assets/character/char_mov_forward2.xpm",
+        "Assets/character/char_mov_forward3.xpm",
+        "Assets/character/char_mov_forward4.xpm",
+        "Assets/character/char_mov_forward5.xpm",
+        "Assets/character/char_mov_forward6.xpm",
+        "Assets/character/char_mov_forward7.xpm"
     };
 
     while (i < FORW_ANIM)
@@ -128,14 +125,14 @@ void    put_backward_mov_player(game_data *game)
     int i = 0;
 
     char *all_sprites[FORW_ANIM] = {
-        "../Assets/character/BACK/char_mov_forward0B.xpm",
-        "../Assets/character/BACK/char_mov_forward1B.xpm",
-        "../Assets/character/BACK/char_mov_forward2B.xpm",
-        "../Assets/character/BACK/char_mov_forward3B.xpm",
-        "../Assets/character/BACK/char_mov_forward4B.xpm",
-        "../Assets/character/BACK/char_mov_forward5B.xpm",
-        "../Assets/character/BACK/char_mov_forward6B.xpm",
-        "../Assets/character/BACK/char_mov_forward7B.xpm"
+        "Assets/character/BACK/char_mov_forward0B.xpm",
+        "Assets/character/BACK/char_mov_forward1B.xpm",
+        "Assets/character/BACK/char_mov_forward2B.xpm",
+        "Assets/character/BACK/char_mov_forward3B.xpm",
+        "Assets/character/BACK/char_mov_forward4B.xpm",
+        "Assets/character/BACK/char_mov_forward5B.xpm",
+        "Assets/character/BACK/char_mov_forward6B.xpm",
+        "Assets/character/BACK/char_mov_forward7B.xpm"
     };
 
     while (i < FORW_ANIM)
@@ -155,12 +152,12 @@ void    put_animation_collectible(game_data *game)
     int i = 0;
 
     char *all_sprites[COLLEC_ANIM] = {
-        "../Assets/collectible/coin.xpm",
-        "../Assets/collectible/coin_2.xpm",
-        "../Assets/collectible/coin_3.xpm",
-        "../Assets/collectible/coin_4.xpm",
-        "../Assets/collectible/coin_5.xpm",
-        "../Assets/collectible/coin_6.xpm",
+        "Assets/collectible/coin.xpm",
+        "Assets/collectible/coin_2.xpm",
+        "Assets/collectible/coin_3.xpm",
+        "Assets/collectible/coin_4.xpm",
+        "Assets/collectible/coin_5.xpm",
+        "Assets/collectible/coin_6.xpm",
     };
 
     while (i < COLLEC_ANIM)
@@ -177,7 +174,7 @@ void    put_animation_collectible(game_data *game)
 
 void    put_img_exit(game_data *game)
 {
-    game->exit.img_exit = mlx_xpm_file_to_image(game->mlx, "../Assets/exit/shop.xpm", &game->exit.width, &game->exit.heigth);
+    game->exit.img_exit = mlx_xpm_file_to_image(game->mlx, "Assets/exit/shop.xpm", &game->exit.width, &game->exit.heigth);
     if(!game->exit.img_exit)
     {
         write(2, "Erro a carregar a imagem exit", 30);
