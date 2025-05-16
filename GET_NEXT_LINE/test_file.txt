@@ -1,0 +1,4 @@
+Olá, mundo!
+Testando o get_next_line.
+Mais uma linha aqui.
+Fim do teste.

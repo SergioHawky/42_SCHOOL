@@ -1,4 +1,4 @@
-#include "ft_printf.h"
+#include "libft.h"
 
 int print_format(char specifier, va_list ap)
 {
@@ -40,7 +40,7 @@ int ft_printf(const char *format, ...)
     return counter;
 }
 
-int main()
+/*int main()
 {
     int count;
     int mycount;
@@ -52,4 +52,4 @@ int main()
     ft_printf("A string tem %d characters\n", mycount);
 
     return 0;
-}
+}*/
