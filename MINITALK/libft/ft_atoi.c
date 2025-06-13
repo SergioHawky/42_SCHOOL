@@ -1,39 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   atoi.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
+/*   By: seilkiv <seilkiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/06 18:00:20 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/04/14 15:18:19 by lgaudin          ###   ########.fr       */
+/*   Created: 2024/11/05 11:05:11 by seilkiv           #+#    #+#             */
+/*   Updated: 2024/11/05 11:05:11 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
+#include "libft.h"
 
-int	ft_atoi(const char *str)
+int	ft_atoi(const char *nptr)
 {
-	int		i;
-	int		negative;
-	int		result;
+	int	i;
+	int	signal;
+	int	result;
 
 	i = 0;
-	negative = 1;
+	signal = 1;
 	result = 0;
-	while (str[i] == ' ' || str[i] == '\f' || str[i] == '\n'
-		|| str[i] == '\r' || str[i] == '\t' || str[i] == '\v')
+	while (nptr[i] == ' ' || (nptr[i] >= 9 && nptr[i] <= 13))
 		i++;
-	if (str[i] == '-')
-		negative *= -1;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	while (str[i] >= '0' && str[i] <= '9')
+	if (nptr[i] == '+' || nptr[i] == '-')
 	{
-		result = (result * 10) + (str[i] - '0');
+		if (nptr[i] == '-')
+			signal = -1;
 		i++;
 	}
-	result *= negative;
-	return (result);
+	while (nptr[i] >= '0' && nptr[i] <= '9')
+	{
+		result = (result * 10) + (nptr[i] - '0');
+		i++;
+	}
+	return (signal * result);
 }

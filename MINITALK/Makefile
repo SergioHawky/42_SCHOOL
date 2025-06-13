@@ -1,42 +1,54 @@
-CC = gcc
+# Executáveis
+NAME = server
+CLIENT = client
+
+# Compilador e flags
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
-CLIENT_SRCS = client.c
-SERVER_SRCS = server.c
-CLIENT_BONUS_SRCS = client_bonus.c
-SERVER_BONUS_SRCS = server_bonus.c
-LIBFT_PATH = libft
-LIBFT_ARCHIVE = $(LIBFT_PATH)/libft.a
-CLIENT_NAME = client
-SERVER_NAME = server
-CLIENT_BONUS_NAME = client_bonus
-SERVER_BONUS_NAME = server_bonus
 
-all: $(CLIENT_NAME) $(SERVER_NAME)
+# Headers (adicione se necessário)
+HEADERS = 
 
-$(CLIENT_NAME): $(CLIENT_SRCS) $(LIBFT_ARCHIVE)
-	$(CC) $(CFLAGS) -o $@ $(CLIENT_SRCS) -L$(LIBFT_PATH) -lft
+# Fontes
+SRC_SERVER = server.c libft/ft_atoi.c libft/ft_print_format1.c libft/ft_print_format2.c libft/ft_printf.c
+SRC_CLIENT = client.c libft/ft_atoi.c libft/ft_print_format1.c libft/ft_print_format2.c libft/ft_printf.c
 
-$(SERVER_NAME): $(SERVER_SRCS) $(LIBFT_ARCHIVE)
-	$(CC) $(CFLAGS) -o $@ $(SERVER_SRCS) -L$(LIBFT_PATH) -lft
+# Objetos
+OBJ_SERVER = $(SRC_SERVER:.c=.o)
+OBJ_CLIENT = $(SRC_CLIENT:.c=.o)
 
-$(CLIENT_BONUS_NAME): $(CLIENT_BONUS_SRCS) $(LIBFT_ARCHIVE)
-	$(CC) $(CFLAGS) -o $@ $(CLIENT_BONUS_SRCS) -L$(LIBFT_PATH) -lft
+# Regra padrão
+all: $(NAME) $(CLIENT)
 
-$(SERVER_BONUS_NAME): $(SERVER_BONUS_SRCS) $(LIBFT_ARCHIVE)
-	$(CC) $(CFLAGS) -o $@ $(SERVER_BONUS_SRCS) -L$(LIBFT_PATH) -lft
+# Regras de build
+$(NAME): $(OBJ_SERVER)
+	$(CC) $(CFLAGS) -o $@ $^
 
-$(LIBFT_ARCHIVE):
-	$(MAKE) -C $(LIBFT_PATH)
+$(CLIENT): $(OBJ_CLIENT)
+	$(CC) $(CFLAGS) -o $@ $^
 
+# Bônus
+SRC_SERVER_BONUS = server_bonus.c utils.c
+SRC_CLIENT_BONUS = client_bonus.c utils.c
+
+OBJ_SERVER_BONUS = $(SRC_SERVER_BONUS:.c=.o)
+OBJ_CLIENT_BONUS = $(SRC_CLIENT_BONUS:.c=.o)
+
+bonus: server_bonus client_bonus
+
+server_bonus: $(OBJ_SERVER_BONUS)
+	$(CC) $(CFLAGS) -o $@ $^
+
+client_bonus: $(OBJ_CLIENT_BONUS)
+	$(CC) $(CFLAGS) -o $@ $^
+
+# Limpeza
 clean:
-	$(MAKE) -C $(LIBFT_PATH) clean
+	rm -f *.o libft/*.o
 
 fclean: clean
-	$(MAKE) -C $(LIBFT_PATH) fclean
-	rm -f $(CLIENT_NAME) $(SERVER_NAME) $(CLIENT_BONUS_NAME) $(SERVER_BONUS_NAME)
+	rm -f $(NAME) $(CLIENT) client_bonus server_bonus
 
 re: fclean all
 
-bonus: $(CLIENT_BONUS_NAME) $(SERVER_BONUS_NAME)
-
-.PHONY: all clean fclean re bonus
+.PHONY: all bonus clean fclean re
