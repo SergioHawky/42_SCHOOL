@@ -2,25 +2,35 @@
 
 void	send_char(pid_t pid, char c)
 {
-	for (int i = 0; i < 8; i++)
+	int	i;
+
+	i = 0;
+	while(i < 8)
 	{
 		if (c & (1 << i))
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
+		i ++;
 		usleep(100);
 	}
 }
 
 int	main(int argc, char **argv)
 {
+	int	i;
+
 	if (argc != 3)
 	{
 		ft_printf("Only 3 arguments please: ./client <PID> <MESSAGE>\n");
 		return (1);
 	}
 	pid_t pid = ft_atoi(argv[1]);
-	for (int i = 0; argv[2][i]; i++)
+	i = 0;
+	while (argv[2][i])
+	{
 		send_char(pid, argv[2][i]);
+		i ++;
+	}
 	return (0);
 }
