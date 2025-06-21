@@ -24,6 +24,7 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
+int					ft_count_words(const char *s, char c);
 int					ft_atoi(const char *nptr);
 int					ft_isalnum(int c);
 int					ft_isalpha(int c);

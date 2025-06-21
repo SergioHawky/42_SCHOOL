@@ -2,7 +2,8 @@ NAME = libft.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 HEADER = libft.h
-SRC = ft_isalpha.c \
+SRC = ft_count_words.c \
+	ft_isalpha.c \
 	ft_isdigit.c \
 	ft_isalnum.c \
 	ft_isascii.c \
