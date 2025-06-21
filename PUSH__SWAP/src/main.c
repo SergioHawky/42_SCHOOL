@@ -68,7 +68,7 @@ static void	join_args(int argc, char **argv, t_stacks *s)
 	}
 	s->join_args = ft_strdup(tmp);
 	if (s->join_args == NULL)
-		free_and_exit_with_message(s, "Error\n");
+		free_and_exit_with_message(s, "Error join\n");
 	if (tmp)
 		free(tmp);
 }

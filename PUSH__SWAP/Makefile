@@ -17,7 +17,8 @@ LIBFT = libft/ft_isdigit.c \
         libft/ft_strlen.c \
 		libft/ft_strncmp.c \
 		libft/ft_count_words.c \
-		libft/ft_strlcpy.c
+		libft/ft_strlcpy.c \
+		libft/ft_atol.c
 
 OBJS = $(SRC:.c=.o) $(LIBFT:.c=.o)
 
