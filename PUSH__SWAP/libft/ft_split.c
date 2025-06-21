@@ -3,66 +3,99 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: huaydin <huaydin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seilkiv <seilkiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/03 13:13:42 by huaydin           #+#    #+#             */
-/*   Updated: 2022/10/24 23:27:50 by huaydin          ###   ########.fr       */
+/*   Created: 2024/11/05 15:52:14 by seilkiv           #+#    #+#             */
+/*   Updated: 2024/11/11 16:01:35 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_count_words(char const *s, char c)
+static char	**free_all(char **dest, int counter)
 {
-	int	wordcount;
-
-	wordcount = 0;
-	while (*s)
-	{
-		if (*s != c)
-		{
-			wordcount++;
-			while (*s != c && *s)
-				s++;
-		}
-		else
-			s++;
-	}
-	return (wordcount);
+	while (counter-- > 0)
+		free(dest[counter]);
+	free(dest);
+	return (NULL);
 }
 
-static int	ft_length_word(char const *s, char c, int i)
+static int	count_words(const char *s, char c)
 {
-	int	lengthofword;
+	int	counter;
+	int	i;
 
-	lengthofword = 0;
-	while (s[i] != c && s[i++])
-		lengthofword++;
-	return (lengthofword);
+	counter = 0;
+	i = 0;
+	while (s[i])
+	{
+		while (s[i] && s[i] == c)
+			i++;
+		if (s[i] == '\0')
+			break ;
+		while (s[i] && s[i] != c)
+			i++;
+		counter++;
+	}
+	return (counter);
+}
+
+static char	**split(char const *s, char c, char **dest, int counter)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	i = 0;
+	while (s[i])
+	{
+		while (s[i] && s[i] == c)
+			i++;
+		if (s[i] == '\0')
+			break ;
+		j = i;
+		while (s[i] && s[i] != c)
+			i++;
+		dest[counter] = malloc(sizeof(char) * (i - j + 1));
+		if (!dest[counter])
+		{
+			free_all(dest, counter);
+			return (NULL);
+		}
+		ft_strlcpy(dest[counter], &s[j], (i - j + 1));
+		counter++;
+	}
+	dest[counter] = NULL;
+	return (dest);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	int		i;
-	int		wordcount;
-	char	**parsedwords;
-	int		lengthofword;
-	int		j;
+	char	**dest;
+	int		counter;
 
-	i = 0;
-	j = -1;
-	wordcount = ft_count_words(s, c);
-	parsedwords = (char **)malloc((wordcount + 1) * sizeof(char *));
-	if (!parsedwords)
+	counter = 0;
+	if (!s)
 		return (NULL);
-	while (++j < wordcount)
-	{
-		while (s[i] == c)
-			i++;
-		lengthofword = ft_length_word(s, c, i);
-		parsedwords[j] = ft_substr(s, i, lengthofword);
-		i += lengthofword;
-	}
-	parsedwords[j] = 0;
-	return (parsedwords);
+	dest = malloc(sizeof(char *) * (count_words(s, c) + 1));
+	if (!dest)
+		return (NULL);
+	dest = split(s, c, dest, counter);
+	return (dest);
 }
+
+/*#include <stdio.h>
+int	main(void) {
+	char str1[] = "Hello world abc 32";
+	char delimiter1 = ' ';
+	char **result1 = ft_split(str1, delimiter1);
+
+	printf("Separando \"%s\" pelo delimitador '%c'\n", str1, delimiter1);
+	for (int i = 0; result1[i] != NULL; i++) {
+		printf("Palavra %d: %s\n", i + 1, result1[i]);
+		free(result1[i]);  // Liberar cada string alocada
+	}
+	free(result1);  // Liberar o array principal
+
+	return (0);
+}*/

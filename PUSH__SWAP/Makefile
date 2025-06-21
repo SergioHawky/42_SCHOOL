@@ -1,54 +1,37 @@
 NAME = push_swap
-CC = cc 
-CFLAGS = -Wall -Wextra -Werror -g 
-LIBFT_DIR = libft
-LIBFT = ./libft/libft.a
-RM = rm -rf
-SRCS = utils.c move.c sort.c main.c
-SRC_DIR = src
-SRC = $(addprefix $(SRC_DIR)/,$(SRCS))
-OBJ = $(SRC:.c=.o)
 
-all: $(LIBFT) $(NAME)
-	@echo "Done!"
-	@echo "To test the program, run 'make test' or 'make test size=10'"
-	@echo "Example: ./push_swap 1 2 3 4 5 6 7 8 9 10"
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
 
-$(LIBFT):
-	@make -s -C $(LIBFT_DIR)
+SRC = src/main.c \
+	  src/move.c \
+	  src/sort.c \
+	  src/utils.c
 
-$(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -L$(LIBFT_DIR) -lft
+LIBFT = libft/ft_isdigit.c \
+		libft/ft_memmove.c \
+		libft/ft_putendl_fd.c \
+        libft/ft_split.c \
+		libft/ft_strdup.c \
+		libft/ft_strjoin.c \
+        libft/ft_strlen.c \
+		libft/ft_strncmp.c \
+		libft/ft_count_words.c \
+		libft/ft_strlcpy.c
 
-# Compilação dos .o um a um
-$(SRC_DIR)/%.o: $(SRC_DIR)/%.c
-	@$(CC) $(CFLAGS) -I$(LIBFT_DIR) -c $< -o $@
+OBJS = $(SRC:.c=.o) $(LIBFT:.c=.o)
 
-clean:	
-	@$(RM) $(OBJ)
-	@make -s -C $(LIBFT_DIR) clean
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+
+clean:
+	rm -f src/*.o libft/*.o
 
 fclean: clean
-	@$(RM) $(NAME)
-	@make -s -C $(LIBFT_DIR) fclean
+	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean test re
-
-# Teste (sem mudanças aqui)
-OS = $(shell uname)
-size ?= 10
-
-ifeq ($(OS),Linux)
-CHECKER = valgrind ./push_swap $(ARG) | ./checker_linux $(ARG)
-else
-CHECKER = ./push_swap $(ARG) | ./checker_Mac $(ARG)
-endif
-
-test:
-	@$(eval ARG = $(shell seq -1000 1000 | shuf -n $(size)))
-	@echo "Checker result: "
-	$(CHECKER)
-	@echo "Instructions count: "
-	@./push_swap $(ARG) | wc -l
+.PHONY: all clean fclean re

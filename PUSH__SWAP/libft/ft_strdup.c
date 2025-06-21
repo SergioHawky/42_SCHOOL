@@ -3,37 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: huaydin <huaydin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seilkiv <seilkiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/03 13:13:42 by huaydin           #+#    #+#             */
-/*   Updated: 2022/10/25 00:01:54 by huaydin          ###   ########.fr       */
+/*   Created: 2024/11/05 10:27:41 by seilkiv           #+#    #+#             */
+/*   Updated: 2024/11/07 13:41:43 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+// This function duplicates a string and returns the duplicate
+
 char	*ft_strdup(const char *s)
 {
-	char	*str;
+	char	*p;
 	size_t	i;
 
-	i = ft_strlen(s) + 1;
-	str = (char *)malloc(sizeof(char) * i);
-	if (!str)
+	p = (char *)malloc((ft_strlen(s) + 1) * sizeof(char));
+	if (!p)
+	{
 		return (NULL);
-	while (i--)
-		str[i] = s[i];
-	return (str);
+	}
+	i = 0;
+	while (s[i])
+	{
+		p[i] = s[i];
+		i++;
+	}
+	p[i] = '\0';
+	return (p);
 }
-/*
-int	main(void)
-{
-	char	*s1;
-	char	*s2;
-
-	s1 = "test";
-	s2 = ft_strdup(s1);
-	printf("%s\n", s2);
-	return (0);
-}
-*/

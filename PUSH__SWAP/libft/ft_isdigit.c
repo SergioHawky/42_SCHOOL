@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: huaydin <huaydin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seilkiv <seilkiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/03 13:13:41 by huaydin           #+#    #+#             */
-/*   Updated: 2022/10/24 22:47:36 by huaydin          ###   ########.fr       */
+/*   Created: 2024/10/28 14:45:10 by seilkiv           #+#    #+#             */
+/*   Updated: 2024/11/05 16:17:25 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,9 @@
 
 int	ft_isdigit(int c)
 {
-	return (c >= '0' && c <= '9');
+	if (c >= '0' && c <= '9')
+	{
+		return (1);
+	}
+	return (0);
 }
-/*
-#include <stdio.h>
-int	main (void)
-{
-	int	c1;
-	int	c2;
-
-	c1 = 'a';
-	c2 = '5';
-	printf("char: %c is digit or not: %d\n", c1, ft_isdigit(c1));
-	printf("char: %c is digit or not: %d\n", c2, ft_isdigit(c2));
-}
-*/

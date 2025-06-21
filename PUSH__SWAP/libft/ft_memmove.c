@@ -3,46 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: huaydin <huaydin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seilkiv <seilkiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/03 13:13:42 by huaydin           #+#    #+#             */
-/*   Updated: 2022/10/16 16:14:17 by huaydin          ###   ########.fr       */
+/*   Created: 2024/10/30 14:08:15 by seilkiv           #+#    #+#             */
+/*   Updated: 2024/11/05 16:07:57 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t n)
-{
-	char	*dst_p;
-	char	*src_p;
-	size_t	i;
+// This functions copies n bytes from src into dest
+// It takes care of overlaping memory
+// It returns a pointer to n the start of dest
 
-	i = 0;
-	dst_p = (char *)dst;
-	src_p = (char *)src;
-	if (src == dst || !n)
-		return (dst);
-	if (src_p < dst_p)
+void	*ft_memmove(void *dest, const void *src, size_t n)
+{
+	unsigned char	*d;
+	unsigned char	*s;
+
+	d = dest;
+	s = (unsigned char *)src;
+	if (!dest && !src)
+		return (dest);
+	if (d < s)
 	{
-		while (++i <= n)
+		while (n--)
 		{
-			dst_p[n - i] = src_p[n - i];
+			*d++ = *s++;
 		}
 	}
 	else
-		while (n-- > 0)
-			*dst_p++ = *src_p++;
-	return (dst);
+	{
+		d += n;
+		s += n;
+		while (n--)
+		{
+			*(--d) = *(--s);
+		}
+	}
+	return (dest);
 }
-/*
-#include <stdio.h>
-int	main(void)
-{
-	char	*p;
-	char src[] = "hallaaaaaaaao";
-	char dest[] = "test";
-	p = ft_memmove(dest, src, 3);
-	printf("%s", (unsigned char *)(p));
-}
-*/
+
+/*#include <stdio.h>
+#include <string.h>
+
+int	main(void) {
+	char src1[] = "Hello, World!";
+	char dest1[20];
+
+	printf("Antes: src = \"%s\", dest = \"%s\"\n", src1, dest1);
+	ft_memmove(dest1, src1, strlen(src1) + 1);
+	printf("Depois: src = \"%s\", dest = \"%s\"\n\n", src1, dest1);
+
+	return (0);
+}*/
