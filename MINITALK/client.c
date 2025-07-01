@@ -22,7 +22,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 3)
 	{
-		ft_printf("Only 3 arguments please: ./client <PID> <MESSAGE>\n");
+		write(2, "Only 3 arguments please: ./client <PID> <MESSAGE>\n", 51);
 		return (1);
 	}
 	pid_t pid = ft_atoi(argv[1]);
