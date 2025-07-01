@@ -32,5 +32,6 @@ int	main(int argc, char **argv)
 		send_char(pid, argv[2][i]);
 		i ++;
 	}
+	send_char(pid, '\0');
 	return (0);
 }
