@@ -29,6 +29,9 @@ $(CLIENT): $(OBJ_CLIENT)
 	@echo "Linkando $@..."
 	@$(CC) $(CFLAGS) -o $@ $^
 
+%.o: %.c
+	@$(CC) $(CFLAGS) -c -o $@ $<
+
 clean:
 	@echo "Removendo arquivos .o ..."
 	@rm -f *.o libft/*.o
