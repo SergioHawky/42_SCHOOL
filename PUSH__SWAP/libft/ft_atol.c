@@ -20,9 +20,9 @@ int	ft_atol(const char *n)
 	while (n[i])
 	{
 		if (res > 2147483647 || (res * sign) < -2147483648 || ft_strlen(n) > 11)
-			write(2, "Error number\n", 14);
+			write(2, "Error number\n", 13);
 		if (!(n[i] >= '0' && n[i] <= '9'))
-			write(2, "Error number\n", 14);
+			write(2, "Error number\n", 13);
 		res = res * 10 + (n[i++] - '0');
 	}
 	return ((int)(res * sign));

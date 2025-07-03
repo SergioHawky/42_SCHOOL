@@ -51,14 +51,12 @@ void	initialize_stacks(int argc, char **argv, t_stacks *s)
 	{
 		if (ft_count_words(argv[i + 1], ' '))
 			s->a_size += ft_count_words(argv[i + 1], ' ');
-		else
-			s->a_size++;
 		i++;
 	}
-	s->a = malloc(s->a_size * sizeof * s->a);
+	s->a = malloc(s->a_size * sizeof(*s->a));
 	if (s->a == NULL)
 		free_and_exit_with_message(s, "Error initialize a\n");
-	s->b = malloc(s->a_size * sizeof * s->b);
+	s->b = malloc(s->a_size * sizeof(*s->b));
 	if (s->b == NULL)
 		free_and_exit_with_message(s, "Error initialize b\n");
 }
@@ -70,7 +68,7 @@ void	create_index(t_stacks *s)
 	int		k;
 	int		*new_a;
 
-	new_a = malloc(s->a_size * sizeof * new_a);
+	new_a = malloc(s->a_size * sizeof(*new_a));
 	if (new_a == NULL)
 		free_and_exit_with_message(s, "Error index\n");
 	i = -1;

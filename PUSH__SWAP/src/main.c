@@ -24,22 +24,28 @@ static void	validate_arguments(int argc, char **argv)
 	int	j;
 
 	i = 0;
-	if (argc < 2)
-		free_and_exit_with_message(NULL, "");
 	while (++i < argc)
 	{
+		int	k;
+
 		j = 0;
-		if (!argv[i][0] || (argv[i][0] && argv[i][0] == ' '))
+		k = 0;
+		while (argv[i][k] == ' ')
+			k++;
+		if (argv[i][0] == '\0' || argv[i][k] == '\0')
 			free_and_exit_with_message(NULL, "Error\n");
 		while (argv[i][j] != '\0')
 		{
-			if ((!(ft_isdigit(argv[i][j])) && (argv[i][j] != ' ')
-			&& (argv[i][j] != '-' && argv[i][j] != '+' && argv[i][j] != ' '))
-			|| (argv[i][j] == '-' && argv[i][j + 1] == '\0')
-			|| (argv[i][j] == '+' && argv[i][j + 1] == '\0')
-			|| (argv[i][j] == '-' && argv[i][j + 1] == ' ')
-			|| (argv[i][j] == '+' && argv[i][j + 1] == ' '))
-				free_and_exit_with_message(NULL, "Error\n");
+			if (
+				(!(ft_isdigit(argv[i][j])) && argv[i][j] != ' ' && argv[i][j] != '-' && argv[i][j] != '+')
+				|| (argv[i][j] == '-' && argv[i][j + 1] == '\0')
+				|| (argv[i][j] == '+' && argv[i][j + 1] == '\0')
+				|| (argv[i][j] == '-' && argv[i][j + 1] == ' ')
+				|| (argv[i][j] == '+' && argv[i][j + 1] == ' ')
+				|| (argv[i][j] == '-' && (argv[i][j + 1] == '-' || argv[i][j + 1] == '+'))
+				|| (argv[i][j] == '+' && (argv[i][j + 1] == '-' || argv[i][j + 1] == '+'))
+			)
+				free_and_exit_with_message(NULL, "Error in\n");
 			j++;
 		}
 	}
@@ -53,7 +59,7 @@ static void	join_args(int argc, char **argv, t_stacks *s)
 
 	i = 0;
 	tmp2 = ft_strdup("");
-	while (++i < argc && argv[i] != NULL)
+	while (++i < argc && argv[i])
 	{
 		tmp = ft_strjoin(tmp2, argv[i]);
 		if (tmp2)
@@ -77,6 +83,8 @@ int	main(int argc, char **argv)
 {
 	t_stacks	*s;
 
+	if (argc < 2)
+		free_and_exit_with_message(NULL, "Error\n");
 	validate_arguments(argc, argv);
 	s = malloc(sizeof * s);
 	if (s == NULL)
