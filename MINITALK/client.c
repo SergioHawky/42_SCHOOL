@@ -26,6 +26,11 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	pid_t pid = ft_atoi(argv[1]);
+	if (pid < 1)
+	{
+    	write(2, "Invalid PID.\n", 13);
+    	return (1);
+	}
 	i = 0;
 	while (argv[2][i])
 	{
