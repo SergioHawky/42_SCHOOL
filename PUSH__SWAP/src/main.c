@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seilkiv <seilkiv@student.42lisboa.com>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/05 00:34:47 by seilkiv           #+#    #+#             */
+/*   Updated: 2025/07/05 00:38:03 by seilkiv          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/push_swap.h"
 
 void	free_and_exit_with_message(t_stacks *s, char *msg)
@@ -22,12 +34,11 @@ static void	validate_arguments(int argc, char **argv)
 {
 	int	i;
 	int	j;
+	int	k;
 
 	i = 0;
 	while (++i < argc)
 	{
-		int	k;
-
 		j = 0;
 		k = 0;
 		while (argv[i][k] == ' ')
@@ -36,15 +47,15 @@ static void	validate_arguments(int argc, char **argv)
 			free_and_exit_with_message(NULL, "Error\n");
 		while (argv[i][j] != '\0')
 		{
-			if (
-				(!(ft_isdigit(argv[i][j])) && argv[i][j] != ' ' && argv[i][j] != '-' && argv[i][j] != '+')
+			if ((!(ft_isdigit(argv[i][j])) && argv[i][j] != ' '
+					&& argv[i][j] != '-' && argv[i][j] != '+')
 				|| (argv[i][j] == '-' && argv[i][j + 1] == '\0')
 				|| (argv[i][j] == '+' && argv[i][j + 1] == '\0')
 				|| (argv[i][j] == '-' && argv[i][j + 1] == ' ')
 				|| (argv[i][j] == '+' && argv[i][j + 1] == ' ')
-				|| (argv[i][j] == '-' && (argv[i][j + 1] == '-' || argv[i][j + 1] == '+'))
-				|| (argv[i][j] == '+' && (argv[i][j + 1] == '-' || argv[i][j + 1] == '+'))
-			)
+				|| (argv[i][j] == '-' && (argv[i][j + 1] == '-' || argv[i][j
+						+ 1] == '+')) || (argv[i][j] == '+' && (argv[i][j
+						+ 1] == '-' || argv[i][j + 1] == '+')))
 				free_and_exit_with_message(NULL, "Error in\n");
 			j++;
 		}
@@ -86,7 +97,7 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		free_and_exit_with_message(NULL, "Error\n");
 	validate_arguments(argc, argv);
-	s = malloc(sizeof * s);
+	s = malloc(sizeof(*s));
 	if (s == NULL)
 		exit(1);
 	initialize_stacks(argc, argv, s);

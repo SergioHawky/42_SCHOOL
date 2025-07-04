@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seilkiv <seilkiv@student.42lisboa.com>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/05 00:35:07 by seilkiv           #+#    #+#             */
+/*   Updated: 2025/07/05 00:35:08 by seilkiv          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/push_swap.h"
 
 void	exit_if_sorted_or_has_duplicate(t_stacks *s, int i)
@@ -63,10 +75,10 @@ void	initialize_stacks(int argc, char **argv, t_stacks *s)
 
 void	create_index(t_stacks *s)
 {
-	int		i;
-	int		j;
-	int		k;
-	int		*new_a;
+	int	i;
+	int	j;
+	int	k;
+	int	*new_a;
 
 	new_a = malloc(s->a_size * sizeof(*new_a));
 	if (new_a == NULL)

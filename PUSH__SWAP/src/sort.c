@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seilkiv <seilkiv@student.42lisboa.com>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/05 00:35:02 by seilkiv           #+#    #+#             */
+/*   Updated: 2025/07/05 00:36:04 by seilkiv          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/push_swap.h"
 
 void	sort_three_elements(t_stacks *s)
@@ -73,7 +85,7 @@ void	radix_sort(t_stacks *s)
 
 	bit_size = 0;
 	while ((1 << bit_size) < s->a_size)
-    	bit_size++;
+		bit_size++;
 	j = -1;
 	while (++j <= bit_size)
 	{
