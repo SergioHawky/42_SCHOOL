@@ -1,23 +1,22 @@
 NAME = so_long
 
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 MLX_DIR = minilibx-linux
 
-# Bibliotecas necessárias
 MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
 INCLUDES = -I$(MLX_DIR)
 
-# Diretórios
 SRC_DIR = source
 LIBFT_DIR = Libft
 
-# Arquivos do projeto
 SRCS = \
 	$(SRC_DIR)/main.c \
 	$(SRC_DIR)/image.c \
+	$(SRC_DIR)/image2.c \
 	$(SRC_DIR)/map.c \
+	$(SRC_DIR)/map2.c \
 	$(SRC_DIR)/movement.c \
 	$(SRC_DIR)/spawn.c \
 	$(SRC_DIR)/animation.c \
@@ -35,24 +34,25 @@ SRCS = \
 
 OBJS = $(SRCS:.c=.o)
 
-# Regra principal
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(MAKE) -C $(MLX_DIR) # Compila a MiniLibX
 	$(CC) $(CFLAGS) $(OBJS) $(MLX_DIR)/libmlx.a $(MLX_FLAGS) $(INCLUDES) -o $(NAME)
 
-# Compila arquivos .c em .o
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
-# Limpa arquivos compilados
 clean:
 	rm -f $(OBJS)
 
-# Limpa tudo, incluindo o binário final
 fclean: clean
 	rm -f $(NAME)
 
-# Recompila tudo do zero
 re: fclean all
+
+mlx:
+	git clone https://github.com/42Paris/minilibx-linux.git $(MLX_DIR)
+	$(MAKE) -C $(MLX_DIR)
+
+.PHONY: all clean fclean re

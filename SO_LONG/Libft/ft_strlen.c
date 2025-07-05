@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: seilkiv <seilkiv@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/20 00:25:49 by seilkiv           #+#    #+#             */
-/*   Updated: 2025/02/20 00:41:50 by seilkiv          ###   ########.fr       */
+/*   Created: 2025/04/22 12:21:58 by seilkiv           #+#    #+#             */
+/*   Updated: 2025/07/05 12:53:30 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
+
 size_t	ft_strlen(const char *s)
 {
 	int	i;
