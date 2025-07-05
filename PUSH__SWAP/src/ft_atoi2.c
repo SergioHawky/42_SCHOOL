@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atol.c                                          :+:      :+:    :+:   */
+/*   ft_atoi2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seilkiv <seilkiv@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 00:33:14 by seilkiv           #+#    #+#             */
-/*   Updated: 2025/07/05 08:19:19 by seilkiv          ###   ########.fr       */
+/*   Updated: 2025/07/05 10:02:25 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,13 @@ int	ft_atoi2(const char *n, t_stacks *s, char **tmp)
 	}
 	while (n[i])
 	{
-		if (res > 2147483647 || (res * sign) < -2147483648 || ft_strlen(n) > 11)
-			free_and_exit(s, tmp);
-		if (!(n[i] >= '0' && n[i] <= '9'))
-			free_and_exit(s, tmp);
-		res = res * 10 + (n[i++] - '0');
+    	if (!(n[i] >= '0' && n[i] <= '9'))
+        	free_and_exit(s, tmp);
+    	if (sign == 1 && res > (2147483647 - (n[i] - '0')) / 10)
+        	free_and_exit(s, tmp);
+    	if (sign == -1 && res > (2147483648 - (n[i] - '0')) / 10)
+        	free_and_exit(s, tmp);
+			res = res * 10 + (n[i++] - '0');
 	}
 	return ((int)(res * sign));
 }
