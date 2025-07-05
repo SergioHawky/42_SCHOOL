@@ -8,7 +8,7 @@ SRC = src/main.c \
 	  src/sort.c \
 	  src/utils.c \
 	  src/validate_arguments.c \
-	  src/ft_atol.c
+	  src/ft_atoi2.c
 
 LIBFT = libft/ft_isdigit.c \
 		libft/ft_memmove.c \

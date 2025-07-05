@@ -6,7 +6,7 @@
 /*   By: seilkiv <seilkiv@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 00:35:07 by seilkiv           #+#    #+#             */
-/*   Updated: 2025/07/05 01:21:23 by seilkiv          ###   ########.fr       */
+/*   Updated: 2025/07/05 08:20:27 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	parse_numbers(t_stacks *s)
 	tmp = ft_split(s->join_args, ' ');
 	i = 0;
 	while (tmp[i] != NULL && tmp[i][0] != '\0')
-		s->a[z++] = ft_atol(tmp[i++], s, tmp);
+		s->a[z++] = ft_atoi2(tmp[i++], s, tmp);
 	free_tmp(tmp);
 }
 

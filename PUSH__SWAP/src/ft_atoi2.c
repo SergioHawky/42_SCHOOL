@@ -6,7 +6,7 @@
 /*   By: seilkiv <seilkiv@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 00:33:14 by seilkiv           #+#    #+#             */
-/*   Updated: 2025/07/05 01:38:18 by seilkiv          ###   ########.fr       */
+/*   Updated: 2025/07/05 08:19:19 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	free_and_exit(t_stacks *s, char **tmp)
 	exit(1);
 }
 
-int	ft_atol(const char *n, t_stacks *s, char **tmp)
+int	ft_atoi2(const char *n, t_stacks *s, char **tmp)
 {
 	int			i;
 	long		sign;
