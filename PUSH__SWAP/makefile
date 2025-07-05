@@ -6,7 +6,9 @@ CFLAGS = -Wall -Wextra -Werror
 SRC = src/main.c \
 	  src/move.c \
 	  src/sort.c \
-	  src/utils.c
+	  src/utils.c \
+	  src/validate_arguments.c \
+	  src/ft_atol.c
 
 LIBFT = libft/ft_isdigit.c \
 		libft/ft_memmove.c \
@@ -18,7 +20,6 @@ LIBFT = libft/ft_isdigit.c \
 		libft/ft_strncmp.c \
 		libft/ft_count_words.c \
 		libft/ft_strlcpy.c \
-		libft/ft_atol.c
 
 OBJS = $(SRC:.c=.o) $(LIBFT:.c=.o)
 

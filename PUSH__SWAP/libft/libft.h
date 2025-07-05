@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seilkiv <seilkiv@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seilkiv <seilkiv@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 12:05:37 by seilkiv           #+#    #+#             */
-/*   Updated: 2024/11/11 12:47:37 by seilkiv          ###   ########.fr       */
+/*   Updated: 2025/07/05 01:00:26 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
-int					ft_atol(const char *n);
 int					ft_count_words(const char *s, char c);
 int					ft_atoi(const char *nptr);
 int					ft_isalnum(int c);

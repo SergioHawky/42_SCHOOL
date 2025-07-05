@@ -6,13 +6,32 @@
 /*   By: seilkiv <seilkiv@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 00:33:14 by seilkiv           #+#    #+#             */
-/*   Updated: 2025/07/05 00:33:14 by seilkiv          ###   ########.fr       */
+/*   Updated: 2025/07/05 01:38:18 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/push_swap.h"
 
-int	ft_atol(const char *n)
+void	free_tmp(char **tmp)
+{
+	int	i;
+
+	if (!tmp)
+		return ;
+	i = 0;
+	while (tmp[i])
+		free(tmp[i++]);
+	free(tmp);
+}
+
+static void	free_and_exit(t_stacks *s, char **tmp)
+{
+	free_tmp(tmp);
+	free_and_exit_with_message(s, "Error number");
+	exit(1);
+}
+
+int	ft_atol(const char *n, t_stacks *s, char **tmp)
 {
 	int			i;
 	long		sign;
@@ -32,9 +51,9 @@ int	ft_atol(const char *n)
 	while (n[i])
 	{
 		if (res > 2147483647 || (res * sign) < -2147483648 || ft_strlen(n) > 11)
-			write(2, "Error number\n", 13);
+			free_and_exit(s, tmp);
 		if (!(n[i] >= '0' && n[i] <= '9'))
-			write(2, "Error number\n", 13);
+			free_and_exit(s, tmp);
 		res = res * 10 + (n[i++] - '0');
 	}
 	return ((int)(res * sign));

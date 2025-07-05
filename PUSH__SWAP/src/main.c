@@ -6,7 +6,7 @@
 /*   By: seilkiv <seilkiv@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 00:34:47 by seilkiv           #+#    #+#             */
-/*   Updated: 2025/07/05 00:38:03 by seilkiv          ###   ########.fr       */
+/*   Updated: 2025/07/05 00:47:01 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,38 +28,6 @@ void	free_and_exit_with_message(t_stacks *s, char *msg)
 			free(s);
 	}
 	exit(1);
-}
-
-static void	validate_arguments(int argc, char **argv)
-{
-	int	i;
-	int	j;
-	int	k;
-
-	i = 0;
-	while (++i < argc)
-	{
-		j = 0;
-		k = 0;
-		while (argv[i][k] == ' ')
-			k++;
-		if (argv[i][0] == '\0' || argv[i][k] == '\0')
-			free_and_exit_with_message(NULL, "Error\n");
-		while (argv[i][j] != '\0')
-		{
-			if ((!(ft_isdigit(argv[i][j])) && argv[i][j] != ' '
-					&& argv[i][j] != '-' && argv[i][j] != '+')
-				|| (argv[i][j] == '-' && argv[i][j + 1] == '\0')
-				|| (argv[i][j] == '+' && argv[i][j + 1] == '\0')
-				|| (argv[i][j] == '-' && argv[i][j + 1] == ' ')
-				|| (argv[i][j] == '+' && argv[i][j + 1] == ' ')
-				|| (argv[i][j] == '-' && (argv[i][j + 1] == '-' || argv[i][j
-						+ 1] == '+')) || (argv[i][j] == '+' && (argv[i][j
-						+ 1] == '-' || argv[i][j + 1] == '+')))
-				free_and_exit_with_message(NULL, "Error in\n");
-			j++;
-		}
-	}
 }
 
 static void	join_args(int argc, char **argv, t_stacks *s)
