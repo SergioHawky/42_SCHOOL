@@ -42,4 +42,8 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+tester:
+	git clone https://github.com/ThibaudM13/minitalk-Tester.git tester_repo || echo "Tester repo already exists"
+	cd tester_repo && bash tester.sh
+
+.PHONY: all clean fclean re tester

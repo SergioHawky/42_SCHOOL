@@ -14,8 +14,8 @@
 # define LIBFT_H
 
 # include <fcntl.h>
-# include <stdlib.h>
 # include <stdarg.h>
+# include <stdlib.h>
 # include <unistd.h>
 
 typedef struct s_list
@@ -69,27 +69,25 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 t_list				*ft_lstnew(void *content);
 int					ft_lstsize(t_list *lst);
 
+// PRINTF
 
-//PRINTF
+int					ft_printf(const char *format, ...);
+int					print_format(char specifier, va_list ap);
+int					ft_print_char(int c);
+int					ft_print_str(char *str);
+int					ft_print_nbr(int n);
+int					ft_print_pt(void *ptr);
+int					ft_print_unsigned(unsigned int n);
+int					ft_print_hex(unsigned int num, int uppercase);
 
-int ft_printf(const char *format, ...);
-int print_format(char specifier, va_list ap);
-int ft_print_char(int  c);
-int ft_print_str(char *str);
-int ft_print_nbr(int n);
-int ft_print_pt(void *ptr);
-int ft_print_unsigned(unsigned int n);
-int ft_print_hex(unsigned int num, int uppercase);
-
-
-//GET_NEXT_LINE
+// GET_NEXT_LINE
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 30
 # endif
 
-char	*get_next_line(int fd);
-size_t	ft_strlen_gnl(char *str);
-char	*ft_strjoin_gnl(char *s1, char *s2);
+char				*get_next_line(int fd);
+size_t				ft_strlen_gnl(char *str);
+char				*ft_strjoin_gnl(char *s1, char *s2);
 
 #endif
