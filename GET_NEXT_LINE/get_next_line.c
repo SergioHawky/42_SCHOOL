@@ -34,7 +34,6 @@ int	main(void)
 	int		fd;
 	char	*line;
 
-	// Abrir o ficheiro para leitura
 	fd = open("test_file.txt", O_RDONLY);
 	if (fd < 0)
 	{
@@ -42,16 +41,14 @@ int	main(void)
 		return (1);
 	}
 
-	// Ler e imprimir uma linha de cada vez
 	printf("Pressione Enter para ler uma linha:\n");
 	while ((line = get_next_line(fd)) != NULL)
 	{
-		getchar(); // Espera o usuário pressionar Enter
-		printf("%s", line); // Imprime a linha retornada
-		free(line); // Libera a memória da linha
+		getchar();
+		printf("%s", line);
+		free(line);
 	}
 
-	// Fechar o ficheiro
 	close(fd);
 	return (0);
 }
