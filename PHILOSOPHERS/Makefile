@@ -3,10 +3,8 @@ NAME = philo
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRC = src/Error.c \
-		src/Main.c \
-		src/Utils.c \
-		src/ValidateParse.c
+SRC = src/Main.c \
+		src/Utils.c 
 
 OBJS = $(SRC:.c=.o)
 

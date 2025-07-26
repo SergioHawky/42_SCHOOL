@@ -17,10 +17,9 @@ typedef struct s_data
     long    n_philo;
 }               t_data;
 
-void	free_and_exit_with_message(char *msg);
 size_t	ft_strlen(const char *s);
 int	    ft_isdigit(int c);
-void    validate_arguments_and_parse(t_data *s, char *str, int  av);
 long	ft_atol(const char *str);
+void	free_and_exit_with_message(t_data *s, char *msg);
 
 #endif

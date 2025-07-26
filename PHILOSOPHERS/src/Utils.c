@@ -31,7 +31,7 @@ long	ft_atol(const char *str)
     while (str[i] >= '0' && str[i] <= '9')
     {
         if (result > (LONG_MAX - (str[i] - '0')) / 10)
-            free_and_exit_with_message("Error: number too big\n");
+            free_and_exit_with_message(NULL, "Error: number too big\n");
         result = result * 10 + (str[i] - '0');
         i++;
     }
