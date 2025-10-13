@@ -22,11 +22,9 @@ int	ft_isdigit(int c)
 long	ft_atol(const char *str)
 {
     long    result;
-    int     sign;
     int     i;
 
     result = 0;
-    sign = 1;
     i = 0;
     while (str[i] >= '0' && str[i] <= '9')
     {
@@ -35,5 +33,24 @@ long	ft_atol(const char *str)
         result = result * 10 + (str[i] - '0');
         i++;
     }
-    return (result * sign);
+    return (result);
+}
+
+long get_current_time(void)
+{
+	struct timeval tv;
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+}
+
+void free_and_exit_with_message(t_engine *engine, char *msg)
+{
+	if (msg)
+		write(2, msg, ft_strlen(msg));
+	if (engine)
+	{
+		free(engine->forks);
+		free(engine->philos);
+	}
+	exit(1);
 }

@@ -3,8 +3,11 @@ NAME = philo
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRC = src/Main.c \
-		src/Utils.c 
+SRC = src/main.c \
+		src/utils.c \
+		src/init.c \
+		src/routine.c \
+		src/monitor.c 
 
 OBJS = $(SRC:.c=.o)
 

@@ -1,0 +1,6 @@
+1 Fazer $var
+2 Parser
+
+Erros:
+- > << >> < sozinhos;
+- tratar:   dasdasd"dasdasd / dasda"sadasd"das
