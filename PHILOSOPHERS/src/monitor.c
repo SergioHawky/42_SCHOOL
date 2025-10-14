@@ -18,7 +18,7 @@ void *monitor_death(void *arg)
 			if ((now - engine->philos[i].last_meal) >= engine->data.die)
 			{
 				pthread_mutex_unlock(engine->philos[i].mutexes.meal_lock);
-				pthread_mutex_lock(engine->write_lock);
+				pthread_mutex_lock(&engine->write_lock);
 				printf("%ld %d died\n", now, engine->philos[i].id);
 				exit(0);
 			}

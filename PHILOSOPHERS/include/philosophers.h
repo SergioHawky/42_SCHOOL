@@ -5,8 +5,9 @@
 #include <stdlib.h>     //malloc free
 #include <unistd.h>     //write, usleep
 #include <pthread.h>    //mutex, threads pesquisar
-#include <sys/timeb.h>  //gettime
-#include <limits.h>     //INT_MAX   
+#include <sys/time.h>   //gettime
+#include <limits.h>     //INT_MAX
+
 
 typedef pthread_t		t_id;
 typedef pthread_mutex_t	t_mutex;
