@@ -50,6 +50,7 @@ clean:
 
 fclean: clean
 	@$(RM) $(NAME)
+	@$(MAKE) -C Libft fclean
 	@echo "🧹 Full clean done"
 
 re: fclean all
