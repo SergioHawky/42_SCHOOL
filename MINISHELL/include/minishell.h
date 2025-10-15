@@ -81,7 +81,6 @@ bool	parse_user_input(t_data *data);
 
 /* utils */
 int		ft_is_space(char c);
-int		ft_strcmp(const char *s1, const char *s2);
 void	errmsg(const char *msg, const char *arg, bool newline);
 
 #endif

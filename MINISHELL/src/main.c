@@ -42,6 +42,6 @@ int	main(int argc, char **argv, char **envp)
 		free(data.user_input);
 		data.token = NULL;
 	}
-	printf("👋 Exiting minishell.\n");
+	printf("Exiting minishell.\n");
 	return (0);
 }
