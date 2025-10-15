@@ -34,7 +34,11 @@ int	main(int argc, char **argv, char **envp)
 		}
 		if (parse_user_input(&data))
 			print_tokens(data.token);
-		free_tokens(data.token);
+		if (data.token)
+		{
+			free_tokens(data.token);
+			data.token = NULL;
+		}
 		free(data.user_input);
 		data.token = NULL;
 	}
