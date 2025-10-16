@@ -1,4 +1,4 @@
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 bool	has_syntax_error(t_token *list)
 {

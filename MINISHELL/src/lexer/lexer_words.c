@@ -1,12 +1,18 @@
 #include "../../include/minishell.h"
 
-int	extract_word(t_token **tokens, const char *input, int start)
+int extract_word(t_token **tokens, const char *input, int start)
 {
-	int	i = start;
+    int i = start;
+    char *str;
 
-	while (input[i] && !ft_is_space(input[i])
-		&& input[i] != '|' && input[i] != '<' && input[i] != '>')
-		i++;
-	add_token(tokens, ft_strndup(input + start, i - start), TOKEN_WORD);
-	return (i);
+    while (input[i] && !ft_is_space(input[i])
+        && input[i] != '|' && input[i] != '<' && input[i] != '>')
+        i++;
+
+    str = ft_strndup(input + start, i - start);
+    if (!str)
+        return (i);
+    add_token(tokens, str, TOKEN_WORD);
+    free(str);
+    return (i);
 }

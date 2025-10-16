@@ -43,5 +43,7 @@ int	main(int argc, char **argv, char **envp)
 		data.token = NULL;
 	}
 	printf("Exiting minishell.\n");
+	rl_clear_history();			// Este?
+	clear_history();			// ou este?
 	return (0);
 }

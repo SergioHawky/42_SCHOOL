@@ -21,8 +21,8 @@ SRC_FILES := \
 	lexer/lexer_words.c \
 	lexer/lexer_redirects.c \
 	lexer/lexer_quotes.c \
-	tokens/tokens_list.c \
-	tokens/tokens_check.c \
+	lexer/tokens/tokens_list.c \
+	lexer/tokens/tokens_check.c \
 	utils/utils_string.c \
 	utils/utils_error.c
 
