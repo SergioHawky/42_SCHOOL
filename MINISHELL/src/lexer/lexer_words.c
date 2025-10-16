@@ -12,7 +12,7 @@ int extract_word(t_token **tokens, const char *input, int start)
     str = ft_strndup(input + start, i - start);
     if (!str)
         return (i);
-    add_token(tokens, str, TOKEN_WORD);
+    add_token(tokens, str, WORD);
     free(str);
     return (i);
 }

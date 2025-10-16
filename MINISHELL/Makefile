@@ -16,6 +16,11 @@ OBJ_DIR     := obj
 SRC_FILES := \
 	main.c \
 	parser/parse_user_input.c \
+	parser/parser_pipe.c \
+	parser/parser_redirects.c \
+	parser/parser_utils.c \
+	parser/parser_word.c \
+	parser/parser.c \
 	lexer/tokenize.c \
 	lexer/lexer_utils.c \
 	lexer/lexer_words.c \

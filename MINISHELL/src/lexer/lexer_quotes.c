@@ -16,7 +16,7 @@ int extract_quoted(t_token **tokens, const char *input, int start)
     str = ft_strndup(input + start + 1, i - start - 1);
     if (!str)
         return (-1); 															// gerir erro
-    add_token(tokens, str, TOKEN_STRING);
+    add_token(tokens, str, STRING);
     free(str);
     return (i + 1);
 }

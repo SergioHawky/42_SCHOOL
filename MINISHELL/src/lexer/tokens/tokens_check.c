@@ -6,13 +6,13 @@ bool	has_syntax_error(t_token *list)
 
 	while (tmp)
 	{
-		if (tmp->type == TOKEN_PIPE && tmp->next && tmp->next->type == TOKEN_PIPE)
+		if (tmp->type == PIPE && tmp->next && tmp->next->type == PIPE)
 		{
 			errmsg("syntax error near unexpected token", "|", true);
 			return (true);
 		}
-		if (tmp->type >= TOKEN_REDIRECT_IN
-			&& tmp->next && tmp->next->type >= TOKEN_REDIRECT_IN)
+		if (tmp->type >= INPUT
+			&& tmp->next && tmp->next->type >= INPUT)
 		{
 			errmsg("syntax error near unexpected token", tmp->next->value, true);
 			return (true);

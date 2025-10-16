@@ -14,7 +14,7 @@ t_token	*tokenize(const char *input)
 		if (input[i] == '\0')
 			break ;
 		if (status == DEFAULT && input[i] == '|')
-			add_token(&tokens, "|", TOKEN_PIPE), i++;
+			add_token(&tokens, "|", PIPE), i++;
 		else if (status == DEFAULT && is_redirect(input[i]))
 			i = handle_redirects(&tokens, input, i);
 		else if (input[i] == '\'' || input[i] == '"')
@@ -30,6 +30,6 @@ t_token	*tokenize(const char *input)
 		else
 			i = extract_word(&tokens, input, i);
 	}
-	add_token(&tokens, "END", TOKEN_END);
+	add_token(&tokens, "END", END);
 	return (tokens);
 }
