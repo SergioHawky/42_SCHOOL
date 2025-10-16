@@ -1,17 +1,9 @@
-# ================================
-#        MINISHELL MAKEFILE
-# ================================
-
-NAME        := minishell
-CC          := cc
-CFLAGS      := -Wall -Wextra -Werror -Iinclude
-RM          := rm -f
-SRC_DIR     := src
-OBJ_DIR     := obj
-
-# ================================
-#         SOURCE FILES
-# ================================
+NAME        = minishell
+CC          = cc
+CFLAGS      = -Wall -Wextra -Werror -Iinclude
+RM          = rm -f
+SRC_DIR     = src
+OBJ_DIR     = obj
 
 SRC_FILES := \
 	main.c \
@@ -34,16 +26,13 @@ SRC_FILES := \
 SRC := $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ := $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-# ================================
-#          BUILD RULES
-# ================================
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@$(MAKE) -C Libft --no-print-directory
-	@$(CC) $(CFLAGS) $(OBJ) -LLibft -lft -lreadline -o $(NAME)
-	@echo "✅ Build complete: $(NAME)"
+	@$(MAKE) -C libft --no-print-directory
+	@$(CC) $(CFLAGS) $(OBJ) -Llibft -lft -lreadline -o $(NAME)
+	@echo "Build complete: $(NAME)"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
@@ -51,12 +40,12 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 clean:
 	@$(RM) -r $(OBJ_DIR)
-	@echo "🧹 Cleaned object files"
+	@echo "Cleaned object files"
 
 fclean: clean
+	@$(MAKE) -C Libft fclean --no-print-directory
 	@$(RM) $(NAME)
-	@$(MAKE) -C Libft fclean
-	@echo "🧹 Full clean done"
+	@echo "Full clean done"
 
 re: fclean all
 

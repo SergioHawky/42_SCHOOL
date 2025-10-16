@@ -12,8 +12,8 @@
 # include <errno.h>
 # include <ctype.h>
 # include <sys/wait.h>
-# include "../Libft/libft.h"
-# include "../ft_printf/ft_printf.h" 
+# include "../libft/libft.h"
+
 
 
 /*=============================*/

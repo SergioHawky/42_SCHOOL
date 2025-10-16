@@ -4,40 +4,40 @@ static void print_commands(t_cmd *cmd)
 {
     int i = 1;
 
-    printf("\n🔹 Commands parsed:\n");
+    ft_printf("\n🔹 Commands parsed:\n");
     while (cmd)
     {
-        printf("\nCMD #%d\n", i++);
-        printf("  command: %s\n", cmd->command ? cmd->command : "(null)");
+        ft_printf("\nCMD #%d\n", i++);
+        ft_printf("  command: %s\n", cmd->command ? cmd->command : "(null)");
         if (cmd->args)
         {
-            printf("  args: ");
+            ft_printf("  args: ");
             for (int j = 0; cmd->args[j]; j++)
-                printf("[%s] ", cmd->args[j]);
-            printf("\n");
+                ft_printf("[%s] ", cmd->args[j]);
+            ft_printf("\n");
         }
         if (cmd->io.infile)
-            printf("  infile: %s\n", cmd->io.infile);
+            ft_printf("  infile: %s\n", cmd->io.infile);
         if (cmd->io.outfile)
-            printf("  outfile: %s%s\n", cmd->io.outfile, cmd->io.append ? " (append)" : "");
+            ft_printf("  outfile: %s%s\n", cmd->io.outfile, cmd->io.append ? " (append)" : "");
         if (cmd->pipe_output)
-            printf("  pipes to next command\n");
+            ft_printf("  pipes to next command\n");
         cmd = cmd->next;
     }
-    printf("\n");
+    ft_printf("\n");
 }
 
 static void	print_tokens(t_token *list)
 {
 	t_token	*tmp = list;
 
-	printf("\n🔹 Tokens:\n");
+	ft_printf("\n🔹 Tokens:\n");
 	while (tmp)
 	{
-		printf("  [%d] \"%s\"\n", tmp->type, tmp->value);
+		ft_printf("  [%d] \"%s\"\n", tmp->type, tmp->value);
 		tmp = tmp->next;
 	}
-	printf("\n");
+	ft_printf("\n");
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -76,7 +76,7 @@ int	main(int argc, char **argv, char **envp)
 		}
 		free(data.user_input);
 	}
-	printf("Exiting minishell.\n");
+	ft_printf("Exiting minishell.\n");
 	rl_clear_history(); 
 	return (0);
 }

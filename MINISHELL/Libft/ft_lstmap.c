@@ -1,22 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seilkiv <seilkiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 15:02:39 by seilkiv           #+#    #+#             */
-/*   Updated: 2024/11/05 16:17:50 by seilkiv          ###   ########.fr       */
+/*   Created: 2024/11/11 12:10:54 by seilkiv           #+#    #+#             */
+/*   Updated: 2024/11/12 13:01:48 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isalnum(int c)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122) || (c >= '0' && c <= '9'))
+	t_list	*new;
+	t_list	*head;
+	void	*content;
+
+	head = NULL;
+	while (lst != NULL)
 	{
-		return (1);
+		content = f(lst->content);
+		if (!content)
+		{
+			ft_lstclear(&head, del);
+			return (NULL);
+		}
+		new = ft_lstnew(content);
+		if (!new)
+		{
+			del(content);
+			ft_lstclear(&head, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&head, new);
+		lst = lst->next;
 	}
-	return (0);
+	return (head);
 }

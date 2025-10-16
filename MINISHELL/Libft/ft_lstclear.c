@@ -1,59 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seilkiv <seilkiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/11 12:10:23 by seilkiv           #+#    #+#             */
-/*   Updated: 2024/11/11 12:22:42 by seilkiv          ###   ########.fr       */
+/*   Created: 2024/11/11 12:25:38 by seilkiv           #+#    #+#             */
+/*   Updated: 2024/11/11 12:26:34 by seilkiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	t_list	*list_ptr;
+	t_list	*node;
 
-	if (!lst)
+	if (!lst || !del)
 		return ;
-	list_ptr = lst;
-	while (list_ptr != NULL)
+	while (*lst)
 	{
-		(*f)(list_ptr->content);
-		list_ptr = list_ptr->next;
+		node = (*lst)->next;
+		ft_lstdelone(*lst, del);
+		*lst = node;
 	}
 }
 /*#include <stdio.h>
 
-void	print_content(void *content)
+void	del(void *content)
 {
-	printf("Conteúdo: %d\n", *(int *)content);
+	free(content);
 }
 
 int	main(void)
 {
 	t_list *node1 = ft_lstnew(malloc(sizeof(int)));
 	t_list *node2 = ft_lstnew(malloc(sizeof(int)));
+	t_list *node3 = ft_lstnew(malloc(sizeof(int)));
 
-	if (!node1 || !node2 )
+	if (!node1 || !node2 || !node3)
 	{
-		printf("Erro ao alocar memória para os nós.\n");
+		printf("Erro ao alocar nós.\n");
 		return (1);
 	}
 
-	*(int *)node1->content = 10;
-	*(int *)node2->content = 20;
-
 	node1->next = node2;
-	node2->next = NULL;
+	node2->next = node3;
 
-	ft_lstiter(node1, print_content);
+	printf("Tamanho da lista antes de limpar: %d\n", ft_lstsize(node1));
+	ft_lstclear(&node1, del);
+	if (node1 == NULL)
+		printf("Lista limpa com sucesso.\n");
+	else
+		printf("Falha ao limpar a lista.\n");
 
-	free(node1->content);
-	free(node2->content);
-	free(node1);
-	free(node2);
 	return (0);
 }*/
