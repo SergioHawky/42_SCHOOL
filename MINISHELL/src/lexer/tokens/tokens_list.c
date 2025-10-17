@@ -2,12 +2,13 @@
 
 t_token	*new_token(const char *value, t_token_type type)
 {
-	t_token	*token = malloc(sizeof(t_token));
+	t_token	*token;
+
+	token = malloc(sizeof(t_token));
 	if (!token)
 		return (NULL);
 	token->value = ft_strdup(value);
 	token->type = type;
-	token->status = DEFAULT;
 	token->prev = NULL;
 	token->next = NULL;
 	return (token);
@@ -15,9 +16,10 @@ t_token	*new_token(const char *value, t_token_type type)
 
 void	add_token(t_token **tokens, const char *value, t_token_type type)
 {
-	t_token	*new = new_token(value, type);
+	t_token	*new;
 	t_token	*tmp;
 
+	new = new_token(value, type);
 	if (!new)
 		return ;
 	if (!*tokens)

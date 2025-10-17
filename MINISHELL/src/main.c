@@ -1,10 +1,10 @@
 #include "../include/minishell.h"
 
+//debug
 static void print_commands(t_cmd *cmd)
 {
     int i = 1;
 
-    ft_printf("\n🔹 Commands parsed:\n");
     while (cmd)
     {
         ft_printf("\nCMD #%d\n", i++);
@@ -18,6 +18,8 @@ static void print_commands(t_cmd *cmd)
         }
         if (cmd->io.infile)
             ft_printf("  infile: %s\n", cmd->io.infile);
+		if (cmd->io.heredoc && cmd->io.heredoc_delimiter)
+    		printf("  heredoc: %s\n", cmd->io.heredoc_delimiter);
         if (cmd->io.outfile)
             ft_printf("  outfile: %s%s\n", cmd->io.outfile, cmd->io.append ? " (append)" : "");
         if (cmd->pipe_output)

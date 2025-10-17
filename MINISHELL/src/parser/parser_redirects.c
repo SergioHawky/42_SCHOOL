@@ -2,36 +2,29 @@
 
 void parse_redirect(t_cmd *cmd, t_token **tk)
 {
-    if (!(*tk)->next)
+    if (!cmd || !*tk || !(*tk)->next)
         return;
+
     char *filename = (*tk)->next->value;
 
     if ((*tk)->type == INPUT)
-    {
-         if (cmd->io.fd_in > 0)
-            close(cmd->io.fd_in);
-        free(cmd->io.infile);
-        cmd->io.infile = ft_strdup(filename);
-        cmd->io.fd_in = open(filename, O_RDONLY);
-    }
+        cmd->io.infile = strdup(filename);
     else if ((*tk)->type == TRUNC)
     {
-         if (cmd->io.fd_out > 0)
-            close(cmd->io.fd_out);
-        free(cmd->io.outfile);
-        cmd->io.outfile = ft_strdup(filename);
-        cmd->io.fd_out = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+        cmd->io.outfile = strdup(filename);
+        cmd->io.append = false;
     }
     else if ((*tk)->type == APPEND)
     {
-        if (cmd->io.fd_out > 0)
-            close(cmd->io.fd_out);
-        free(cmd->io.outfile);
-        cmd->io.outfile = ft_strdup(filename);
-        cmd->io.fd_out = open(filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
+        cmd->io.outfile = strdup(filename);
         cmd->io.append = true;
     }
-    // HEREDOC será tratado mais tarde
+    else if ((*tk)->type == HEREDOC)
+    {
+        cmd->io.heredoc_delimiter = strdup(filename);
+        cmd->io.heredoc = true;
+    }
 
     *tk = (*tk)->next->next;
 }
+

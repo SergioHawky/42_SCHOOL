@@ -2,9 +2,12 @@
 
 int extract_quoted(t_token **tokens, const char *input, int start)
 {
-    char quote = input[start];
-    int i = start + 1;
+    char quote;
+    int i;
     char *str;
+
+    quote = input[start];
+    i = start + 1;
 
     while (input[i] && input[i] != quote)
         i++;

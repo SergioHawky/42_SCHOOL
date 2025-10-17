@@ -32,13 +32,6 @@ typedef enum e_token_type
 	END
 }	t_token_type;
 
-typedef enum e_status
-{
-	DEFAULT,
-	SQUOTE,
-	DQUOTE
-}	t_status;
-
 /*=============================*/
 /*         STRUCTS             */
 /*=============================*/
@@ -47,7 +40,6 @@ typedef struct s_token
 {
 	char			*value;
 	t_token_type	type;
-	t_status		status;
 	struct s_token	*prev;
 	struct s_token	*next;
 }	t_token;
@@ -60,6 +52,7 @@ typedef struct s_io
 	int		fd_out;
 	bool	append;
 	bool	heredoc;
+	char    *heredoc_delimiter;
 }	t_io;
 
 typedef struct s_command
@@ -81,12 +74,11 @@ typedef struct s_data
 }	t_data;
 
 /*=============================*/
-/*         PROTOTYPES          */
+/*            FILES            */
 /*=============================*/
 
 /* lexer */
 t_token	*tokenize(const char *input);
-int		set_status(int status, const char *str, int i);
 int		is_redirect(char c);
 int		extract_word(t_token **tokens, const char *input, int start);
 int		extract_quoted(t_token **tokens, const char *input, int start);
@@ -106,6 +98,7 @@ t_cmd	*parse_pipe(t_cmd *cmd, t_token **tk);
 void	parse_redirect(t_cmd *cmd, t_token **tk);
 t_cmd	*last_cmd(t_cmd *cmd);
 void	free_commands(t_cmd *cmd);
+void	init_cmd(t_cmd *cmd);
 
 
 /* utils */

@@ -2,9 +2,10 @@
 
 int extract_word(t_token **tokens, const char *input, int start)
 {
-    int i = start;
+    int i;
     char *str;
 
+    i = start;
     while (input[i] && !ft_is_space(input[i])
         && input[i] != '|' && input[i] != '<' && input[i] != '>')
         i++;

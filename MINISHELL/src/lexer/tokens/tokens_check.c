@@ -2,8 +2,9 @@
 
 bool	has_syntax_error(t_token *list)
 {
-	t_token	*tmp = list;
+	t_token	*tmp;
 
+	tmp = list;
 	while (tmp)
 	{
 		if (tmp->type == PIPE && tmp->next && tmp->next->type == PIPE)
